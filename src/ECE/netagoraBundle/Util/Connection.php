@@ -3,6 +3,7 @@
 /**
 *  Class Connection
 */
+namespace ECE\netagoraBundle\Util;
 class Connection{
 
     private $host;

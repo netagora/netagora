@@ -9,11 +9,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class AdminController extends Controller
 {
     /**
-     * @Route("/Welcome/{name}")
+     * @Route("/AdminPanel/StatsUser")
      * @Template()
      */
-    public function indexAction($name)
+    public function statsUserAction()
     {
+        $name = 'statUser';
+        return array('name' => $name);
+    }
+    
+    /**
+     * @Route("/AdminPanel/StatsSite")
+     * @Template()
+     */
+    public function statsSiteAction()
+    {
+        $name = 'statSite';
         return array('name' => $name);
     }
 }

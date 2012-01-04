@@ -9,11 +9,32 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ProjectController extends Controller
 {
     /**
-     * @Route("/Welcome/{name}")
+     * @Route("/Documentation")
      * @Template()
      */
-    public function indexAction($name)
+    public function documentationAction()
     {
+        $name = 'documentation';
+        return array('name' => $name);
+    }
+    
+    /**
+     * @Route("/Contribution")
+     * @Template()
+     */
+    public function contributionAction()
+    {
+        $name = 'contribution';
+        return array('name' => $name);
+    }
+    
+    /**
+     * @Route("/About")
+     * @Template()
+     */
+    public function aboutAction()
+    {
+        $name = 'about';
         return array('name' => $name);
     }
 }

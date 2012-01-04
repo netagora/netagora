@@ -9,11 +9,32 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class DisconnectedController extends Controller
 {
     /**
-     * @Route("/Welcome/{name}")
+     * @Route("/Subscribe")
      * @Template()
      */
-    public function indexAction($name)
+    public function subscribeAction()
     {
+        $name = 'subscribe';
+        return array('name' => $name);
+    }
+    
+    /**
+     * @Route("/Login")
+     * @Template()
+     */
+    public function loginAction()
+    {
+        $name = 'login';
+        return array('name' => $name);
+    }
+    
+    /**
+     * @Route("/PasswordRetrieval")
+     * @Template()
+     */
+    public function passwordRetrievalAction()
+    {
+        $name = 'ForgotPassword';
         return array('name' => $name);
     }
 }
