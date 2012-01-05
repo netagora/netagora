@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
  */
-class User extends BaseUser
+class Users extends BaseUser
 {
     /**
      * @ORM\Id
@@ -18,14 +18,14 @@ class User extends BaseUser
      */
     protected $id;
     
-    protected $password;
+    //protected $password;
     private $login;
     private $mail;
-    private $inscription;
-    private $image;
+    private $inscription_date;
+    /*private $image;
     private $age;
     private $location;
-    private $lastConnection;
+    private $lastConnection;*/
     //private static $conn;
 
     public function __construct()
