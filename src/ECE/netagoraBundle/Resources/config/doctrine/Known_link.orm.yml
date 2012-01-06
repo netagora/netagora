@@ -1,0 +1,31 @@
+ECE\netagoraBundle\Entity\Known_link:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    category:
+      type: string
+      length: '200'
+    title_head:
+      type: string
+      length: '200'
+    h1:
+      type: string
+      length: '200'
+    h2:
+      type: string
+      length: '200'
+    tags:
+      type: string
+      length: '200'
+    main_url:
+      type: string
+      length: '200'
+    keywords:
+      type: string
+      length: '200'
+  lifecycleCallbacks: {  }

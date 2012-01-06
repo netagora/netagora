@@ -1,0 +1,30 @@
+fb:
+    pattern:  /
+    defaults: { _controller: "netagoraBundle:Fb:index" }
+
+fb_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "netagoraBundle:Fb:show" }
+
+fb_new:
+    pattern:  /new
+    defaults: { _controller: "netagoraBundle:Fb:new" }
+
+fb_create:
+    pattern:  /create
+    defaults: { _controller: "netagoraBundle:Fb:create" }
+    requirements: { _method: post }
+
+fb_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "netagoraBundle:Fb:edit" }
+
+fb_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "netagoraBundle:Fb:update" }
+    requirements: { _method: post }
+
+fb_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "netagoraBundle:Fb:delete" }
+    requirements: { _method: post }

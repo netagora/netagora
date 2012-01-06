@@ -1,0 +1,61 @@
+<h1>Publications</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td>{{ entity.user }}</td>
+        </tr>
+        <tr>
+            <th>Known_link</th>
+            <td>{{ entity.knownlink }}</td>
+        </tr>
+        <tr>
+            <th>Network</th>
+            <td>{{ entity.network }}</td>
+        </tr>
+        <tr>
+            <th>Author</th>
+            <td>{{ entity.author }}</td>
+        </tr>
+        <tr>
+            <th>Date_published</th>
+            <td>{{ entity.datepublished|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Publication_ref</th>
+            <td>{{ entity.publicationref }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ entity.content }}</td>
+        </tr>
+        <tr>
+            <th>Link_url</th>
+            <td>{{ entity.linkurl }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('publications') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('publications_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('publications_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

@@ -2,3 +2,7 @@ vendor/*
 app/cache/*
 app/logs/*
 .DS_Store
+
+netagora.esproj/Project.espressostorage
+
+netagora.esproj/user.Dorine.espressostorage

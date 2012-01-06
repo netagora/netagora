@@ -1,0 +1,15 @@
+ECE\netagoraBundle\Entity\Category:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    type:
+      type: string
+      length: '40'
+    displayed:
+      type: integer
+  lifecycleCallbacks: {  }

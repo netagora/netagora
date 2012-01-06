@@ -1,3 +1,199 @@
+category:
+    pattern:  /categories
+    defaults: { _controller: netagoraBundle:Category:index }
+ 
+category_show:
+    pattern:  /category/show/{id}
+    defaults: { _controller: netagoraBundle:Category:show }
+ 
+category_edit:
+    pattern:  /category/edit/{id}
+    defaults: { _controller: netagoraBundle:Category:edit }
+ 
+category_delete:
+    pattern:  /category/delete/{id}
+    defaults: { _controller: netagoraBundle:Category:delete }
+ 
+category_update:
+    pattern:  /category/update/{id}
+    defaults: { _controller: netagoraBundle:Category:update }
+ 
+category_create:
+    pattern:  /category/create
+    defaults: { _controller: netagoraBundle:Category:create }
+ 
+category_new:
+    pattern:  /category/add
+    defaults: { _controller: netagoraBundle:Category:new }
+    
+favoris:
+    pattern:  /favoris
+    defaults: { _controller: netagoraBundle:Favoris:index }
+ 
+favoris_show:
+    pattern:  /favoris/show/{id}
+    defaults: { _controller: netagoraBundle:Favoris:show }
+ 
+favoris_edit:
+    pattern:  /favoris/edit/{id}
+    defaults: { _controller: netagoraBundle:Favoris:edit }
+ 
+favoris_delete:
+    pattern:  /favoris/delete/{id}
+    defaults: { _controller: netagoraBundle:Favoris:delete }
+ 
+favoris_update:
+    pattern:  /favoris/update/{id}
+    defaults: { _controller: netagoraBundle:Favoris:update }
+ 
+favoris_create:
+    pattern:  /favoris/create
+    defaults: { _controller: netagoraBundle:Favory:create }
+ 
+favoris_new:
+    pattern:  /favoris/add
+    defaults: { _controller: netagoraBundle:Favory:new }
+    
+fb:
+    pattern:  /fb
+    defaults: { _controller: netagoraBundle:Fb:index }
+ 
+fb_show:
+    pattern:  /fb/show/{id}
+    defaults: { _controller: netagoraBundle:Fb:show }
+ 
+fb_edit:
+    pattern:  /fb/edit/{id}
+    defaults: { _controller: netagoraBundle:Fb:edit }
+ 
+fb_delete:
+    pattern:  /fb/delete/{id}
+    defaults: { _controller: netagoraBundle:Fb:delete }
+ 
+fb_update:
+    pattern:  /fb/update/{id}
+    defaults: { _controller: netagoraBundle:Fb:update }
+ 
+fb_create:
+    pattern:  /fb/create
+    defaults: { _controller: netagoraBundle:Fb:create }
+ 
+fb_new:
+    pattern:  /fb/add
+    defaults: { _controller: netagoraBundle:Fb:new }
+    
+known_link:
+    pattern:  /known_link
+    defaults: { _controller: netagoraBundle:Known_link:index }
+ 
+known_link_show:
+    pattern:  /known_link/show/{id}
+    defaults: { _controller: netagoraBundle:Known_link:show }
+ 
+known_link_edit:
+    pattern:  /known_link/edit/{id}
+    defaults: { _controller: netagoraBundle:Known_link:edit }
+ 
+known_link_delete:
+    pattern:  /known_link/delete/{id}
+    defaults: { _controller: netagoraBundle:Known_link:delete }
+ 
+known_link_update:
+    pattern:  /known_link/update/{id}
+    defaults: { _controller: netagoraBundle:Known_link:update }
+ 
+known_link_create:
+    pattern:  /known_link/create
+    defaults: { _controller: netagoraBundle:Known_link:create }
+ 
+known_link_new:
+    pattern:  /known_link/add
+    defaults: { _controller: netagoraBundle:Known_link:new }
+    
+publications:
+    pattern:  /publications
+    defaults: { _controller: netagoraBundle:Publications:index }
+ 
+publications_show:
+    pattern:  /publications/show/{id}
+    defaults: { _controller: netagoraBundle:Publications:show }
+ 
+publications_edit:
+    pattern:  /publications/edit/{id}
+    defaults: { _controller: netagoraBundle:Publications:edit }
+ 
+publications_delete:
+    pattern:  /publications/delete/{id}
+    defaults: { _controller: netagoraBundle:Publications:delete }
+ 
+publications_update:
+    pattern:  /publications/update/{id}
+    defaults: { _controller: netagoraBundle:Publications:update }
+ 
+publications_create:
+    pattern:  /publications/create
+    defaults: { _controller: netagoraBundle:Publications:create }
+ 
+publications_new:
+    pattern:  /publications/add
+    defaults: { _controller: netagoraBundle:Publications:new }
+
+twitter:
+    pattern:  /twitter
+    defaults: { _controller: netagoraBundle:Twitter:index }
+ 
+twitter_show:
+    pattern:  /twitter/show/{id}
+    defaults: { _controller: netagoraBundle:Twitter:show }
+ 
+twitter_edit:
+    pattern:  /twitter/edit/{id}
+    defaults: { _controller: netagoraBundle:Twitter:edit }
+ 
+twitter_delete:
+    pattern:  /twitter/delete/{id}
+    defaults: { _controller: netagoraBundle:Twitter:delete }
+ 
+twitter_update:
+    pattern:  /twitter/update/{id}
+    defaults: { _controller: netagoraBundle:Twitter:update }
+ 
+twitter_create:
+    pattern:  /twitter/create
+    defaults: { _controller: netagoraBundle:Twitter:create }
+ 
+twitter_new:
+    pattern:  /twitter/add
+    defaults: { _controller: netagoraBundle:Twitter:new }
+    
+user:
+    pattern:  /user
+    defaults: { _controller: netagoraBundle:User:index }
+ 
+user_show:
+    pattern:  /user/show/{id}
+    defaults: { _controller: netagoraBundle:User:show }
+ 
+user_edit:
+    pattern:  /user/edit/{id}
+    defaults: { _controller: netagoraBundle:User:edit }
+ 
+user_delete:
+    pattern:  /user/delete/{id}
+    defaults: { _controller: netagoraBundle:User:delete }
+ 
+user_update:
+    pattern:  /user/update/{id}
+    defaults: { _controller: netagoraBundle:User:update }
+ 
+user_create:
+    pattern:  /user/create
+    defaults: { _controller: netagoraBundle:User:create }
+ 
+user_new:
+    pattern:  /user/add
+    defaults: { _controller: netagoraBundle:User:new }
+
 _assetic:
     resource: .
     type:     assetic

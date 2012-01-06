@@ -1,0 +1,30 @@
+twitter:
+    pattern:  /
+    defaults: { _controller: "netagoraBundle:Twitter:index" }
+
+twitter_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "netagoraBundle:Twitter:show" }
+
+twitter_new:
+    pattern:  /new
+    defaults: { _controller: "netagoraBundle:Twitter:new" }
+
+twitter_create:
+    pattern:  /create
+    defaults: { _controller: "netagoraBundle:Twitter:create" }
+    requirements: { _method: post }
+
+twitter_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "netagoraBundle:Twitter:edit" }
+
+twitter_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "netagoraBundle:Twitter:update" }
+    requirements: { _method: post }
+
+twitter_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "netagoraBundle:Twitter:delete" }
+    requirements: { _method: post }

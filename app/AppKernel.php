@@ -3,6 +3,8 @@
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
+date_default_timezone_set("Europe/Paris");
+
 class AppKernel extends Kernel
 {
     public function registerBundles()
@@ -18,7 +20,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new ECE\netagoraBundle\netagoraBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+          //  new FOS\UserBundle\FOSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
