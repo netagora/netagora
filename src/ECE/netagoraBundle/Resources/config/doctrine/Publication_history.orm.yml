@@ -1,0 +1,21 @@
+ECE\netagoraBundle\Entity\Publication_history:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    publication:
+      type: string
+      length: 255
+    old_cat:
+      type: string
+      length: 255
+    current_cat:
+      type: string
+      length: 255
+    change_date:
+      type: datetime
+  lifecycleCallbacks: {  }

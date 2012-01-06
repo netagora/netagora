@@ -1,0 +1,45 @@
+<h1>Publication_history</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Publication</th>
+            <td>{{ entity.publication }}</td>
+        </tr>
+        <tr>
+            <th>Old_cat</th>
+            <td>{{ entity.oldcat }}</td>
+        </tr>
+        <tr>
+            <th>Current_cat</th>
+            <td>{{ entity.currentcat }}</td>
+        </tr>
+        <tr>
+            <th>Change_date</th>
+            <td>{{ entity.changedate|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('publication_history') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('publication_history_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('publication_history_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

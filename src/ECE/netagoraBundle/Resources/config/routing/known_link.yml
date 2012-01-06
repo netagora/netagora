@@ -1,0 +1,30 @@
+known_link:
+    pattern:  /
+    defaults: { _controller: "netagoraBundle:Known_link:index" }
+
+known_link_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "netagoraBundle:Known_link:show" }
+
+known_link_new:
+    pattern:  /new
+    defaults: { _controller: "netagoraBundle:Known_link:new" }
+
+known_link_create:
+    pattern:  /create
+    defaults: { _controller: "netagoraBundle:Known_link:create" }
+    requirements: { _method: post }
+
+known_link_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "netagoraBundle:Known_link:edit" }
+
+known_link_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "netagoraBundle:Known_link:update" }
+    requirements: { _method: post }
+
+known_link_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "netagoraBundle:Known_link:delete" }
+    requirements: { _method: post }

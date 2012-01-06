@@ -1,0 +1,31 @@
+ECE\netagoraBundle\Entity\User:
+  type: entity
+  table: null
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    username:
+      type: string
+      length: '20'
+    password:
+      type: string
+      length: '40'
+    mail:
+      type: string
+      length: 255
+    inscription_date:
+      type: datetime
+    img:
+      type: string
+      length: 255
+    age:
+      type: integer
+    location:
+      type: string
+      length: 255
+    last_connection:
+      type: datetime
+  lifecycleCallbacks: {  }

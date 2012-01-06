@@ -1,0 +1,51 @@
+<h1>Publications list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>User</th>
+            <th>Known_link</th>
+            <th>Network</th>
+            <th>Author</th>
+            <th>Date_published</th>
+            <th>Publication_ref</th>
+            <th>Content</th>
+            <th>Link_url</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('publications_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.user }}</td>
+            <td>{{ entity.knownlink }}</td>
+            <td>{{ entity.network }}</td>
+            <td>{{ entity.author }}</td>
+            <td>{% if entity.datepublished %}{{ entity.datepublished|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>{{ entity.publicationref }}</td>
+            <td>{{ entity.content }}</td>
+            <td>{{ entity.linkurl }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('publications_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('publications_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('publications_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

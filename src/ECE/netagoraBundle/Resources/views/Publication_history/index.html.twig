@@ -1,0 +1,43 @@
+<h1>Publication_history list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Publication</th>
+            <th>Old_cat</th>
+            <th>Current_cat</th>
+            <th>Change_date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('publication_history_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.publication }}</td>
+            <td>{{ entity.oldcat }}</td>
+            <td>{{ entity.currentcat }}</td>
+            <td>{% if entity.changedate %}{{ entity.changedate|date('Y-m-d H:i:s') }}{% endif%}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('publication_history_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('publication_history_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('publication_history_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>
