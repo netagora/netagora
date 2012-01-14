@@ -11,18 +11,23 @@ class UserType extends AbstractType
     {
         $builder
             ->add('username')
-            ->add('password')
-            ->add('mail')
-            ->add('inscription_date')
-            ->add('img')
-            ->add('age')
-            ->add('location')
-            ->add('last_connection')
+            ->add('email', 'email')
+            ->add('password', 'password')
+            ->add('file', 'file', array('required' => false, 'label'=>'Upload your photo'))
+            ->add('location', null, array('required' => false))
+            ->add('firstname', null, array('required' => true))
+            ->add('lastname', null, array('required' => true))
+            ->add('birthdate', 'birthday', array(
+                'required' => false, 
+                'label' => 'Birthdate', 
+                'years' => range(date('Y') - 90, date('Y')),
+                'empty_value' => ''
+            ))
         ;
     }
 
     public function getName()
     {
-        return 'ece_netagorabundle_usertype';
+        return 'user';
     }
 }

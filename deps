@@ -60,3 +60,11 @@
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
     version=v1.0.1    
+
+[BuzzBundle]
+    git=https://github.com/sensio/SensioBuzzBundle.git
+    target=/bundles/Sensio/Bundle/BuzzBundle
+
+[Buzz]
+    git=https://github.com/kriswallsmith/Buzz.git
+    version=v0.5

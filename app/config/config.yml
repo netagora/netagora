@@ -58,3 +58,25 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+    
+fos_twitter:
+    file: %kernel.root_dir%/../vendor/twitteroauth/twitteroauth/twitteroauth.php
+    consumer_key: Huzq3JiVnckweiDIDlhpxg
+    consumer_secret: 5bNkZddwISgRSZIKMP1LGAuKECyKN04SZ4cBsiRkhr0
+    callback_url: http://127.0.0.1:8888/netagora/web/app_dev.php/secured/login_check
+    
+#my.twitter.user:
+#    class: ECE\netagoraBundle\Security\User\Provider\TwitterProvider
+#    arguments:
+#        twitter_oauth: "@fos_twitter.api"
+#        userManager: "@fos_user.user_manager"
+#        validator: "@validator"
+#        session: "@session"
+
+fos_user:
+    db_driver:     orm
+    firewall_name: main
+    use_listener: false
+    user_class:   ECE\netagoraBundle\Entity\User
+    
+    

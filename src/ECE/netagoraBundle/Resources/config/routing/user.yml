@@ -3,9 +3,9 @@ user:
     defaults: { _controller: "netagoraBundle:User:index" }
 
 user_show:
-    pattern:  /{id}/show
+    pattern: /{id}/show
     defaults: { _controller: "netagoraBundle:User:show" }
-
+    
 user_new:
     pattern:  /new
     defaults: { _controller: "netagoraBundle:User:new" }

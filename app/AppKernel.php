@@ -20,7 +20,9 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new ECE\netagoraBundle\netagoraBundle(),
-          //  new FOS\UserBundle\FOSUserBundle(),
+            new FOS\TwitterBundle\FOSTwitterBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

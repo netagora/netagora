@@ -1,38 +1,78 @@
 security:
+    factories:
+        - "%kernel.root_dir%/../vendor/bundles/FOS/TwitterBundle/Resources/config/security_factories.xml"
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
+        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            users:
-                user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        fos_twitter:
+            id: fos_twitter.auth
+
+        fos_userbundle:
+            id: fos_user.user_manager
+        #my_fos_twitter_provider:
+        #    id: my.twitter.user
+        #in_memory:
+        #    users:
+         #       user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+          #      admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
+            
+        main:
+            pattern: ^/
             form_login:
-                check_path: /demo/secured/login_check
-                login_path: /demo/secured/login
-            logout:
-                path:   /demo/secured/logout
-                target: /demo/
-            #anonymous: ~
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
+            
+
+       # login:
+        #    pattern:  ^/demo/secured/login$
+         #   security: false
+
+        #secured_area:
+        #    pattern:    ^/demo/secured/
+        #    form_login:
+        #        check_path: /demo/secured/login_check
+        #        login_path: /demo/secured/login
+        #    logout:
+        #        path:   /demo/secured/logout
+        #        target: /demo/
+        secured:
+            #pattern:   /secured/.*
+            pattern:  /login_check
+            fos_twitter: true
+            
+        public:
+            pattern:   /.*
+            anonymous: true
+            fos_twitter: true
+            logout: true
+            #fos_twitter:
+            #    login_path: /twitter/login
+            #    check_path: /twitter/login_check
+            #    default_target_path: /
+            #    provider: my_fos_twitter_provider
+            anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
 
     access_control:
+        - { path: /.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/, role: ROLE_ADMIN }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
+

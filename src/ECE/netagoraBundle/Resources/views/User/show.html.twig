@@ -16,7 +16,7 @@
         </tr>
         <tr>
             <th>Mail</th>
-            <td>{{ entity.mail }}</td>
+            <td>{{ entity.email }}</td>
         </tr>
         <tr>
             <th>Inscription_date</th>
@@ -24,11 +24,11 @@
         </tr>
         <tr>
             <th>Img</th>
-            <td>{{ entity.img }}</td>
+            <td>{{ entity.picture }}</td>
         </tr>
         <tr>
             <th>Age</th>
-            <td>{{ entity.age }}</td>
+            <td>{{ entity.birthdate |date('Y-m-d')}}</td>
         </tr>
         <tr>
             <th>Location</th>

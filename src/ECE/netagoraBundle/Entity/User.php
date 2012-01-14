@@ -2,60 +2,93 @@
 
 namespace ECE\netagoraBundle\Entity;
 
+use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ECE\netagoraBundle\Entity\User
  */
-class User
+class User extends BaseUser
 {
     /**
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string $username
      */
-    private $username;
+     //protected $username;
 
     /**
      * @var string $password
      */
-    private $password;
+     //protected $password;
 
     /**
-     * @var string $mail
+     * @var string $email
      */
-    private $mail;
+    protected $email;
 
     /**
-     * @var datetime $inscription_date
+     * @var string $picture
      */
-    private $inscription_date;
-
-    /**
-     * @var string $img
-     */
-    private $img;
-
-    /**
-     * @var integer $age
-     */
-    private $age;
-
+    private $picture;
+    
     /**
      * @var string $location
      */
     private $location;
+    
+    /**
+     * @var string $firstname
+     */
+    private $firstname;
+    
+    /**
+     * @var string $lastname
+     */
+    private $lastname;
+    
+    /**
+     * @var datetime $birthdate
+     */
+    private $birthdate;
+    
+    /**
+     * @var datetime $inscriptionDate
+     */
+    private $inscriptionDate;
 
     /**
-     * @var datetime $last_connection
+     * @var datetime $lastConnection
      */
-    private $last_connection;
+    private $lastConnection;
+    
+    /** 
+     * @var string
+     */
+    protected $twitterID;
 
+    /** 
+     * @var string
+     */
+    protected $twitter_username;
+    
+    /**
+     * @Assert\Image(maxSize="1M")
+     */
+    public $file;
+
+    function __construct()
+    {
+        parent::__construct();
+        $this->lastConnection = new \DateTime();
+        $this->inscriptionDate = new \DateTime();
+    }
 
     /**
      * Get id
@@ -72,19 +105,39 @@ class User
      *
      * @param string $username
      */
-    public function setUsername($username)
+   /* public function setUsername($username)
     {
         $this->username = $username;
-    }
+    }*/
 
     /**
      * Get username
      *
      * @return string 
      */
-    public function getUsername()
+    /*  public function getUsername()
     {
         return $this->username;
+    }*/
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -92,101 +145,41 @@ class User
      *
      * @param string $password
      */
-    public function setPassword($password)
+    /*public function setPassword($password)
     {
         $this->password = $password;
-    }
+    }*/
 
     /**
      * Get password
      *
      * @return string 
      */
-    public function getPassword()
+    /*public function getPassword()
     {
         return $this->password;
-    }
-
+    }*/
+    
     /**
-     * Set mail
+     * Set picture
      *
-     * @param string $mail
+     * @param string $picture
      */
-    public function setMail($mail)
+    public function setPicture($picture)
     {
-        $this->mail = $mail;
+        $this->picture = $picture;
     }
 
     /**
-     * Get mail
-     *
-     * @return string 
-     */
-    public function getMail()
-    {
-        return $this->mail;
-    }
-
-    /**
-     * Set inscription_date
-     *
-     * @param datetime $inscriptionDate
-     */
-    public function setInscriptionDate($inscriptionDate)
-    {
-        $this->inscription_date = $inscriptionDate;
-    }
-
-    /**
-     * Get inscription_date
-     *
-     * @return datetime 
-     */
-    public function getInscriptionDate()
-    {
-        return $this->inscription_date;
-    }
-
-    /**
-     * Set img
-     *
-     * @param string $img
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-    }
-
-    /**
-     * Get img
+     * Get picture
      *
      * @return string 
      */
-    public function getImg()
+    public function getPicture()
     {
-        return $this->img;
+        return $this->picture;
     }
-
-    /**
-     * Set age
-     *
-     * @param integer $age
-     */
-    public function setAge($age)
-    {
-        $this->age = $age;
-    }
-
-    /**
-     * Get age
-     *
-     * @return integer 
-     */
-    public function getAge()
-    {
-        return $this->age;
-    }
-
+    
     /**
      * Set location
      *
@@ -208,22 +201,186 @@ class User
     }
 
     /**
-     * Set last_connection
+     * Set firstname
+     *
+     * @param string $firstname
+     */
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    /**
+     * Get firstname
+     *
+     * @return string 
+     */
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+    
+    /**
+     * Set lastname
+     *
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * Get lastname
+     *
+     * @return string 
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+    
+    /**
+     * Set birthdate
+     *
+     * @param integer $birthdate
+     */
+    public function setBirthdate($birthdate)
+    {
+        $this->birthdate = $birthdate;
+    }
+
+    /**
+     * Get birthdate
+     *
+     * @return integer 
+     */
+    public function getBirthdate()
+    {
+        return $this->birthdate;
+    }
+
+    /**
+     * Set inscriptionDate
+     *
+     * @param datetime $inscriptionDate
+     */
+    public function setInscriptionDate($inscriptionDate)
+    {
+        $this->inscriptionDate = $inscriptionDate;
+    }
+
+    /**
+     * Get inscriptionDate
+     *
+     * @return datetime 
+     */
+    public function getInscriptionDate()
+    {
+        return $this->inscriptionDate;
+    }
+
+    /**
+     * Set lastConnection
      *
      * @param datetime $lastConnection
      */
     public function setLastConnection($lastConnection)
     {
-        $this->last_connection = $lastConnection;
+        $this->lastConnection = $lastConnection;
     }
 
     /**
-     * Get last_connection
+     * Get lastConnection
      *
      * @return datetime 
      */
     public function getLastConnection()
     {
-        return $this->last_connection;
+        return $this->lastConnection;
+    }
+    
+    /**
+     * Set twitterID
+     *
+     * @param string $twitterID
+     */
+    public function setTwitterID($twitterID)
+    {
+        $this->twitterID = $twitterID;
+        $this->setTwitterUsername($twitterID);
+        $this->salt = '';
+    }
+
+    /**
+     * Get twitterID
+     *
+     * @return string 
+     */
+    public function getTwitterID()
+    {
+        return $this->twitterID;
+    }
+
+    /**
+     * Set twitter_username
+     *
+     * @param string $twitterUsername
+     */
+    public function setTwitterUsername($twitterUsername)
+    {
+        $this->twitter_username = $twitterUsername;
+    }
+
+    /**
+     * Get twitter_username
+     *
+     * @return string 
+     */
+    public function getTwitterUsername()
+    {
+        return $this->twitter_username;
+    }
+
+    public function getAbsolutePath()
+    {
+        return null === $this->picture ? null : $this->getUploadRootDir().'/'.$this->picture;
+    }
+
+    public function getWebPath()
+    {
+        return null === $this->picture ? null : $this->getUploadDir().'/'.$this->picture;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'uploads/documents';
+    }
+    
+    public function upload()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->file) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and then the target filename to move to
+        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+
+        // set the path property to the filename where you'ved saved the file
+        $this->picture = $this->file->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+        $this->file = null;
     }
 }

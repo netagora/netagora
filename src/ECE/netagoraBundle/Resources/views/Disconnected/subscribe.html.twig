@@ -1,5 +1,49 @@
 {% extends "netagoraBundle::layout.html.twig" %}
 
 {% block content %}
-    SUBSCRIBE
+    <h1>Subscribe !</h1>
+    <h2>Fill the form to subscribe to NetAgora</h2>
+
+    <form action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>
+        {#{{ form_widget(form) }} #}
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+            {{ form_errors(form.username) }}
+            <br />
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+            <br />
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+            {{ form_errors(form.password) }}
+            <br />
+            {{ form_label(form.file) }}
+            {{ form_widget(form.file) }}
+            {{ form_errors(form.file) }}
+            <br />
+            {{ form_label(form.location) }}
+            {{ form_widget(form.location) }}
+            {{ form_errors(form.location) }}
+            <br />
+            {{ form_label(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+            {{ form_errors(form.firstname) }}
+            <br />
+            {{ form_label(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+            {{ form_errors(form.lastname) }}
+            <br />
+            <div id="birthdate_label">
+            {{ form_label(form.birthdate) }}
+            </div>
+            {{ form_widget(form.birthdate)}}
+            {{ form_errors(form.birthdate) }}
+        
+        {{ form_rest(form) }}
+        <p>
+            <button type="submit">Create</button>
+        </p>
+    </form>
+
 {% endblock %}

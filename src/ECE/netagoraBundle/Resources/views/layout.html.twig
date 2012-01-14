@@ -1,6 +1,18 @@
-Début layout <br />
-
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="{{ asset('bundles/netagora/css/form.css') }}" rel="stylesheet" type="text/css" media="screen" />
+        {{ twitter_anywhere_setup() }}
+    </head>
+    <body>
+        Début layout <br />
+        <span id="twitter_connect"></span>
+            {{ twitter_anywhere_setConfig('callbackURL', 'http://127.0.0.1:8888/netagora/web/app_dev.php/secured/login_check') }}
+            {{ twitter_anywhere_queue('T("#twitter_connect").connectButton()') }}
 {% block content %}
 {% endblock %}
 <br />
 Fin layout
+{{ twitter_anywhere_initialize() }}
+</body>
+</html>

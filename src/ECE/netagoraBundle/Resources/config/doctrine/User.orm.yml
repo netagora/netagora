@@ -7,25 +7,38 @@ ECE\netagoraBundle\Entity\User:
       id: true
       generator:
         strategy: AUTO
-    username:
+#    username:
+#      type: string
+#      length: 255
+#    email:
+#      type: string
+#      length: 255
+#    password:
+#      type: string
+#      length: 255
+    picture:
       type: string
-      length: '20'
-    password:
-      type: string
-      length: '40'
-    mail:
-      type: string
-      length: 255
-    inscription_date:
-      type: datetime
-    img:
-      type: string
-      length: 255
-    age:
-      type: integer
+      length: 70
+      nullable: true
     location:
       type: string
-      length: 255
-    last_connection:
+      length: 100
+      nullable: true
+    firstname:
+      type: string
+      length: 100
+      nullable: true
+    lastname:
+      type: string
+      length: 100
+      nullable: true
+    birthdate:
+      type: date
+      nullable: true
+    inscriptionDate:
       type: datetime
+      nullable: true
+    lastConnection:
+      type: datetime
+      nullable: true
   lifecycleCallbacks: {  }
