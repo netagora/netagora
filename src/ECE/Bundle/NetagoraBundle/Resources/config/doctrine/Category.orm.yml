@@ -9,3 +9,8 @@ ECE\Bundle\NetagoraBundle\Entity\Category:
     type:             { type: string, length: 40 }
     isDisplayed:      { type: boolean, column: is_displayed }
   lifecycleCallbacks: {  }
+  oneToMany:
+    knownLinks:
+      targetEntity:   KnownLink
+      mappedBy:       category
+      cascade:        ["persist", "delete", "merge"]

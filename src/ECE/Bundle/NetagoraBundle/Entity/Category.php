@@ -3,7 +3,6 @@
 namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ECE\Bundle\NetagoraBundle\Entity\Category
@@ -31,6 +30,17 @@ class Category
     private $users;
 
     /**
+     * @var ArrayCollection $knownLinks
+     */
+    private $knownLinks;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->knownLinks = new ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -38,6 +48,30 @@ class Category
     public function getId()
     {
         return $this->id;
+    }
+
+    public function getKnownLinks()
+    {
+        return $this->knownLinks;
+    }
+
+    public function setKnownLinks($knownLinks)
+    {
+        $this->knownLinks = array();
+        foreach ($knownLinks as $knownLink) {
+            $this->addKnownLink($knownLink);
+        }
+    }
+
+    public function addKnownLink(KnownLink $knownLink)
+    {
+        if (!$this->knownLinks->contains($knownLink)) {
+            $this->knownLinks->add($knownLink);
+        }
+
+        if (!$knownLink->getCategory()) {
+            $knownLink->setCategory($this);
+        }
     }
 
     public function getUsers()

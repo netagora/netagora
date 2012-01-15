@@ -1,0 +1,20 @@
+ECE\Bundle\NetagoraBundle\Entity\KnownLink:
+  type: entity
+  table: na_known_links
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:         { strategy: AUTO }
+    title:               { type: string, length: 200 }
+    h1:                  { type: string, length: 200 }
+    h2:                  { type: string, length: 200 }
+    tags:                { type: string, length: 200 }
+    url:                 { type: string, length: 200 }
+    keywords:            { type: string, length: 200 }
+  lifecycleCallbacks:    {}
+  manyToOne:
+    category:
+      targetEntity:   Category
+      inversedBy:     knownLinks
+  
