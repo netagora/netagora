@@ -1,0 +1,9 @@
+madalynn_plum_servers:
+    production:
+        host: my.website.com
+        user: netagora
+        dir: /var/www/my.website.com
+        port: 22
+        password: mySecretPwd
+        options:
+            dry_run: true

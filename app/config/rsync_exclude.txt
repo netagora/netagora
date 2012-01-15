@@ -1,0 +1,10 @@
+.git
+.svn
+.hg
+CVS
+app/config/deployment.yml
+app/config/rsync_exclude.txt
+app/config/parameters.ini
+app/cache/*
+app/logs/*
+web/app_dev.php

@@ -1,7 +1,10 @@
+app/config/parameters.ini
+app/config/deployment.yml
 app/cache/*
 app/logs/*
+vendor/*
+web/bundles/*
 .DS_Store
 
 netagora.esproj/Project.espressostorage
-
 netagora.esproj/user.Dorine.espressostorage

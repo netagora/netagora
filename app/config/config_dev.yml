@@ -21,3 +21,15 @@ monolog:
 
 assetic:
     use_controller: true
+
+madalynn_plum:
+    options:
+        dry_run: false
+        rsync_exclude: "%kernel.root_dir%/config/rsync_exclude.txt"
+        commands:
+            - 'php app/console cache:clear --env=prod --no-debug'
+            - 'php app/console assets:install web'
+    deployers:
+        - Plum\Deployer\RsyncDeployer
+        - Plum\Deployer\SshDeployer
+    servers: "%kernel.root_dir%/config/deployment.yml"

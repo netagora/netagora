@@ -1,10 +1,10 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=v2.0.8
+    version=v2.0.9
 
 [twig]
     git=http://github.com/fabpot/Twig.git
-    version=v1.4.0
+    version=v1.5.1
 
 [monolog]
     git=http://github.com/Seldaek/monolog.git
@@ -24,7 +24,7 @@
 
 [swiftmailer]
     git=http://github.com/swiftmailer/swiftmailer.git
-    version=v4.1.4
+    version=v4.1.5
 
 [assetic]
     git=http://github.com/kriswallsmith/assetic.git
@@ -36,6 +36,16 @@
 [metadata]
     git=http://github.com/schmittjoh/metadata.git
     version=1.0.0
+
+[twitteroauth]
+    git=https://github.com/kertz/twitteroauth.git
+
+[buzz]
+    git=https://github.com/kriswallsmith/Buzz.git
+    version=v0.5
+
+[plum]
+    git=https://github.com/aerialls/Plum.git
 
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
@@ -55,16 +65,26 @@
 [SensioGeneratorBundle]
     git=http://github.com/sensio/SensioGeneratorBundle.git
     target=/bundles/Sensio/Bundle/GeneratorBundle
+    version=origin/2.0
 
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
-    version=v1.0.1    
+    version=v1.0.1
+
+[FOSUserBundle]
+    git=https://github.com/FriendsOfSymfony/FOSUserBundle.git
+    target=/bundles/FOS/UserBundle
+
+[FOSTwitterBundle]
+    git=https://github.com/FriendsOfSymfony/FOSTwitterBundle.git
+    target=/bundles/FOS/TwitterBundle
+    version=v1.0
 
 [BuzzBundle]
     git=https://github.com/sensio/SensioBuzzBundle.git
     target=/bundles/Sensio/Bundle/BuzzBundle
 
-[Buzz]
-    git=https://github.com/kriswallsmith/Buzz.git
-    version=v0.5
+[MadalynnPlumBundle]
+    git=https://github.com/aerialls/MadalynnPlumBundle.git
+    target=/bundles/Madalynn/Bundle/PlumBundle
