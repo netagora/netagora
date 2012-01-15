@@ -25,4 +25,7 @@ Installation
         locale="en"
         secret="1fc014198d06fefe2a75ea46a09a50426d42bf6e"
 
-4- 
+4- Install Bundles
+
+    $ cd /path/to/netagora
+    $ bin/vendors install
