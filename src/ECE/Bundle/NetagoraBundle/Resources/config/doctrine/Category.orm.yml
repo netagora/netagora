@@ -1,0 +1,11 @@
+ECE\Bundle\NetagoraBundle\Entity\Category:
+  type: entity
+  table: na_categories
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:      { strategy: AUTO }
+    type:             { type: string, length: 40 }
+    isDisplayed:      { type: boolean, column: is_displayed }
+  lifecycleCallbacks: {  }

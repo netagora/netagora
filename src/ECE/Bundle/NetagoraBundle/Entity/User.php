@@ -3,6 +3,7 @@
 namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -61,7 +62,9 @@ class User extends BaseUser
      * @var string
      */
     protected $twitter_username;
-    
+
+    private $categories;
+
     /**
      * @Assert\Image(maxSize="1M")
      */
@@ -72,6 +75,7 @@ class User extends BaseUser
         parent::__construct();
         $this->lastLoginAt = new \DateTime();
         $this->registeredAt = new \DateTime();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -96,6 +100,30 @@ class User extends BaseUser
         parent::username($username);
 
         $this->setEmailCanonical($email);
+    }
+
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    public function setCategories($categories)
+    {
+        $this->categories = array();
+        foreach ($categories as $category) {
+            $this->addCategory($category);
+        }
+    }
+
+    public function addCategory(Category $category)
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        if (!$category->contains($this)) {
+            $category->addUser($this);
+        }
     }
 
     /**

@@ -37,3 +37,14 @@ ECE\Bundle\NetagoraBundle\Entity\User:
       nullable: true
       column: last_login_at
   lifecycleCallbacks: {  }
+  manyToMany:
+    categories:
+      targetEntity: Category
+      joinTable:
+        name: na_users_categories
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          category_id:
+            referencedColumnName: id
