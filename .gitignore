@@ -4,6 +4,7 @@ app/cache/*
 app/logs/*
 vendor/*
 web/bundles/*
+web/uploads/*
 .DS_Store
 
 netagora.esproj/Project.espressostorage

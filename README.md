@@ -5,9 +5,9 @@ Installation
 
     $ git clone git@github.com:netagora/netagora.git
 
-2- Rename `app/config/parameters.ini.dist` to `app/config/parameters.ini`
+2- Copy `app/config/parameters.ini.dist` to `app/config/parameters.ini`
 
-    $ mv app/config/parameters.ini.dist app/config/parameters.ini
+    $ cp app/config/parameters.ini.dist app/config/parameters.ini
 
 3- Edit the `app/config/parameters.ini` file with your database settings:
 
