@@ -1,0 +1,39 @@
+ECE\Bundle\NetagoraBundle\Entity\User:
+  type: entity
+  table: na_users
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    picture:
+      type: string
+      length: 70
+      nullable: true
+    location:
+      type: string
+      length: 100
+      nullable: true
+    firstName:
+      type: string
+      length: 100
+      nullable: true
+      column: first_name
+    lastName:
+      type: string
+      length: 100
+      nullable: true
+      column: last_name
+    birthdate:
+      type: date
+      nullable: true
+    registeredAt:
+      type: datetime
+      nullable: true
+      column: registered_at
+    lastLoginAt:
+      type: datetime
+      nullable: true
+      column: last_login_at
+  lifecycleCallbacks: {  }
