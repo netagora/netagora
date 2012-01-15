@@ -1,0 +1,17 @@
+ECE\Bundle\NetagoraBundle\Entity\ServiceToken:
+  type: entity
+  table: na_service_tokens
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:         { strategy: AUTO }
+    type:                { type: string, length: 15 }
+    token:               { type: string, length: 200 }
+    data:                { type: text, nullable: true }
+  lifecycleCallbacks: {  }
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy:   tokens
+      

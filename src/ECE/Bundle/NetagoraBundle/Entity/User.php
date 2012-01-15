@@ -66,6 +66,8 @@ class User extends BaseUser
 
     private $publications;
 
+    private $tokens;
+
     /**
      * @Assert\Image(maxSize="1M")
      */
@@ -78,6 +80,7 @@ class User extends BaseUser
         $this->registeredAt = new \DateTime();
         $this->categories = new ArrayCollection();
         $this->publications = new ArrayCollection();
+        $this->tokens = new ArrayCollection();
     }
 
     /**
@@ -102,6 +105,49 @@ class User extends BaseUser
         parent::username($username);
 
         $this->setEmailCanonical($email);
+    }
+
+    public function getTokens()
+    {
+        return $this->tokens;
+    }
+
+    public function getTwitterToken()
+    {
+        return $this->getTokenByType('twitter');
+    }
+
+    public function getFacebookToken()
+    {
+        return $this->getTokenByType('facebook');
+    }
+
+    private function getTokenByType($type)
+    {
+        foreach ($this->tokens as $token) {
+            if ($type === $token->getType()) {
+                return $token;
+            }
+        }
+    }
+
+    public function setTokens($tokens)
+    {
+        $this->tokens = array();
+        foreach ($tokens as $token) {
+            $this->addToken($token);
+        }
+    }
+
+    public function addToken(ServiceToken $token)
+    {
+        if (!$this->tokens->contains($token)) {
+            $this->token->add($token);
+        }
+
+        if (!$token->getUser()) {
+            $token->setUser($this);
+        }
     }
 
     public function getCategories()

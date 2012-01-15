@@ -38,6 +38,10 @@ ECE\Bundle\NetagoraBundle\Entity\User:
       column: last_login_at
   lifecycleCallbacks: {  }
   oneToMany:
+    tokens:
+      targetEntity: ServiceToken
+      mappedBy: user
+      cascade: ["persist", "delete", "merge"]
     publications:
       targetEntity: Publication
       mappedBy: user
