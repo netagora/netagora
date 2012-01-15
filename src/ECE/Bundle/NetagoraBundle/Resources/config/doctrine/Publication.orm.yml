@@ -1,0 +1,21 @@
+ECE\Bundle\NetagoraBundle\Entity\Publication:
+  type: entity
+  table: na_publications
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:         { strategy: AUTO }
+    knownLink:           { type: string, length: 255, column: know_link }
+    socialNetwork:       { type: string, length: 10, column: social_network }
+    author:              { type: string, length: 50 }
+    publishedAt:         { type: datetime, column: published_at }
+    reference:           { type: string, length: 200, unique: true }
+    content:             { type: text }
+    linkUrl:             { type: string, length: 200, column: link_url }
+    isFavorite:          { type: boolean, column: is_favorite }
+  lifecycleCallbacks:    {}
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy:   publications

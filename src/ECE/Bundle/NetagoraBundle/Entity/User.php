@@ -65,6 +65,8 @@ class User extends BaseUser
 
     private $categories;
 
+    private $publications;
+
     /**
      * @Assert\Image(maxSize="1M")
      */
@@ -76,6 +78,7 @@ class User extends BaseUser
         $this->lastLoginAt = new \DateTime();
         $this->registeredAt = new \DateTime();
         $this->categories = new ArrayCollection();
+        $this->publications = new ArrayCollection();
     }
 
     /**
@@ -123,6 +126,42 @@ class User extends BaseUser
 
         if (!$category->contains($this)) {
             $category->addUser($this);
+        }
+    }
+
+    public function getPublications()
+    {
+        return $this->publications;
+    }
+
+    public function getFavoritePublications()
+    {
+        $favorites = array();
+        foreach ($this->publications as $publication) {
+            if ($publication->isFavorite()) {
+                $favorites[] = $publication;
+            }
+        }
+
+        return $favorites;
+    }
+
+    public function setPublications($publications)
+    {
+        $this->publications = array();
+        foreach ($publications as $publication) {
+            $this->addPublication($publication);
+        }
+    }
+
+    public function addPublication(Publication $publication)
+    {
+        if (!$this->publications->contains($publication)) {
+            $this->publications->add($publication);
+        }
+
+        if (!$publication->getUser()) {
+            $publication->setUser($this);
         }
     }
 

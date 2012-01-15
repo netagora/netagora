@@ -37,6 +37,11 @@ ECE\Bundle\NetagoraBundle\Entity\User:
       nullable: true
       column: last_login_at
   lifecycleCallbacks: {  }
+  oneToMany:
+    publications:
+      targetEntity: Publication
+      mappedBy: user
+      cascade: ["persist", "delete", "merge"]
   manyToMany:
     categories:
       targetEntity: Category
