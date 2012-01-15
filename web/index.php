@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 date_default_timezone_set("Europe/Paris");
 
-$kernel = new AppKernel('prod', false);
+$kernel = new AppKernel('prod', true);
 $kernel->loadClassCache();
 //$kernel = new AppCache($kernel);
 $kernel->handle(Request::createFromGlobals())->send();
