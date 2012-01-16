@@ -29,3 +29,7 @@ Installation
 
     $ cd /path/to/netagora
     $ bin/vendors install
+
+5- Install DataBase
+
+    php app/console doctrine:schema:update --force
