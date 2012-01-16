@@ -10,62 +10,39 @@ security:
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        fos_twitter:
-            id: fos_twitter.auth
+        netagora_twitter_provider:
+            id: ece_netagora.twitter_provider
 
-        fos_userbundle:
+        fos_user:
             id: fos_user.user_manager
-        #my_fos_twitter_provider:
-        #    id: my.twitter.user
-        #in_memory:
-        #    users:
-         #       user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-          #      admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-            
-        main:
-            pattern: ^/
-            form_login:
-                provider: fos_userbundle
-                csrf_provider: form.csrf_provider
-            logout:       true
-            anonymous:    true
-            
 
-       # login:
-        #    pattern:  ^/demo/secured/login$
-         #   security: false
-
-        #secured_area:
-        #    pattern:    ^/demo/secured/
-        #    form_login:
-        #        check_path: /demo/secured/login_check
-        #        login_path: /demo/secured/login
-        #    logout:
-        #        path:   /demo/secured/logout
-        #        target: /demo/
-        secured:
-            #pattern:   /secured/.*
-            pattern:  /login_check
-            fos_twitter: true
-            
         public:
             pattern:   /.*
             anonymous: true
-            fos_twitter: true
+            fos_twitter:
+                login_path: /twitter/login
+                check_path: /twitter/login_check
+                default_target_path: /
+                provider: netagora_twitter_provider
             logout: true
-            #fos_twitter:
-            #    login_path: /twitter/login
-            #    check_path: /twitter/login_check
-            #    default_target_path: /
-            #    provider: my_fos_twitter_provider
-            anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+
+#        public:
+#            pattern:  /
+#            fos_twitter:
+#                provider: fos_twitter
+#                login_path: /twitter/login
+#                check_path: /twitter/login_check
+#                default_target_path: /
+#            form_login:
+#                provider: fos_user
+#                csrf_provider: form.csrf_provider
+#            logout:       true
+#            anonymous:    true
 
     access_control:
         - { path: /.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }

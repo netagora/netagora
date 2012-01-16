@@ -5,9 +5,8 @@ namespace ECE\Bundle\NetagoraBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use ECE\netagoraBundle\Entity\User;
-use ECE\netagoraBundle\Entity\Document;
-use ECE\netagoraBundle\Form\UserType;
+use ECE\Bundle\NetagoraBundle\Entity\User;
+use ECE\Bundle\NetagoraBundle\Form\UserType;
 use Sensio\Bundle\BuzzBundle\DependencyInjection\SensioBuzzExtension;
 
 class DisconnectedController extends Controller
@@ -47,7 +46,7 @@ class DisconnectedController extends Controller
             
         }
 
-        return $this->render('netagoraBundle:Disconnected:subscribe.html.twig', array(
+        return $this->render('ECENetagoraBundle:Disconnected:subscribe.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
         ));

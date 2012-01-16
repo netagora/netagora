@@ -1,1 +1,8 @@
 Hello {{ name }}!
+
+{% if app.user %}
+
+    <p>Welcome {{ app.user.username }} :)</p>
+    {{ app.user.twitterID }}
+
+{% endif %}

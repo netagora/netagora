@@ -6,13 +6,14 @@
     </head>
     <body>
         Début layout <br />
-        <span id="twitter_connect"></span>
-            {{ twitter_anywhere_setConfig('callbackURL', url('twitter_login_check')) }}
-            {{ twitter_anywhere_queue('T("#twitter_connect").connectButton()') }}
-{% block content %}
-{% endblock %}
-<br />
-Fin layout
-{{ twitter_anywhere_initialize() }}
-</body>
+        <span id="twitter_connect">
+            {#<a href="{{ path('twitter_login') }}">Connect with Twitter</a>#}
+        </span>
+        {{ twitter_anywhere_setConfig('callbackURL', url('twitter_login_check')) }}
+        {{ twitter_anywhere_queue('T("#twitter_connect").connectButton()') }}
+        {% block content %}{% endblock %}
+        <br />
+        Fin layout
+        {{ twitter_anywhere_initialize() }}
+    </body>
 </html>

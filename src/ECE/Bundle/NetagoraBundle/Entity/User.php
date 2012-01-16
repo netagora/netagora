@@ -60,7 +60,7 @@ class User extends BaseUser
     /** 
      * @var string
      */
-    protected $twitter_username;
+    protected $twitterUsername;
 
     private $categories;
 
@@ -95,14 +95,14 @@ class User extends BaseUser
 
     public function setUsername($username)
     {
-        parent::username($username);
+        parent::setUsername($username);
 
         $this->setUsernameCanonical($username);
     }
 
     public function setEmail($email)
     {
-        parent::username($username);
+        parent::setEmail($email);
 
         $this->setEmailCanonical($email);
     }
@@ -379,7 +379,7 @@ class User extends BaseUser
      */
     public function setTwitterUsername($twitterUsername)
     {
-        $this->twitter_username = $twitterUsername;
+        $this->twitterUsername = $twitterUsername;
     }
 
     /**
@@ -389,7 +389,7 @@ class User extends BaseUser
      */
     public function getTwitterUsername()
     {
-        return $this->twitter_username;
+        return $this->twitterUsername;
     }
 
     public function getAbsolutePath()

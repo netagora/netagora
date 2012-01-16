@@ -121,12 +121,12 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/secured/login_check", name="twitter_login_check")
+     * @Route("/foo/login_check", name="foo_login_check")
      * 
      */
     public function loginCheckAction()
     {
-        
+
         /*$request = $this->get('request');
         $twitter = $this->get('fos_twitter.service');
         
@@ -150,7 +150,7 @@ class ConnectedController extends Controller
         //return new Response('authentifié'.$authURL.'  <pre>'.var_dump($request->server).'</pre>');
         //return $this->redirect($this->generateUrl('test', array('twitterID' => $accessTokenURL)), 301);
         
-        $request = $this->get('request');
+        /*$request = $this->get('request');
         $twitter = $this->get('fos_twitter.service');
         $authURL = $twitter->getLoginUrl($request);
 
@@ -174,15 +174,15 @@ class ConnectedController extends Controller
             print_r($response);
             echo '</pre>';
             die;
-            return $response;
+            return $response;*/
             /*echo '<pre>';
             print_r($response);
             echo '</pre>';
             $accessTokenURL = $twitter->getAccessToken($request);
             echo '<br />Access Token: <pre>';
             print_r($accessTokenURL);
-            echo '</pre><br />';*/
-        }
+            echo '</pre><br />';
+        }*/
 
        /* var_dump($response);
         echo $response->getStatusCode();
@@ -197,7 +197,14 @@ class ConnectedController extends Controller
     */
     public function connectTwitterAction()
     {   
+        
+        $request = $this->get('request');
+        $twitter = $this->get('fos_twitter.service');
 
+        $authURL = $twitter->getLoginUrl($request);
+        $response = new RedirectResponse($authURL);
+
+        return $response;
 
     }
 }
