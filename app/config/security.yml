@@ -27,7 +27,7 @@ security:
             fos_twitter:
                 login_path: /twitter/login
                 check_path: /twitter/login_check
-                default_target_path: /
+                default_target_path: /Home/test
                 provider: netagora_twitter_provider
             logout: true
 

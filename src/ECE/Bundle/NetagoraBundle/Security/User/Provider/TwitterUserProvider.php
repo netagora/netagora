@@ -42,7 +42,7 @@ class TwitterUserProvider implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         $user = $this->findUserByTwitterId($username);
-
+        
         $this->twitter->setOAuthToken(
             $this->session->get('access_token'),
             $this->session->get('access_token_secret')
@@ -50,6 +50,7 @@ class TwitterUserProvider implements UserProviderInterface
 
         try {
              $info = $this->twitter->get('account/verify_credentials');
+             //$test = $this->twitter->get('statuses/home_timeline', array('screen_name' => $info->screen_name, 'count' => '5'));
         } catch (Exception $e) {
              $info = null;
         }
@@ -62,16 +63,20 @@ class TwitterUserProvider implements UserProviderInterface
             }
 
             $username = $info->screen_name;
-
             $user->setTwitterID($info->id);
             $user->setTwitterUsername($username);
             $user->setUsername($username);
             $user->setEmail($username);
             $user->setFirstName($info->name);
 
-
-
             $this->manager->updateUser($user);
+            $twitterSerialize = serialize($this->twitter);
+            
+            // Register twitter_id in session
+            $this->session->set('twitter_id', $user->getTwitterID());
+            $this->session->set('twitter', $twitterSerialize);
+            $this->session->set('info', $info);
+            
         }
 
         if (empty($user)) {

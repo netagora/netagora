@@ -126,68 +126,6 @@ class ConnectedController extends Controller
      */
     public function loginCheckAction()
     {
-
-        /*$request = $this->get('request');
-        $twitter = $this->get('fos_twitter.service');
-        
-        $authURL = $twitter->getLoginUrl($request);
-
-        $accessTokenURL = $twitter->getAccessToken($request);
-        echo 'Access Token: <pre>'.print_r($accessTokenURL).'</pre><br />';
-        
-        echo $twitter->getTwitter()->http_code.'<pre>'.print_r($request->server).'</pre>';
-        if($twitter->getTwitter()->http_code==200){
-            echo 'redirect';
-            return new RedirectResponse($authURL);
-        }
-        else if($accessTokenURL != NULL && $twitter->getTwitter()->http_code==200){
-            return new Response('On a l\'access token à envoyer en post à Twitter via l\'url: https://api.twitter.com/oauth/access_token ');
-        }else{
-            return new Response('non authentifié: '.$twitter->getTwitter()->http_code.'<bt /> <pre>'.var_dump($request->server).'</pre>');
-        }*/
-        
-        
-        //return new Response('authentifié'.$authURL.'  <pre>'.var_dump($request->server).'</pre>');
-        //return $this->redirect($this->generateUrl('test', array('twitterID' => $accessTokenURL)), 301);
-        
-        /*$request = $this->get('request');
-        $twitter = $this->get('fos_twitter.service');
-        $authURL = $twitter->getLoginUrl($request);
-
-        $response = new RedirectResponse($authURL);
-        var_dump($_GET);
-        echo $response->getStatusCode();
-        if($response->getStatusCode()==302 && empty($_GET)){
-            echo '<br />redirect';
-            $response = new RedirectResponse($authURL);
-            return $response;
-
-            //return $this->redirect($this->generateUrl('home', array('username' => 'authenticated')), 301);
-        }else if( !is_null($_GET) && !is_null($_GET['oauth_verifier']) && !is_null($_GET['oauth_token']) ){
-            echo $response->getStatusCode().' authURL: '.$authURL;
-            //$response = new RedirectResponse('http://127.0.0.1:8888/netagora/web/app_dev.php/secured/login_check?oauth_token='.$_GET['oauth_token'].'&oauth_verifier='.$_GET['oauth_verifier']);
-            $buzz = $this->get('buzz');
-            $res = $buzz->get('http://bit.ly/aVUeDG');
-            print_r($res->getHeader('Location'));
-            die;
-            echo '<pre>';
-            print_r($response);
-            echo '</pre>';
-            die;
-            return $response;*/
-            /*echo '<pre>';
-            print_r($response);
-            echo '</pre>';
-            $accessTokenURL = $twitter->getAccessToken($request);
-            echo '<br />Access Token: <pre>';
-            print_r($accessTokenURL);
-            echo '</pre><br />';
-        }*/
-
-       /* var_dump($response);
-        echo $response->getStatusCode();
-        die; */
-
         
     }
     
