@@ -26,7 +26,7 @@ background-image: -webkit-gradient(
 
 @font-face {
 	font-family: swatch;
-	src: url( '/bundles/ecebeta/font/SWATRG__.ttf' );
+	src: url( '/bundles/ecebeta/font/SWATRG__.TTF' );
 }
 
 body{
