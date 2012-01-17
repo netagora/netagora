@@ -1,0 +1,363 @@
+/**
+*
+*BODY OR:
+*background-image: linear-gradient(bottom, #B4A187 9%, #E4C69C 55%, #FFDAA7 78%);
+background-image: -o-linear-gradient(bottom, #B4A187 9%, #E4C69C 55%, #FFDAA7 78%);
+background-image: -moz-linear-gradient(bottom, #B4A187 9%, #E4C69C 55%, #FFDAA7 78%);
+background-image: -webkit-linear-gradient(bottom, #B4A187 9%, #E4C69C 55%, #FFDAA7 78%);
+background-image: -ms-linear-gradient(bottom, #B4A187 9%, #E4C69C 55%, #FFDAA7 78%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.09, #B4A187),
+	color-stop(0.55, #E4C69C),
+	color-stop(0.78, #FFDAA7)
+
+	);
+	
+*
+* DARK GRAY #1:
+* DARK GRAY #2 (grad): #454545
+* GRAY (grad2): #8F8F8F
+* BEIGE: #FFEFD9
+*/
+
+.body_container{
+
+	height: 100%;
+	width: 100%;	
+	position: absolute;
+	top: 40px;
+    padding: 0;
+	
+	background: #c8c5c2;
+	background-color: #c8c5c2;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#eae5df), to(#c8c5c2));
+	background-image: -moz-linear-gradient(top, #eae5df, #c8c5c2);
+	background-image: -ms-linear-gradient(top, #eae5df, #c8c5c2);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #eae5df), color-stop(100%, #c8c5c2));
+	background-image: -webkit-linear-gradient(top, #eae5df, #c8c5c2);
+	background-image: -o-linear-gradient(top, #eae5df, #c8c5c2);
+	background-image: linear-gradient(top, #eae5df, #c8c5c2);
+		
+}
+
+.body_insider{
+	
+	height: auto;
+	width: 80%;
+	padding: 0px;
+	margin: 40px auto;
+	text-align: center;
+	
+}
+
+.feeds_content{
+	
+	width: 95%;
+	height: 500px;
+	margin: 30px auto;
+	overflow: auto;
+	
+}
+
+.feeds_twitter{
+	
+	border: 1px solid #333;
+	display: inline-table;
+	width: 45%;
+	height: 550px;
+	overflow: auto;	
+}
+
+.feeds_fb{
+	
+	display: inline-table;
+	width: 45%;
+	border: 1px solid #333;
+	height: 550px;
+	overflow: auto;	
+}
+
+#website_title{
+	
+	width: 100%;
+	height: auto;
+	text-align: center;
+	
+	margin: 40px 0;
+		
+	font-size: 4em;
+	
+	color: #591023;
+	text-shadow: 0 1px 0 #816237;
+
+}
+
+#block_container{
+	
+	width: 80%;	
+	margin: 50px auto;
+	text-align: center;
+	height: 300px;
+	
+}
+
+.home_block{
+	
+	float: left;
+
+	background: #591023;
+	background-color: #591023;
+	background-repeat: repeat-x;
+	background-image: -khtml-gradient(linear, left top, left bottom, from(#7F1732), to(#591023));
+	background-image: -moz-linear-gradient(top, #7F1732, #591023);
+	background-image: -ms-linear-gradient(top, #7F1732, #591023);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #7F1732), color-stop(100%, #591023));
+	background-image: -webkit-linear-gradient(top, #7F1732, #591023);
+	background-image: -o-linear-gradient(top, #7F1732, #591023);
+	background-image: linear-gradient(top, #7F1732, #591023);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+		
+
+	width: 25%;
+	height: 200px;
+	margin: 30px 10px;
+	padding: 20px;
+	
+	color: #CE9D57;
+	
+	font-size: 20px;
+	
+	
+}
+
+#left{
+	
+	-webkit-border-radius: 40px;
+	-webkit-border-bottom-right-radius: 0;
+	-moz-border-radius: 40px;
+	-moz-border-radius-bottomright: 0;
+	border-radius: 40px;
+	border-bottom-right-radius: 0;
+}
+
+#middle{
+	
+	
+	-webkit-border-radius: 40px;
+	-webkit-border-bottom-right-radius: 0;
+	-moz-border-radius: 40px;
+	-moz-border-radius-bottomright: 0;
+	border-radius: 40px;
+	border-bottom-right-radius: 0;
+	-webkit-border-bottom-left-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	border-bottom-left-radius: 0;
+}
+
+#right{
+	
+	
+	-webkit-border-radius: 40px;
+	-webkit-border-bottom-left-radius: 0;
+	-moz-border-radius: 40px;
+	-moz-border-radius-bottomleft: 0;
+	border-radius: 40px;
+	border-bottom-left-radius: 0;
+}
+
+
+/* ********** MUSIC ************ */
+
+.music_feed{
+	
+	margin: 10px;
+	padding: 10px;
+	padding-bottom: 0;
+	text-align: center;
+	border: 0;
+	border-bottom: 1px solid;
+
+}
+
+.music_feed .icon{
+	
+	display: inline-table;
+	margin: 0 10px;
+	padding: 0 0px;
+	vertical-align: middle;
+
+}
+
+.facebook{
+
+	width: 12px;
+	height: 12px;
+	background-image: url('Facebook.png');
+	
+}
+
+.twitter{
+
+	width: 12px;
+	height: 12px;
+	background-image: url('Twitter.png');
+	
+}
+
+.music_feed .link{
+
+	display: inline-block;
+	margin: 0 10px;
+	padding: 0 10px;
+	vertical-align: middle;
+
+	width: 300px; /* à modifier selon vos besoins */
+	overflow: hidden;
+	-o-text-overflow: ellipsis; /* pour Opera 9 */
+	text-overflow: ellipsis; /* pour le reste du monde */
+	
+	text-align: left;
+		
+	
+}
+
+.music_feed .infos{
+
+	display: inline-table;
+	margin: 0 10px;
+	padding: 0 10px;
+	vertical-align: middle;
+	
+	width: 280px;
+	
+	
+}
+
+.music_feed .fav_icon{
+	
+	display: inline-table;
+	margin: 0 10px;
+	padding: 0 0px;
+	vertical-align: middle;
+	background-image: url('heart_no.png');
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+	
+}
+
+.music_feed .fav_icon:hover{
+	
+		background-image: url('heart.png');
+		
+}
+
+.share_feed{
+	
+	width: 100%;
+	text-align: right;
+	margin-top: 5px;
+	padding-right: 14px;
+	padding-bottom: 3px;
+	opacity: 0;
+	-webkit-transition: opacity 1s ease-out;  /* Saf3.2+, Chrome */
+	     -moz-transition: opacity 1s ease-out;  /* FF4+ */
+	      -ms-transition: opacity 1s ease-out;  /* IE10? */
+	       -o-transition: opacity 1s ease-out;  /* Opera 10.5+ */
+	          transition: opacity 1s ease-out;
+	
+}
+
+.share_feed:hover{
+
+	opacity: 1;
+	
+}
+
+.share_feed a{
+	
+	background-image:url('everything-spritev2.png');
+	height: 16px;
+	width:16px ;
+	margin: 2px;
+	display:inline-block;
+	
+
+-webkit-transition: all 0s ease-out;  /* Saf3.2+, Chrome */
+     -moz-transition: all 0s ease-out;  /* FF4+ */
+      -ms-transition: all 0s ease-out;  /* IE10? */
+       -o-transition: all 0s ease-out;  /* Opera 10.5+ */
+          transition: all 0s ease-out;
+	
+}
+
+.share_feed a:hover{
+	
+	-webkit-transition: all 0s ease-out;  /* Saf3.2+, Chrome */
+	     -moz-transition: all 0s ease-out;  /* FF4+ */
+	      -ms-transition: all 0s ease-out;  /* IE10? */
+	       -o-transition: all 0s ease-out;  /* Opera 10.5+ */
+	          transition: all 0s ease-out;
+	          cursor: pointer;
+	
+}
+
+.share_feed a.t_reply{
+
+	background-position:0px 0px;
+	
+}
+
+.share_feed a.t_reply:hover{
+
+	background-position:-16px 0px;
+
+	
+}
+
+.share_feed a.t_favorite{
+
+	background-position:-32px 0px;
+	
+}
+
+.share_feed a.t_favorite:hover{
+
+	background-position:-48px 0px;
+
+	
+}
+
+.share_feed a.t_retweet{
+
+	background-position:-80px 0px;
+	
+}
+
+.share_feed a.t_retweet:hover{
+
+	background-position:-96px 0px;
+
+	
+}
+
+img.thumb{
+
+	width: 100px;
+	height: 100px;
+}
+
+#footer{
+	
+	text-align: center;
+	color: #591023;
+	border-top: 1px solid #591023;
+	
+}

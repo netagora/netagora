@@ -2,6 +2,10 @@ app/config/parameters.ini
 app/config/deployment.yml
 app/cache/*
 app/logs/*
+beta/config/parameters.ini
+beta/config/deployment.yml
+beta/cache/*
+beta/logs/*
 vendor/*
 web/bundles/*
 web/uploads/*
