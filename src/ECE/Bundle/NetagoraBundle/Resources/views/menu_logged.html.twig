@@ -1,0 +1,50 @@
+{% extends "ECENetagoraBundle::layout.html.twig" %}
+{% block menu %}
+<div class="topbar">
+    <div class="fill">
+        <div class="container">
+            <ul>
+                <li id="videos"><h3><a href="#">Videos</a></h3></li>
+                <li id="pictures"><h3><a href="#">Pictures</a></h3></li>
+                <li id="music"><h3><a href="#">Music</a></h3></li>
+                <li id="locations"><h3><a href="#">Locations</a></h3></li>
+                <li id="feeds"><h3><a href="#">Feeds</a></h3></li>
+                <li id="other"><h3><a href="#">Other</a></h3></li>
+                
+           </ul>
+           <div class="nav secondary-nav">
+	           <ul id="nav2">
+		           <li id="favoris"><a href="#"><img src="{{ asset('bundles/ecenetagora/images/bigHeart.png') }}" /></a></li>
+		           <li class="menu" id="not_co">
+		                <a href="#" class="menu"><img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" /></a>
+		                <ul class="menu-dropdown">
+		                    <li><a href="#">Profile</a></li>
+		                    <li><a href="#">Settings</a></li>
+		                    <li class="divider"></li>
+		                    <li><a href="#">Logout</a></li>
+		                </ul>
+		            </li>
+		        </ul>
+	            <form action="">
+	                  <input type="text" placeholder="Search" />
+	            </form>
+           </div>
+           
+           
+                     
+        </div>
+    </div>
+</div>
+
+<ul id="navigation">
+ <li class="home"><a title="Home" href="#"><img src="{{ asset('bundles/ecenetagora/images/Home.png') }}" height="18px" /></a></li>
+</ul>
+
+<div class="body_container">
+
+	<div class="body_insider">
+	{% block content %}{% endblock %}
+	</div>
+
+</div>
+{% endblock %}

@@ -6,11 +6,11 @@ ECE\Bundle\NetagoraBundle\Entity\Publication:
       type: integer
       id: true
       generator:         { strategy: AUTO }
-    knownLink:           { type: string, length: 255, column: know_link }
-    socialNetwork:       { type: string, length: 10, column: social_network }
+    knownLink:           { type: string, length: 255, column: know_link, nullable: true }
+    socialNetwork:       { type: string, length: 10, column: social_network, nullable: true }
     author:              { type: string, length: 50 }
     publishedAt:         { type: datetime, column: published_at }
-    reference:           { type: string, length: 200, unique: true }
+    reference:           { type: string, length: 200 }
     content:             { type: text }
     linkUrl:             { type: string, length: 200, column: link_url }
     isFavorite:          { type: boolean, column: is_favorite }
@@ -19,3 +19,4 @@ ECE\Bundle\NetagoraBundle\Entity\Publication:
     user:
       targetEntity: User
       inversedBy:   publications
+      cascade:      ["persist", "delete", "merge"]

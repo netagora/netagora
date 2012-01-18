@@ -1,5 +1,5 @@
 #user_username{
-    margin-left: 100px;
+    margin-left: 102px;
 }
 #user_email{
     margin-left: 127px;
@@ -7,17 +7,17 @@
 #user_password{
     margin-left: 104px;
 }
-#user_picture{
-    margin-left: 44px;
+#user_file{
+    margin-left: 56px;
 }
 #user_location{
-    margin-left: 108px;
+    margin-left: 111px;
 }
-#user_firstname{
-    margin-left: 101px;
+#user_firstName{
+    margin-left: 105px;
 }
-#user_lastname{
-    margin-left: 103px;
+#user_lastName{
+    margin-left: 105px;
 }
 #user_birthdate{
     margin-left: 109px;

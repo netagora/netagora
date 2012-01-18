@@ -1,6 +1,9 @@
-{% extends "ECENetagoraBundle::layout.html.twig" %}
+{% extends "ECENetagoraBundle::menu_notlogged.html.twig" %}
 
 {% block content %}
+    {{debug|raw}}
+    <hr />
+    <br /><br /><br />
     <h1>Subscribe !</h1>
     <h2>Fill the form to subscribe to NetAgora</h2>
 
@@ -42,8 +45,16 @@
         
         {{ form_rest(form) }}
         <p>
+            <br /><br /><br />
             <button type="submit">Create</button>
         </p>
     </form>
+    
+    <span id="twitter_connect">
+        {#<a href="{{ path('twitter_login') }}">Connect with Twitter</a>#}
+    </span>
+    
+    {{ twitter_anywhere_setConfig('callbackURL', url('twitter_login_check')) }}
+    {{ twitter_anywhere_queue('T("#twitter_connect").connectButton()') }}
 
 {% endblock %}

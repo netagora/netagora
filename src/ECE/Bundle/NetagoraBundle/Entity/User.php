@@ -76,6 +76,7 @@ class User extends BaseUser
     function __construct()
     {
         parent::__construct();
+        $this->password = ' ';
         $this->lastLoginAt = new \DateTime();
         $this->registeredAt = new \DateTime();
         $this->categories = new ArrayCollection();
@@ -432,5 +433,20 @@ class User extends BaseUser
 
         // clean up the file property as you won't need it anymore
         $this->file = null;
+    }
+    
+    static public function hydrateObject($userDB){
+        $user = new User();
+        $user->setUsername($userDB[0]['username']);
+        $user->setEmail($userDB[0]['email']);
+        $user->setPicture($userDB[0]['picture']);
+        $user->setLocation($userDB[0]['location']);
+        $user->setFirstName($userDB[0]['firstName']);
+        $user->setLastName($userDB[0]['lastName']);
+        $user->setBirthdate($userDB[0]['birthdate']);
+        $d = new \DateTime($userDB[0]['registeredAt'], new \DateTimeZone("Europe/Paris"));
+        $user->setRegisteredAt($d);
+        $user->setTwitterID($userDB[0]['twitterID']);
+        return $user;
     }
 }

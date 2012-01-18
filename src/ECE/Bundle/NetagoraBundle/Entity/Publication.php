@@ -252,7 +252,11 @@ class Publication
         return $this->isFavorite;
     }
     
-    public function savePublications(){
-        
+    static public function isLinkPublication($rawPublication){
+        $res = false;
+        if(1 == preg_match('#http://#', $rawPublication)){
+            $res = true;
+        }
+        return $res;
     }
 }

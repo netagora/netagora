@@ -1,19 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="{{ asset('bundles/netagora/css/form.css') }}" rel="stylesheet" type="text/css" media="screen" />
+        <link href="{{ asset('bundles/ecenetagora/css/form.css') }}" rel="stylesheet" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('bundles/ecenetagora/css/css_body2.css') }}" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ asset('bundles/ecenetagora/css/form.css') }}" type="text/css" media="screen" />
+        <!-- Scripts: inc. TableSorter -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+        <script type="text/javascript" src="{{ asset('bundles/ecenetagora/js/nav.js') }}"></script> 
         {{ twitter_anywhere_setup() }}
     </head>
     <body>
-        Début layout <br />
-        <span id="twitter_connect">
-            {#<a href="{{ path('twitter_login') }}">Connect with Twitter</a>#}
-        </span>
-        {{ twitter_anywhere_setConfig('callbackURL', url('twitter_login_check')) }}
-        {{ twitter_anywhere_queue('T("#twitter_connect").connectButton()') }}
-        {% block content %}{% endblock %}
-        <br />
-        Fin layout
+	    <div id="fb-root"></div>
+	    <script>(function(d, s, id) {
+	      var js, fjs = d.getElementsByTagName(s)[0];
+	      if (d.getElementById(id)) return;
+	      js = d.createElement(s); js.id = id;
+	      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=157952174313665";
+	      fjs.parentNode.insertBefore(js, fjs);
+	    }(document, 'script', 'facebook-jssdk'));</script>
+
+        {% block menu %}{% endblock %}
+        
+        <div id="footer_body" class="fill">
+        	<div id="logo"><img src="{{ asset('bundles/ecenetagora/images/netagora.png') }}" /></div>
+        	<div class="links_footer">
+        		<a href="#">About</a><br />
+        		<a href="#">Documentation</a><br />
+        		<a href="#">Credits</a>
+        	</div>
+        	<div class="links_footer">
+        		<a href="http://symfony.com/" target="_blank">We use Symfony 2</a><br />
+        		<a href="https://twitter.com/#!/NetAgora" target="_blank">Twitter</a><br />
+        		<a href="https://www.facebook.com/netagora" target="_blank">Facebook</a>
+        	</div>
+        </div>
         {{ twitter_anywhere_initialize() }}
     </body>
 </html>

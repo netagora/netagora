@@ -91,15 +91,29 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/Feeds")
+     * @Route("/Feeds", name="Feeds")
      * @Template()
      */
     public function feedsAction()
     {
-        $name = 'feeds';
-        return array('name' => $name);
+        return array();
     }
     
+    /**
+     * @Route("/Feeds", name="refresh")
+     * @Template()
+     */
+    public function refreshAction()
+    {
+        echo 'hello';
+        
+        $form = $this->createFormBuilder()
+                    ->getForm();
+
+        return $this->render('ECENetagoraBundle:Connected:feeds.html.twig', array(
+                             'form' => $form->createView(),
+                            ));
+    }
     /**
      * @Route("/Favourites")
      * @Template()

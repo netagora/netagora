@@ -6,11 +6,6 @@ ECENetagoraBundle:
 home:
     pattern: /Home/{username}
     defaults: { _controller: "netagoraBundle:Connected:home" }
-
-subscribe:
-    pattern:  /Subscribe
-    defaults: { _controller: "netagoraBundle:Disconnected:subscribe" }
-    requirements: { _method: post }
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
