@@ -1,7 +1,7 @@
 {% extends "ECENetagoraBundle::menu_logged.html.twig" %}
 
 {% block content %}
-
+    {% for publication in publications %}
     <div class="feeds">
             <div class="one_feed">
                   <div class="avatar">
@@ -9,7 +9,7 @@
                   </div>                                    
                   <div class="content">
                         <div class="ids">
-                              <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
+                              <div class="pseudo"><a href="{{publication.author}}{{feed_author_url}}" target="_blank">{{publication.author}}</a></div>
                               <div class="{{networking}}"></div>
                               <div class="fav_icon"></div>
                               <div class="share_feed">{{social_buttons|raw}}</div>
@@ -22,5 +22,6 @@
                   </div>
             </div>
     </div>
+    {% endfor %}
     
 {% endblock %}

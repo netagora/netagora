@@ -1,5 +1,4 @@
-<?php
-
+<?php 
 namespace ECE\Bundle\NetagoraBundle\Security\User\Provider;
 
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -13,26 +12,26 @@ use \TwitterOAuth;
 
 class TwitterUserProvider implements UserProviderInterface
 {
-    /** 
-     * @var \Twitter
-     */
+    /**
+* @var \Twitter
+*/
     protected $twitter;
     protected $userManager;
     protected $validator;
     protected $session;
 
     public function __construct(\TwitterOAuth $twitter, UserManager $manager, Validator $validator, Session $session)
-    {   
+    {
         $this->twitter = $twitter;
         $this->manager = $manager;
         $this->validator = $validator;
         $this->session = $session;
-    }   
+    }
 
     public function supportsClass($class)
-    {   
+    {
         return $this->manager->supportsClass($class);
-    }   
+    }
 
     public function findUserByTwitterId($twitterID)
     {
@@ -41,8 +40,9 @@ class TwitterUserProvider implements UserProviderInterface
 
     public function loadUserByUsername($username)
     {
-        $user = $this->findUserByTwitterId($username);
         
+        $user = $this->findUserByTwitterId($username);
+
         $this->twitter->setOAuthToken(
             $this->session->get('access_token'),
             $this->session->get('access_token_secret')
@@ -50,7 +50,6 @@ class TwitterUserProvider implements UserProviderInterface
 
         try {
              $info = $this->twitter->get('account/verify_credentials');
-             //$test = $this->twitter->get('statuses/home_timeline', array('screen_name' => $info->screen_name, 'count' => '5'));
         } catch (Exception $e) {
              $info = null;
         }
@@ -63,20 +62,16 @@ class TwitterUserProvider implements UserProviderInterface
             }
 
             $username = $info->screen_name;
+
             $user->setTwitterID($info->id);
             $user->setTwitterUsername($username);
-            $user->setUsername('username');
+            $user->setUsername($username);
             $user->setEmail($username);
             $user->setFirstName($info->name);
 
+
+
             $this->manager->updateUser($user);
-            $twitterSerialize = serialize($this->twitter);
-            
-            // Register twitter_id in session
-            $this->session->set('twitter_id', $user->getTwitterID());
-            $this->session->set('twitter', $twitterSerialize);
-            $this->session->set('info', $info);
-            
         }
 
         if (empty($user)) {

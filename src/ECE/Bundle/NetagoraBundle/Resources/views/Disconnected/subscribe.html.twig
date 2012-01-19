@@ -1,12 +1,8 @@
 {% extends "ECENetagoraBundle::menu_notlogged.html.twig" %}
 
 {% block content %}
-    {{debug|raw}}
-    <hr />
-    <br /><br /><br />
-    <h1>Subscribe !</h1>
-    <h2>Fill the form to subscribe to NetAgora</h2>
-    {{error}}
+    {#{{debug|raw}}#}
+    {#{{error}}#}
     <form id="subscribe" action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>
         <fieldset>
             <legend class="subtitle">Subscribe</legend>

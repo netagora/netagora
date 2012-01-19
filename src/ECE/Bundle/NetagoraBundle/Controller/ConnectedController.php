@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
+use ECE\Bundle\NetagoraBundle\Entity\Publication;
 
 class ConnectedController extends Controller
 {
@@ -61,15 +62,28 @@ class ConnectedController extends Controller
         $network = "t";
         $social_buttons = $user->getSocialButtons($network,'158903826945024000');
         $networking = 'twitter';
+        
+        //Get session
         $feed_author = 'me';
-        $feed_author_url = 'http://facebook.com';
+        
+        //Get all publications
+        $em = $this->getDoctrine()->getEntityManager();
+        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
+        $publications = $query->getResult();
+        
+        foreach($publications as $publication){
+            $feed_author = $publication->getAuthor();
+            $feed_author_url = $publication->getLinkUrl();
+        }
+        
         $display = 'display';
         $link_url ='http://www.youtube.com/embed/Vv5LEuJJ-f0?rel=0';
         $link = 'mylink';
         $feed_text = 'content';
-         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
                
-        return array('name' => $name, 
+        return array('publications' => $publications,
+                     'name' => $name, 
                      'feed_author' => $feed_author, 
                      'feed_author_url' => $feed_author_url, 
                      'display' => $display, 
