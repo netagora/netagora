@@ -25,7 +25,7 @@ color-stop(0.78, #FFDAA7)
 
 @font-face {
 font-family: swatch;
-src: url( '../font/SWATRG__.ttf' );
+src: url( '../font/SWATRG__.TTF' );
 }
 
 body{

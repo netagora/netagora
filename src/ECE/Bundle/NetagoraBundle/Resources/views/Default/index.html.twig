@@ -1,88 +1,88 @@
-{% extends "ECENetagoraBundle::layout.html.twig" %}
-{% block menu %}
+{% extends "ECENetagoraBundle::menu_notlogged.html.twig" %}
+{% block content %}
 <div id="top_body" class="fill">
 
-	<div id="title">
-		<span id='net'>net</span>agora
-		<div id='description'>The only open source social aggregator</div>
-	</div>
-	
-	<div id="explain">
-	
-		<div class="left">
-			<p>Connect your social accounts</p>
-			<img src="{{ asset('bundles/ecenetagora/images/social.png') }}"/>
-		</div>
-		
-		<div class="sep"></div>
-		
-		<div class="middle">
-			<p>Your timelines sorted by categories!</p>
-			<img src="{{ asset('bundles/ecenetagora/images/categories_mix.png') }}" />
-		</div>
-		
-	</div>
+      <div id="title">
+            <span id='net'>net</span>agora
+            <div id='description'>The only open source social aggregator</div>
+      </div>
+      
+      <div id="explain">
+      
+            <div class="left">
+                  <p>Connect your social accounts</p>
+                  <img src="{{ asset('bundles/ecenetagora/images/social.png') }}"/>
+            </div>
+            
+            <div class="sep"></div>
+            
+            <div class="middle">
+                  <p>Your timelines sorted by categories!</p>
+                  <img src="{{ asset('bundles/ecenetagora/images/categories_mix.png') }}" />
+            </div>
+            
+      </div>
 
 </div>
 
 <div id="bottom_body">
 
-	<div class="left">
-		<span class="subtitle">
-			
-			Your feeds in one place
-			
-		</span><br />
-		<div class="description">
-		
-			NetAgora is a social network aggregator that allows you to see your different feeds in one place. But it does more than that. It also sort them for you so it is easiest to find the latest news about your friend's lives
-		
-		</div>
-					
-	</div>
-	
-	<div class="sep"></div>
-	
-	<div class="middle">
-		<span class="subtitle">
-			
-			With your help
-			
-		</span><br />
-		<div class="description">
-		
-			NetAgora is the first open source social aggregator. Everyone can help building and improving it. Users can share ideas for improvements and developers can implement them or implement other ideas too.
-		
-		</div>
-	</div>
-	
-	<div class="sep"></div>
-	
-	<div class="right">
-		<span class="subtitle">
-				
-					Get informed
-				
-				</span><br />
-				<div class="description">
-				
-					Receive an e-mail when <b>NetAgora</b> is launched and win a pioneer badge for your early care !
-				
-				</div>
-		
-				<br />
-				
-				<form method="post" action="">
-				
-					<fieldset>
-					
-						<input type="text" name="mail" value="" />
-						<button>Suscribe</button>
-					
-					</fieldset>
-				
-				</form>
-	</div>
+      <div class="left">
+            <span class="subtitle">
+                  
+                  Your feeds in one place
+                  
+            </span><br />
+            <div class="description">
+            
+                  NetAgora is a social network aggregator that allows you to see your different feeds in one place. But it does more than that. It also sort them for you so it is easiest to find the latest news about your friend's lives
+            
+            </div>
+                              
+      </div>
+      
+      <div class="sep"></div>
+      
+      <div class="middle">
+            <span class="subtitle">
+                  
+                  With your help
+                  
+            </span><br />
+            <div class="description">
+            
+                  NetAgora is the first open source social aggregator. Everyone can help building and improving it. Users can share ideas for improvements and developers can implement them or implement other ideas too.
+            
+            </div>
+      </div>
+      
+      <div class="sep"></div>
+      
+      <div class="right">
+            <span class="subtitle">
+                        
+                              Get informed
+                        
+                        </span><br />
+                        <div class="description">
+                        
+                              Receive an e-mail when <b>NetAgora</b> is launched and win a pioneer badge for your early care !
+                        
+                        </div>
+            
+                        <br />
+                        
+                        <form method="post" action="">
+                        
+                              <fieldset>
+                              
+                                    <input type="text" name="mail" value="" />
+                                    <button>Suscribe</button>
+                              
+                              </fieldset>
+                        
+                        </form>
+      </div>
 
 </div>
 {% endblock %}

@@ -35,7 +35,19 @@ class ConnectedController extends Controller
     public function profileAction()
     {
         $name = 'profile';
-        return array('name' => $name);
+        $user = new User();
+        $network = "t";
+        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
+        $mail_address = 'bla@gmail.com';
+        $name = 'first last';
+        $location = 'paris';
+        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+               
+        return array('name' => $name, 
+                     'mail_address' => $mail_address, 
+                     'name' => $name, 
+                     'location' => $location, 
+                     'avatar_url' => $avatar_url);
     }
     
     /**
@@ -107,7 +119,29 @@ class ConnectedController extends Controller
     public function photoAction()
     {
         $name = 'photo';
-        return array('name' => $name);
+        $user = new User();
+        $network = "t";
+        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
+        $networking = 'twitter';
+        $feed_author = 'me';
+        $feed_author_url = 'http://facebook.com';
+        $display = 'display';
+        //$link_url ='http://30.media.tumblr.com/tumblr_lxefkzG8B91qe4vldo1_500.jpg';
+        $link_url = 'http://s3.amazonaws.com/data.tumblr.com/tumblr_lxuwzc5pO01qexajco1_1280.jpg?AWSAccessKeyId=AKIAJ6IHWSU3BX3X7X3Q&Expires=1326905886&Signature=VWVZph8IsBx%2FeMqVUdF9kyJOPCM%3D';
+        $link = 'mylink';
+        $feed_text = 'content';
+         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+               
+        return array('name' => $name, 
+                     'feed_author' => $feed_author, 
+                     'feed_author_url' => $feed_author_url, 
+                     'display' => $display, 
+                     'link_url' => $link_url, 
+                     'link' => $link, 
+                     'feed_text' => $feed_text, 
+                     'networking' => $networking, 
+                     'social_buttons' => $social_buttons, 
+                     'avatar_url' => $avatar_url);
     }
     
     /**
@@ -117,7 +151,29 @@ class ConnectedController extends Controller
     public function locationSitesAction()
     {
         $name = 'location';
-        return array('name' => $name);
+        $user = new User();
+        $network = "t";
+        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
+        $networking = 'twitter';
+        $feed_author = 'me';
+        $feed_author_url = 'http://facebook.com';
+        $display = 'display';
+        $link_url ='http://bla.ca';
+        $link = 'mylink';
+        $feed_text = 'content';
+        $category = 'video';
+        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+
+         return array('name' => $name, 
+                      'feed_author' => $feed_author, 
+                      'feed_author_url' => $feed_author_url, 
+                      'display' => $display, 
+                      'link_url' => $link_url, 
+                      'link' => $link, 
+                      'feed_text' => $feed_text, 
+                      'networking' => $networking, 
+                      'social_buttons' => $social_buttons, 
+                      'avatar_url' => $avatar_url);
     }
     
     /**
@@ -127,7 +183,28 @@ class ConnectedController extends Controller
     public function otherAction()
     {
         $name = 'other';
-        return array('name' => $name);
+        $user = new User();
+        $network = "t";
+        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
+        $networking = 'twitter';
+        $feed_author = 'me';
+        $feed_author_url = 'http://facebook.com';
+        $display = 'display';
+        $link_url ='http://bla.ca';
+        $link = 'mylink';
+        $feed_text = 'content';
+         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+               
+        return array('name' => $name, 
+                     'feed_author' => $feed_author, 
+                     'feed_author_url' => $feed_author_url, 
+                     'display' => $display, 
+                     'link_url' => $link_url, 
+                     'link' => $link, 
+                     'feed_text' => $feed_text, 
+                     'networking' => $networking, 
+                     'social_buttons' => $social_buttons, 
+                     'avatar_url' => $avatar_url);
     }
     
     /**
@@ -136,7 +213,31 @@ class ConnectedController extends Controller
      */
     public function feedsAction()
     {
-        return array();
+        $name = 'location';
+           $user = new User();
+           $network = "t";
+           $social_buttons = $user->getSocialButtons($network,'158903826945024000');
+           $networking = 'twitter';
+           $feed_author = 'me';
+           $feed_author_url = 'http://facebook.com';
+           $display = 'display';
+           $link_url ='http://bla.ca';
+           $link = 'mylink';
+           $feed_text = 'content';
+           $category = 'video';
+            $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+
+           return array('name' => $name, 
+                        'feed_author' => $feed_author, 
+                        'feed_author_url' => $feed_author_url, 
+                        'display' => $display, 
+                        'link_url' => $link_url, 
+                        'link' => $link, 
+                        'feed_text' => $feed_text, 
+                        'networking' => $networking, 
+                        'social_buttons' => $social_buttons, 
+                        'avatar_url' => $avatar_url);
+        
     }
     
     /**
@@ -158,7 +259,29 @@ class ConnectedController extends Controller
     public function favouritesAction()
     {
         $name = 'favourites';
-        return array('name' => $name);
+        $user = new User();
+        $network = "t";
+        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
+        $networking = 'twitter';
+        $feed_author = 'me';
+        $feed_author_url = 'http://facebook.com';
+        $display = 'display';
+        $link_url ='http://bla.ca';
+        $link = 'mylink';
+        $feed_text = 'content';
+        $category = 'video';
+        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+               
+        return array('name' => $name, 
+                     'feed_author' => $feed_author, 
+                     'feed_author_url' => $feed_author_url, 
+                     'display' => $display, 
+                     'link_url' => $link_url, 
+                     'link' => $link, 
+                     'feed_text' => $feed_text, 
+                     'networking' => $networking, 
+                     'social_buttons' => $social_buttons, 
+                     'avatar_url' => $avatar_url);
     }
     
     /**

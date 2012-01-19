@@ -1,5 +1,56 @@
-{% extends "ECENetagoraBundle::layout.html.twig" %}
+{% extends "ECENetagoraBundle::menu_logged.html.twig" %}
 
 {% block content %}
-    PROFILE
+
+    <form id="profile">
+          <fieldset>
+                <legend class="subtitle">Profile</legend>
+                <ol>
+                      <li>
+                            <label for=name>Name</label>
+                            <input id=name name=name type=text placeholder="{{name}}" required autofocus>
+                      </li>
+                      <li>
+                            <label for=email>Email</label>
+                            <input id=email name=email type=email placeholder="{{mail_address}}" required>
+                      </li>
+                      <li>
+                            <label for=location>Location</label>
+                            <input id=location name=location type=text placeholder="{{location}}" required>
+                      </li>
+                      <li>
+                            <label for=phone>Old password</label>
+                            <input id=oldpass name=password type=password placeholder="" required>
+                      </li>
+                      <li>
+                            <label for=phone>New password</label>
+                            <input id=newpass name=password type=password placeholder="">
+                      </li>
+                      <li>
+                            <label for=phone>New password</label>
+                            <input id=newpass2 name=password type=password placeholder="">
+                      </li>
+                </ol>
+                
+                <div class="division"></div>
+                
+                <legend class="subtitle">Picture</legend>
+                <ol>
+                      <li>
+                            <label for=name>Profile picture</label>
+                            <input id=avatar name=avatar type=file >
+                            <div class="avatar"><img src="{{avatar_url}}" /></div>
+                      </li>
+                      
+                </ol>
+                
+          </fieldset>
+                    
+           <div class="division"></div>
+ 
+            <fieldset>
+                <button type=submit>Save changes</button>
+          </fieldset>
+    </form>
+        
 {% endblock %}

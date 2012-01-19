@@ -2,10 +2,30 @@
 
 {% block content %}
 
-feeds
-  <!-- <form action="{#{{ path('refresh') }}#}" method="post" {#{{ form_enctype(form) }}#}>
-       <p>
-           <button type="submit">Create</button>
-       </p>
-   </form>-->
+    <div class="feeds">
+            <div class="one_feed">
+                  <div class="avatar">
+                        <img src="{{avatar_url}}" />
+                  </div>                                    
+                  <div class="content">
+                        <div class="ids">
+                              <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
+                              <div class="{{networking}}"></div>
+                              <div class="fav_icon"></div>
+                              <div class="share_feed">{{social_buttons|raw}}</div>
+                        </div>
+                        <div class="feed_content">
+                              <div class="text">{{feed_text}}</div>
+                              <div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
+                        </div>
+                  </div>
+            </div>
+    </div>
+    
+    <!-- <form action="{{ path('refresh') }}" method="post" {#{{ form_enctype(form) }}#}>
+         <p>
+             <button type="submit">Create</button>
+         </p>
+     </form>-->
+    
 {% endblock %}
