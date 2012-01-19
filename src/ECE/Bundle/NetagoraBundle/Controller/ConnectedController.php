@@ -3,11 +3,10 @@
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class ConnectedController extends Controller
 {
@@ -26,8 +25,6 @@ class ConnectedController extends Controller
         }else{
             return array('name' => 'anonymous', 'current_user' => '0');
         }
-        
-        
     }
     
     /**
@@ -47,7 +44,28 @@ class ConnectedController extends Controller
     public function videoAction()
     {
         $name = 'video';
-        return array('name' => $name);
+        $user = new User();
+        $network = "t";
+        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
+        $networking = 'twitter';
+        $feed_author = 'me';
+        $feed_author_url = 'http://facebook.com';
+        $display = 'display';
+        $link_url ='http://www.youtube.com/embed/Vv5LEuJJ-f0?rel=0';
+        $link = 'mylink';
+        $feed_text = 'content';
+         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
+               
+        return array('name' => $name, 
+                     'feed_author' => $feed_author, 
+                     'feed_author_url' => $feed_author_url, 
+                     'display' => $display, 
+                     'link_url' => $link_url, 
+                     'link' => $link, 
+                     'feed_text' => $feed_text, 
+                     'networking' => $networking, 
+                     'social_buttons' => $social_buttons, 
+                     'avatar_url' => $avatar_url);
     }
     
     /**
@@ -105,14 +123,11 @@ class ConnectedController extends Controller
      */
     public function refreshAction()
     {
-        echo 'hello';
-        
-        $form = $this->createFormBuilder()
-                    ->getForm();
 
-        return $this->render('ECENetagoraBundle:Connected:feeds.html.twig', array(
-                             'form' => $form->createView(),
-                            ));
+        return array();
+        /*$this->render('ECENetagoraBundle:Connected:feeds.html.twig', array(
+                        'form' => $form->createView(),
+                        ));*/
     }
     /**
      * @Route("/Favourites")

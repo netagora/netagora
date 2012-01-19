@@ -130,8 +130,7 @@ class DisconnectedController extends Controller
      */
     public function loginAction()
     {
-        $name = 'login';
-        return array('name' => $name);
+        return array();
     }
     
     /**
@@ -142,7 +141,7 @@ class DisconnectedController extends Controller
     {
         $error = '';
         $debug = '';
-        //Renvoie le mot de passe en clair dans le mail
+
         $email = $request->request->get('mail');
         
         //Find the user
@@ -166,7 +165,7 @@ class DisconnectedController extends Controller
                     The netagora team.
                     ');
             $this->get('mailer')->send($message);
-        } else {
+        } else if ($request->request->get('mail') != ''){
             $error = 'Your account doesn\'t exist';
         }
         

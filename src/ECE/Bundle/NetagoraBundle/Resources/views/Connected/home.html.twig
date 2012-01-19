@@ -1,8 +1,164 @@
-{% extends "ECENetagoraBundle::menu_logged.html.twig" %}
+{% extends "ECENetagoraBundle::layout.html.twig" %}
 
-{% block content %}
-Home
-<br />
-<h1>Welcome {{name}}!</h1>
-user_id = {{current_user}}
+{% block menu %}
+<div class="body_container" id="home_co">
+
+      <div class="body_insider">
+    <div class="welcome_title">home.</div>
+                      
+                      
+                      <div class="cat_container">
+                            <!-- START CONTAINER VIDEOS -->
+                            <div class="categories" id="home_videos">
+                                  <div class="cat_title">
+                                        Latest videos <span class="close">x</span>
+                                  </div>
+                                  <div class="cat_new_content">
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                  </div>
+                            </div>
+                            <!-- END CONTAINER VIDEOS -->
+                            
+                            <!-- START CONTAINER MUSIC -->
+                            <div class="categories" id="home_music">
+                                  <div class="cat_title">
+                                        Latest music <span class="close">x</span>
+                                  </div>
+                                  <div class="cat_new_content">
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                  </div>
+                            </div>
+                            <!-- END CONTAINER MUSIC -->
+                            
+                            <!-- START CONTAINER PICTURES -->
+                            <div class="categories" id="home_pictures">
+                                  <div class="cat_title">
+                                        Latest pictures <span class="close">x</span>
+                                  </div>
+                                  <div class="cat_new_content">
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                  </div>
+                            </div>
+                            <!-- END CONTAINER PICTURES -->
+                            
+                            <!-- START CONTAINER LOCATIONS -->
+                            <div class="categories" id="home_locations">
+                                  <div class="cat_title">
+                                        Latest locations <span class="close">x</span>
+                                  </div>
+                                  <div class="cat_new_content">
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                  </div>
+                            </div>
+                            <!-- END CONTAINER LOCATIONS -->
+          
+                            <!-- START CONTAINER OTHERS -->
+                            <div class="categories" id="home_other">
+                                  <div class="cat_title">
+                                        Latest other <span class="close">x</span>
+                                  </div>
+                                  <div class="cat_new_content">
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                  </div>
+                            </div>
+                            <!-- END CONTAINER OTHER -->
+                            
+                            <!-- START CONTAINER FEEDS -->
+                            <div class="categories" id="home_feeds">
+                                  <div class="cat_title">
+                                        Latest feeds <span class="close">x</span>
+                                  </div>
+                                  <div class="cat_new_content">
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                  </div>
+                            </div>
+                            <!-- END CONTAINER FEEDS -->
+                            
+                            <!-- START CONTAINER FAVORITES -->
+                            <div class="categories" id="home_favorites">
+                                  <div class="cat_title">
+                                        Latest favorites <span class="close">x</span>
+                                  </div>
+                                  <div class="cat_new_content">
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                        <div class="content">
+                                              <div class="description">title</div>
+                                              <div class="source"><a href="">(source)</a></div>
+                                        </div>
+                                  </div>
+                            </div>
+                            <!-- END CONTAINER FAVORITES -->
+                            
+                            <!-- START CONTAINER PROFIL -->
+                            <div class="categories" id="home_profil">
+                                  <div class="cat_title">
+                                        PROFIL <span class="close">x</span>
+                                  </div>
+                                  
+                            </div>
+                            <!-- END CONTAINER PROFIL -->                        
+    
+                      </div>
+                      
+                      <div id="cat_missing"></div>
+                                                                    
+                </div>
+    </div>
+    </div>
+    
+    <h1>Welcome {{name}}!</h1>
+    user_id = {{current_user}}
 {% endblock %}

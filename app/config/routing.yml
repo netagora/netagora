@@ -2,10 +2,6 @@ ECENetagoraBundle:
     resource: "@ECENetagoraBundle/Controller/"
     type:     annotation
     prefix:   /
-
-home:
-    pattern: /Home/{username}
-    defaults: { _controller: "netagoraBundle:Connected:home" }
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
