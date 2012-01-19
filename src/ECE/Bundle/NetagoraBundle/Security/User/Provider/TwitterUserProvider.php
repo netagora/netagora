@@ -38,7 +38,6 @@ class TwitterUserProvider implements UserProviderInterface
 
     public function loadUserByUsername($username)
     {
-        
         $user = $this->findUserByTwitterId($username);
 
         $this->twitter->setOAuthToken(
