@@ -54,10 +54,10 @@ class DisconnectedController extends Controller
     }
     
     /**
-     * @Route("/Login")
+     * @Route("/menu_notlogged", name="login")
      * @Template()
      */
-    public function loginAction()
+    public function loginAction(Request $request)
     {
         return array();
     }

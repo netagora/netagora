@@ -7,47 +7,45 @@
             <ul>
                 <li id="home_index"><h3><a href="#">Home</a></h3></li>
                 <li id="about"><h3><a href="#">About</a></h3></li>
-                <li id="doc"><h3><a href="#">Documentation</a></h3></li>	                
+                <li id="doc"><h3><a href="#">Documentation</a></h3></li>                    
            </ul>
 
-			<div class="nav secondary-nav">
-			    <ul id="nav2">
-			        <li class="menu" id="form_bar">
-			             <h3><a href="#" class="menu">Sign In</a></h3>
-			             <ul class="menu-dropdown">
-			                 <li><div id="sign_div"><fieldset id="signin_menu">
-			                     <form method="post" id="signin" action="https://twitter.com/sessions">
-			                       <label for="username">Username</label>
-			                       <input id="username" name="username" value="" title="username" tabindex="4" type="text" placeholder="Type here">
-			                       </p>
-			                       <p>
-			                         <label for="password">Password</label>
-			                         <input id="password" name="password" value="" title="password" tabindex="5" type="password" placeholder="Type here">
-			                       </p>
-			                       <p class="remember">
-			                         <input id="signin_submit" value="Sign in" tabindex="6" type="submit">
-			                         <input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
-			                         <label for="remember">Remember me</label>
-			                       </p>
-			                       <div class="forgot"><a href="#" id="resend_password_link">Forgot your password?</a></div>
-			                       <div class="forgot-username"><a id="forgot_username_link" href="#">Forgot your username?</a></div>
-			                     </form>
-			             	</fieldset></div></li>
-			             </ul>
-			         </li>
-			     </ul>
-			</div>
-	        </div>	        
+            <div class="nav secondary-nav">
+                <ul id="nav2">
+                    <li class="menu" id="form_bar">
+                         <h3><a href="#" class="menu">Sign In</a></h3>
+                         <ul class="menu-dropdown">
+                             <li><div id="sign_div"><fieldset id="signin_menu">
+                                 <form method="post" id="signin" action="{{ path('login') }}">
+                                   <label for="username">Username</label>
+                                   <input id="username" name="username" value="" title="username" tabindex="4" type="text" placeholder="Type here">
+                                   </p>
+                                   <p>
+                                     <label for="password">Password</label>
+                                     <input id="password" name="password" value="" title="password" tabindex="5" type="password" placeholder="Type here">
+                                   </p>
+                                   <p class="remember">
+                                     <input id="signin_submit" value="Sign in" tabindex="6" type="submit">
+                                     <input id="remember" name="remember_me" value="1" tabindex="7" type="checkbox">
+                                     <label for="remember">Remember me</label>
+                                   </p>
+                                   <div class="forgot"><a href="#" id="resend_password_link">Forgot your password?</a></div>
+                                   <div class="forgot-username"><a id="forgot_username_link" href="#">Forgot your username?</a></div>
+                                 </form>
+                             </fieldset></div></li>
+                         </ul>
+                     </li>
+                 </ul>
+            </div>
+            </div>            
     </div>
 </div>
 <!-- END TOP BAR -->
-
 <div class="body_container">
 
-	<div class="body_insider">
-	
-		{% block content %}{% endblock %}
-	
-	</div>
+    <div class="body_insider">
+        {% block content %}{% endblock %}
+    
+    </div>
 </div>
 {% endblock %}

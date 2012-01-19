@@ -59,6 +59,7 @@ class ConnectedController extends Controller
     {
         $name = 'video';
         $user = new User();
+        $user->setTwitterUsername('Saro0h');
         $network = "t";
         $social_buttons = $user->getSocialButtons($network,'158903826945024000');
         $networking = 'twitter';
@@ -83,9 +84,8 @@ class ConnectedController extends Controller
         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
                
         return array('publications' => $publications,
-                     'name' => $name, 
-                     'feed_author' => $feed_author, 
-                     'feed_author_url' => $feed_author_url, 
+                     'user' => $user,
+                     'name' => $name,
                      'display' => $display, 
                      'link_url' => $link_url, 
                      'link' => $link, 
