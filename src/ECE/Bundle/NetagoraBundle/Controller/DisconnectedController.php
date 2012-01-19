@@ -17,31 +17,27 @@ class DisconnectedController extends Controller
      */
     public function subscribeAction(Request $request)
     {
-        $debug = 'SubscribeAction';
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity  = new User();
-        $entity->setUsername('Enter your username');
+        $user  = new User();
+        $user->setUsername('Enter your username');
         
         $form = $this->createForm(new UserType(), $entity);
-        $form->bindRequest($request);
-        if ($form->isValid()) {
-            $entity->setLastLogin(new \DateTime());
-            $entity->upload();
-            //Update the user $this->manager->updateUser($user);
-            $em->persist($entity);
-            $em->flush();
-            //set session
-            $session->set('user_id', $entity->getId());
-           // return $this->redirect($this->generateUrl('home', array('username' => $entity->getUsername()), 301);//permanent redirection
+
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
+                
+                die('do some fun things');
+                
+            }
         }
-        
-        return $this->render('ECENetagoraBundle:Disconnected:subscribe.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            //'debug'  => $debug,
-            //'error'  => $error,
-        ));
+
+        return array(
+            'user' => $user,
+            'form' => $form->createView(),
+        );
     }
     
     /**
