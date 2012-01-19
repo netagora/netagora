@@ -74,7 +74,8 @@ class DisconnectedController extends Controller
                     if(count($publications) == 0 || $flag == false){
                         $debug = $debug.'<br />Hydratation Object Publication |';
                         $newPublication->setAuthor($array[$i]->user->name);
-                        $newPublication->setUser($userConnected);
+                        //$newPublication->setUser($userConnected); 
+                        //=>Got that error 'SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Saro0h' for key 'UNIQ_A2FBC267A0D96FBF' 
                         $newPublication->setPublishedAt($createdAt);
                         $newPublication->setReference($array[$i]->id_str);
                         $newPublication->setContent($array[$i]->text);

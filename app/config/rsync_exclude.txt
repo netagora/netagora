@@ -10,3 +10,4 @@ app/logs/*
 web/app_dev.php
 web/beta_dev.php
 web/config.php
+beta/config/parameters.ini

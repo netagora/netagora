@@ -1,6 +1,7 @@
-homepage:
-    pattern: /
-    defaults: { _controller: "ECEBetaBundle:Default:index" }
+ECEBetaBundle:
+   prefix: /
+   resource: "@ECEBetaBundle/Controller/"
+   type: annotation
     
 # Internal routing configuration to handle ESI
 #_internal:

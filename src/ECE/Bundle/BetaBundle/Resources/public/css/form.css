@@ -1,28 +1,44 @@
 #user_username{
     margin-left: 100px;
 }
+
 #user_email{
     margin-left: 127px;
 }
+
 #user_password{
     margin-left: 104px;
 }
+
 #user_picture{
     margin-left: 44px;
 }
+
 #user_location{
     margin-left: 108px;
 }
+
 #user_firstname{
     margin-left: 101px;
 }
+
 #user_lastname{
     margin-left: 103px;
 }
+
 #user_birthdate{
     margin-left: 109px;
     float: left;
 }
+
 #birthdate_label{
     float:left;
+}
+
+#subscribe_btn{
+    margin: -10px 0 0 0;
+}
+
+#emailing_email{
+    margin: 0 0 0 15px;
 }

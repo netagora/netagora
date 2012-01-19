@@ -1046,7 +1046,8 @@ ul#navigation .home a{
 #bottom_body button{
 	
 	padding: 5px;
-	
+	float: left;
+    margin: -26px 0 0 210px;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;

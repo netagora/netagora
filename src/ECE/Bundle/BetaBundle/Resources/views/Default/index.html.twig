@@ -1,26 +1,24 @@
 {% extends "ECEBetaBundle::layout.html.twig" %}
 {% block menu %}
+
 <div id="top_body" class="fill">
 
     <div id="title">
         <span id='net'>net</span>agora
         <div id='description'>The only open source social aggregator</div>
     </div>
-    
     <div id="explain">
-    
         <div class="left">
             <p>Connect your social accounts</p>
             <img src="{{ asset('bundles/ecebeta/images/social.png') }}"/>
         </div>
-        
+
         <div class="sep"></div>
-        
+
         <div class="middle">
             <p>Your timelines sorted by categories!</p>
             <img src="{{ asset('bundles/ecebeta/images/categories_mix.png') }}" />
         </div>
-        
     </div>
 
 </div>
@@ -59,29 +57,21 @@
     <div class="sep"></div>
     
     <div class="right">
-        <span class="subtitle">
-                
-                    Get informed
-                
-                </span><br />
-                <div class="description">
-                
-                    Receive an e-mail when <b>NetAgora</b> is launched and win a pioneer badge for your early care !
-                
+        <span class="subtitle"> Get informed </span><br />
+            <div class="description">
+                Receive an e-mail when <b>NetAgora</b> is launched and win a pioneer badge for your early care !
+            </div>
+            <br />
+            <form action="{{ path('homepage') }}" method="post">
+                <div>
+                    <label for="emailing_email" class=" required">Email</label>
+                    <input type="email" id="emailing_email" name="email" required="required" />
                 </div>
-        
-                <br />
-                
-                <form method="post" action="">
-                
-                    <fieldset>
-                    
-                        <input type="text" name="mail" value="" />
-                        <button>Suscribe</button>
-                    
-                    </fieldset>
-                
-                </form>
+    
+                <p>
+                    <button id="subscribe_btn" type="submit">Subscribe</button>
+                </p>
+            </form>
     </div>
 
 </div>

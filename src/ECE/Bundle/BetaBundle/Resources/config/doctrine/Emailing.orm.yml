@@ -1,0 +1,10 @@
+ECE\Bundle\BetaBundle\Entity\Emailing:
+  type: entity
+  table: na_emailing
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:      { strategy: AUTO }
+    email:             { type: string, length: 80, unique: true }
+  lifecycleCallbacks: {  }
