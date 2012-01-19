@@ -3,14 +3,15 @@
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Session;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Symfony\Component\HttpFoundation\Session;
+use Sensio\Bundle\BuzzBundle\DependencyInjection\SensioBuzzExtension;
+use ECE\Bundle\NetagoraBundle\Security\User\Provider\TwitterUserProvider;
 use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
-use Sensio\Bundle\BuzzBundle\DependencyInjection\SensioBuzzExtension;
-use Symfony\Component\HttpFoundation\Response;
-use ECE\Bundle\NetagoraBundle\Security\User\Provider\TwitterUserProvider;
 use ECE\Bundle\NetagoraBundle\Entity\Publication;
 
 class DisconnectedController extends Controller
@@ -84,6 +85,7 @@ class DisconnectedController extends Controller
                         $newPublication->setKnownLink('-1');
                         $em->persist($newPublication);
                         $em->flush();
+                        //redirection vers Home
                         $debug = $debug.'Save done. ID publication: '.$newPublication->getId().'<br />';
                     }
                 }
@@ -92,11 +94,18 @@ class DisconnectedController extends Controller
         }
         
         /* Subscribe form */
+        $error = '';
         $entity  = new User();
-        $form= $this->createForm(new UserType(), $entity);
+        $entity->setUsername('Enter your username');
+        
+        $form = $this->createForm(new UserType(), $entity);
+        
+        if ($request->request->get('password') != $request->request->get('password_again')) {
+            $error = 'Your must type the same password twice <br />';
+        }
+        
         $form->bindRequest($request);
-        if ($form->isValid()) {
-            $entity->setPassword(md5($entity->getPassword()));//Encode password in md5
+        if ($form->isValid() && $error != '') {
             $entity->setLastLogin(new \DateTime());
             $entity->upload();
             //Update the user $this->manager->updateUser($user);
@@ -104,14 +113,14 @@ class DisconnectedController extends Controller
             $em->flush();
             //set session
             $session->set('user_id', $entity->getId());
-
-            //return $this->redirect($this->generateUrl('home', array('username' => $entity->getUsername()), 301);//permanent redirection
+           // return $this->redirect($this->generateUrl('home', array('username' => $entity->getUsername()), 301);//permanent redirection
         }
         
         return $this->render('ECENetagoraBundle:Disconnected:subscribe.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView(),
             'debug'  => $debug,
+            'error'  => $error,
         ));
     }
     
@@ -126,12 +135,41 @@ class DisconnectedController extends Controller
     }
     
     /**
-     * @Route("/PasswordRetrieval")
+     * @Route("/PasswordRetrieval", name="forgot")
      * @Template()
      */
-    public function passwordRetrievalAction()
+    public function passwordRetrievalAction(Request $request)
     {
-        $name = 'ForgotPassword';
-        return array('name' => $name);
+        $error = '';
+        $debug = '';
+        //Renvoie le mot de passe en clair dans le mail
+        $email = $request->request->get('mail');
+        
+        //Find the user
+        $em = $this->getDoctrine()->getEntityManager();
+        if ($email) {
+            $user = $em->getRepository('ECENetagoraBundle:User')->findOneByEmail($email);
+        }
+        
+        if (!empty($user)) {
+            $message = \Swift_Message::newInstance()
+                    ->setSubject('Your access to netagora.net')
+                    ->setFrom(array('no-reply@netagora.net'=>'Netagora Team'))
+                    ->setTo($email)
+                    ->setBody('Hi '.$user->getFirstName().'!
+
+                    Your username is '.$user->getUsername().'
+                    Your password is '.$user->getPassword().'
+
+                    See you soon on www.netagora.net !
+
+                    The netagora team.
+                    ');
+            $this->get('mailer')->send($message);
+        } else {
+            $error = 'Your account doesn\'t exist';
+        }
+        
+        return array('error'=>$error, 'debug' => $debug);
     }
 }

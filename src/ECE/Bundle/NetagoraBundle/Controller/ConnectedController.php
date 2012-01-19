@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ConnectedController extends Controller
 {
     /**
-     * @Route("/Home/{name}")
+     * @Route("/Home/{name}", name="home")
      * @Template()
      */
     public function homeAction($name)

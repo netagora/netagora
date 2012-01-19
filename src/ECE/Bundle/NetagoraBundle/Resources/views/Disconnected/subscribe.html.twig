@@ -6,49 +6,70 @@
     <br /><br /><br />
     <h1>Subscribe !</h1>
     <h2>Fill the form to subscribe to NetAgora</h2>
-
-    <form action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>
-        {#{{ form_widget(form) }} #}
-            {{ form_label(form.username) }}
-            {{ form_widget(form.username) }}
-            {{ form_errors(form.username) }}
-            <br />
-            {{ form_label(form.email) }}
-            {{ form_widget(form.email) }}
-            {{ form_errors(form.email) }}
-            <br />
-            {{ form_label(form.password) }}
-            {{ form_widget(form.password) }}
-            {{ form_errors(form.password) }}
-            <br />
-            {{ form_label(form.file) }}
-            {{ form_widget(form.file) }}
-            {{ form_errors(form.file) }}
-            <br />
-            {{ form_label(form.location) }}
-            {{ form_widget(form.location) }}
-            {{ form_errors(form.location) }}
-            <br />
-            {{ form_label(form.firstName) }}
-            {{ form_widget(form.firstName) }}
-            {{ form_errors(form.firstName) }}
-            <br />
-            {{ form_label(form.lastName) }}
-            {{ form_widget(form.lastName) }}
-            {{ form_errors(form.lastName) }}
-            <br />
-            <div id="birthdate_label">
-            {{ form_label(form.birthdate) }}
-            </div>
-            {{ form_widget(form.birthdate)}}
-            {{ form_errors(form.birthdate) }}
-        
-        {{ form_rest(form) }}
-        <p>
-            <br /><br /><br />
-            <button type="submit">Create</button>
-        </p>
+    {{error}}
+    <form id="subscribe" action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>
+        <fieldset>
+            <legend class="subtitle">Subscribe</legend>
+                <ol>
+                    <li>
+                        {{ form_label(form.username) }}
+                        {{ form_widget(form.username) }}
+                        {{ form_errors(form.username) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.email) }}
+                        {{ form_widget(form.email) }}
+                        {{ form_errors(form.email) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.password) }}
+                        {{ form_widget(form.password) }}
+                        {{ form_errors(form.password) }}
+                        
+                    </li>
+                    <li>
+                        <label for=phone>Confirm password</label>
+                        <input id=pass name=password_again type=password placeholder="">
+                    </li>
+                    <br />
+                    <li>
+                        {{ form_label(form.file) }}
+                        {{ form_widget(form.file) }}
+                        {{ form_errors(form.file) }}
+                    </li>
+                    <br />
+                    <li>
+                        {{ form_label(form.location) }}
+                        {{ form_widget(form.location) }}
+                        {{ form_errors(form.location) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.firstName) }}
+                        {{ form_widget(form.firstName) }}
+                        {{ form_errors(form.firstName) }}
+                    </li>
+                    <li>
+                        {{ form_label(form.lastName) }}
+                        {{ form_widget(form.lastName) }}
+                        {{ form_errors(form.lastName) }}
+                    </li>
+                    <li>
+                        <div id="birthdate_label">
+                            {{ form_label(form.birthdate) }}
+                        </div>
+                        {{ form_widget(form.birthdate)}}
+                        {{ form_errors(form.birthdate) }}
+                    </li>
+                  </ol>
+             </fieldset>
+                    
+           <div class="division"></div>
+ 
+            <fieldset>
+                <button type=submit>Register</button>
+          </fieldset>
     </form>
+    
     
     <span id="twitter_connect">
         {#<a href="{{ path('twitter_login') }}">Connect with Twitter</a>#}
