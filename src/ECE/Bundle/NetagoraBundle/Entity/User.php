@@ -449,4 +449,20 @@ class User extends BaseUser
         $user->setTwitterID($userDB[0]['twitterID']);
         return $user;
     }
+    
+    public function getSocialButtons($network, $tweet_id)
+    {
+        if($network == "f"){
+            // for the social buttons at the bottom of the feed display
+            $social_buttons='<div class="fb-like" data-href="http://blop.ca" data-send="true" data-layout="button_count" data-width="200" data-show-faces="true"></div>';
+        }
+        else if($network == "t"){
+            $t_reply = '<a class="t_reply" href="https://twitter.com/intent/tweet?in_reply_to='.$tweet_id.'"> </a>';
+            $t_fav = '<a class="t_favorite" href="https://twitter.com/intent/retweet?tweet_id='.$tweet_id.'"> </a>';
+            $t_retweet = '<a class="t_retweet" href="https://twitter.com/intent/favorite?tweet_id='.$tweet_id.'"> </a>';
+            $social_buttons = $t_reply . ' ' . $t_fav . ' ' . $t_retweet;
+        }
+
+        return $social_buttons;
+    }
 }
