@@ -14,3 +14,7 @@ web/uploads/*
 
 netagora.esproj/Project.espressostorage
 netagora.esproj/user.Dorine.espressostorage
+
+app/AppKernel.php
+
+app/AppKernel.php
