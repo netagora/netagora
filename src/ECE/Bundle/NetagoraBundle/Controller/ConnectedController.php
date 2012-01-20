@@ -52,51 +52,42 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/Videos")
+     * @Route("/Videos", name="videos")
      * @Template()
      */
     public function videoAction()
     {
         $name = 'video';
+        
+        //Get the user connected
         $user = new User();
         $user->setTwitterUsername('Saro0h');
+        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
+        
         $network = "t";
         $social_buttons = $user->getSocialButtons($network,'158903826945024000');
         $networking = 'twitter';
         
-        //Get session
-        $feed_author = 'me';
-        
         //Get all publications
         $em = $this->getDoctrine()->getEntityManager();
+        //Récupérer les publications category.id = 1 => publication->known_link.category_id
         $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
         $publications = $query->getResult();
-        
-        foreach($publications as $publication){
-            $feed_author = $publication->getAuthor();
-            $feed_author_url = $publication->getLinkUrl();
-        }
-        
+          
+        //?
         $display = 'display';
-        $link_url ='http://www.youtube.com/embed/Vv5LEuJJ-f0?rel=0';
-        $link = 'mylink';
-        $feed_text = 'content';
-        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
                
         return array('publications' => $publications,
                      'user' => $user,
                      'name' => $name,
                      'display' => $display, 
-                     'link_url' => $link_url, 
-                     'link' => $link, 
-                     'feed_text' => $feed_text, 
                      'networking' => $networking, 
-                     'social_buttons' => $social_buttons, 
-                     'avatar_url' => $avatar_url);
+                     'social_buttons' => $social_buttons
+                     );
     }
     
     /**
-     * @Route("/Music")
+     * @Route("/Music", name="music")
      * @Template()
      */
     public function musicAction()
@@ -127,7 +118,7 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/Photos")
+     * @Route("/Photos", name="photos")
      * @Template()
      */
     public function photoAction()
@@ -140,7 +131,6 @@ class ConnectedController extends Controller
         $feed_author = 'me';
         $feed_author_url = 'http://facebook.com';
         $display = 'display';
-        //$link_url ='http://30.media.tumblr.com/tumblr_lxefkzG8B91qe4vldo1_500.jpg';
         $link_url = 'http://s3.amazonaws.com/data.tumblr.com/tumblr_lxuwzc5pO01qexajco1_1280.jpg?AWSAccessKeyId=AKIAJ6IHWSU3BX3X7X3Q&Expires=1326905886&Signature=VWVZph8IsBx%2FeMqVUdF9kyJOPCM%3D';
         $link = 'mylink';
         $feed_text = 'content';
@@ -159,7 +149,7 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/Locations")
+     * @Route("/Locations", name="location")
      * @Template()
      */
     public function locationSitesAction()
@@ -191,7 +181,7 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/Other")
+     * @Route("/Other", name="other")
      * @Template()
      */
     public function otherAction()
@@ -222,7 +212,7 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/Feeds", name="Feeds")
+     * @Route("/Feeds", name="feeds")
      * @Template()
      */
     public function feedsAction()
@@ -253,21 +243,8 @@ class ConnectedController extends Controller
                         'avatar_url' => $avatar_url);
         
     }
-    
     /**
-     * @Route("/Feeds", name="refresh")
-     * @Template()
-     */
-    public function refreshAction()
-    {
-
-        return array();
-        /*$this->render('ECENetagoraBundle:Connected:feeds.html.twig', array(
-                        'form' => $form->createView(),
-                        ));*/
-    }
-    /**
-     * @Route("/Favourites")
+     * @Route("/Favourites", name="favourites")
      * @Template()
      */
     public function favouritesAction()
@@ -296,6 +273,19 @@ class ConnectedController extends Controller
                      'networking' => $networking, 
                      'social_buttons' => $social_buttons, 
                      'avatar_url' => $avatar_url);
+    }
+    
+    /**
+     * @Route("/Feeds", name="refresh")
+     * @Template()
+     */
+    public function refreshAction()
+    {
+
+        return array();
+        /*$this->render('ECENetagoraBundle:Connected:feeds.html.twig', array(
+                        'form' => $form->createView(),
+                        ));*/
     }
     
     /**
