@@ -1,6 +1,7 @@
 {% extends "ECENetagoraBundle::menu_logged.html.twig" %}
 
 {% block content %}
+    <div class="page_name">Feeds</div>
     {% if publications|length > 0 %}
         {% for publication in publications %}
             <div class="feeds">
