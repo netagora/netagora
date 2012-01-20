@@ -1926,3 +1926,8 @@ padding: 20px;
 #birthdate_label{
     float:left;
 }
+
+.about p a{
+	
+	opacity: 1;
+}
