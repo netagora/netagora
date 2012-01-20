@@ -52,6 +52,7 @@ class ConnectedController extends Controller
      */
     public function videoAction()
     {
+        $publications = '';
         //Get the user connected
         $user = new User();
         $user->setTwitterUsername('Saro0h');
@@ -84,6 +85,7 @@ class ConnectedController extends Controller
      */
     public function musicAction()
     {
+        $publications = '';
         //Get the user connected
         $user = new User();
         $user->setTwitterUsername('Saro0h');
@@ -116,29 +118,31 @@ class ConnectedController extends Controller
      */
     public function photoAction()
     {
-        $name = 'photo';
+        $publications = '';
+        //Get the user connected
         $user = new User();
+        $user->setTwitterUsername('Saro0h');
+        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
+        
         $network = "t";
         $social_buttons = $user->getSocialButtons($network,'158903826945024000');
         $networking = 'twitter';
-        $feed_author = 'me';
-        $feed_author_url = 'http://facebook.com';
+        
+        //Get all publications
+        $em = $this->getDoctrine()->getEntityManager();
+        //Récupérer les publications category.id = 3 => publication->known_link.category_id
+        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
+        $publications = $query->getResult();
+          
+        //?
         $display = 'display';
-        $link_url = 'http://s3.amazonaws.com/data.tumblr.com/tumblr_lxuwzc5pO01qexajco1_1280.jpg?AWSAccessKeyId=AKIAJ6IHWSU3BX3X7X3Q&Expires=1326905886&Signature=VWVZph8IsBx%2FeMqVUdF9kyJOPCM%3D';
-        $link = 'mylink';
-        $feed_text = 'content';
-         $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
                
-        return array('name' => $name, 
-                     'feed_author' => $feed_author, 
-                     'feed_author_url' => $feed_author_url, 
+        return array('publications' => $publications,
+                     'user' => $user,
                      'display' => $display, 
-                     'link_url' => $link_url, 
-                     'link' => $link, 
-                     'feed_text' => $feed_text, 
                      'networking' => $networking, 
-                     'social_buttons' => $social_buttons, 
-                     'avatar_url' => $avatar_url);
+                     'social_buttons' => $social_buttons
+                     );
     }
     
     /**
@@ -147,30 +151,31 @@ class ConnectedController extends Controller
      */
     public function locationSitesAction()
     {
-        $name = 'location';
+        $publications = '';
+        //Get the user connected
         $user = new User();
+        $user->setTwitterUsername('Saro0h');
+        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
+        
         $network = "t";
         $social_buttons = $user->getSocialButtons($network,'158903826945024000');
         $networking = 'twitter';
-        $feed_author = 'me';
-        $feed_author_url = 'http://facebook.com';
+        
+        //Get all publications
+        $em = $this->getDoctrine()->getEntityManager();
+        //Récupérer les publications category.id = 3 => publication->known_link.category_id
+        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
+        $publications = $query->getResult();
+          
+        //?
         $display = 'display';
-        $link_url ='http://bla.ca';
-        $link = 'mylink';
-        $feed_text = 'content';
-        $category = 'video';
-        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
-
-         return array('name' => $name, 
-                      'feed_author' => $feed_author, 
-                      'feed_author_url' => $feed_author_url, 
-                      'display' => $display, 
-                      'link_url' => $link_url, 
-                      'link' => $link, 
-                      'feed_text' => $feed_text, 
-                      'networking' => $networking, 
-                      'social_buttons' => $social_buttons, 
-                      'avatar_url' => $avatar_url);
+               
+        return array('publications' => $publications,
+                     'user' => $user,
+                     'display' => $display, 
+                     'networking' => $networking, 
+                     'social_buttons' => $social_buttons
+                     );
     }
     
     /**
