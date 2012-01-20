@@ -73,14 +73,13 @@ class DisconnectedController extends Controller
                     ->setFrom(array('no-reply@netagora.net'=>'Netagora Team'))
                     ->setTo($email)
                     ->setBody('Hi '.$user->getFirstName().'!
+                               Your username is '.$user->getUsername().'
+                               Your password is '.$user->getPassword().'
 
-                    Your username is '.$user->getUsername().'
-                    Your password is '.$user->getPassword().'
+                               See you soon on www.netagora.net !
 
-                    See you soon on www.netagora.net !
-
-                    The netagora team.
-                    ');
+                               The netagora team.
+                              ');
             $this->get('mailer')->send($message);
         } else if ($request->request->get('mail') != ''){
             $error = 'Your account doesn\'t exist';

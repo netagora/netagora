@@ -18,7 +18,7 @@ class Publication
     private $user;
 
     /**
-     * @var string $knownLink
+     * @var KnownLink $knownLink
      */
     private $knownLink;
 
