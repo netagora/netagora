@@ -915,7 +915,7 @@ margin: 14px;
 
 /* ***** ***** DIV TOP BODY ***** ***** */
 #top_body{
-
+margin-top: 40px;
 height: 450px;
 width: 100%;
 text-align: center;
@@ -979,17 +979,34 @@ opacity: 0.8;
 
 }
 
+#explain p .availability{
+	
+	font-size: 0.6em;
+}
+
 #explain img{
 
 height: 200px;
 
 }
 
+#explain .left img.twitter_soc{
+	
+	height: 150px;
+	
+}
+
+#explain .left img.mini_soc{
+	
+	height: 10px;
+	
+}
+
 .middle{
 
 margin: 10px;
 display: inline-block;
-
+vertical-align: top;
 }
 
 #explain .sep{
