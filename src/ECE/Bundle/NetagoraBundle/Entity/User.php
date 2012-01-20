@@ -355,7 +355,7 @@ class User implements AdvancedUserInterface
 
     public function isEnabled()
     {
-        return $this->enabled;
+        return $this->isEnabled;
     }
 
     public function setRoles($roles)
@@ -365,7 +365,8 @@ class User implements AdvancedUserInterface
 
     public function getRoles()
     {
-        return $this->roles;
+        //return array($this->roles);
+        return array('ROLE_USER', 'ROLE_MEMBER');
     }
 
     /**

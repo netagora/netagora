@@ -465,7 +465,7 @@ pre {
 }
 
 .topbar form {
-  float: left;
+  float: right;
   margin: 5px 0 0 0;
   position: relative;
   filter: alpha(opacity=100);

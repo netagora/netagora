@@ -7,17 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-/** 
- * @Route("/twitter")
- *
- */
 class SecurityController extends Controller
 {
     /** 
-     * @Route("/login", name="twitter_login")
+     * @Route("/twitter/login", name="twitter_login")
      *
      */
-    public function loginAction(Request $request)
+    public function twitterLoginAction(Request $request)
     {
         $twitter = $this->get('fos_twitter.service');
 
@@ -25,10 +21,25 @@ class SecurityController extends Controller
     }
 
     /** 
-     * @Route("/login_check", name="twitter_login_check")
-     *
+     * @Route("/login", name="form_login")
+     * @Template()
+     */
+    public function loginAction(Request $request)
+    {
+        return array();
+    }
+
+    /** 
+     * @Route("/twitter/login_check", name="twitter_login_check")
+     * @Route("/login_check", name="form_login_check")
      */
     public function loginCheckAction()
+    {
+        
+    }
+
+    /** @Route("/logout", name="logout") */
+    public function logoutAction()
     {
         
     }

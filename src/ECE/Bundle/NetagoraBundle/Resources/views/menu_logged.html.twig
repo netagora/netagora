@@ -28,23 +28,20 @@
                 <form action="">
                       <input type="text" placeholder="Search" />
                 </form>
-           </div>
-           
-           
-                     
+           </div>     
         </div>
     </div>
 </div>
-
 <ul id="navigation">
- <li class="home"><a title="Home" href="#"><img src="{{ asset('bundles/ecenetagora/images/Home.png') }}" height="18px" /></a></li>
+    <li class="home">
+        <a title="Home" href="#">
+            <img src="{{ asset('bundles/ecenetagora/images/Home.png') }}" height="18px" />
+        </a>
+    </li>
 </ul>
-
 <div class="body_container">
-
     <div class="body_insider">
-    {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
     </div>
-
 </div>
 {% endblock %}
