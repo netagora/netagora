@@ -25,7 +25,7 @@ color-stop(0.78, #FFDAA7)
 
 @font-face {
 font-family: swatch;
-src: url( '../font/SWATRG__.TTF' );
+	src: url( '../font/SWATRG__.ttf' );
 }
 
 body{
@@ -1097,6 +1097,14 @@ font-size: 2em;
 
 }
 
+.subtitle2{
+	
+	font-size: 2em;
+	margin-top: 10px;
+	margin-bottom: 0;
+	
+}
+
 .grey_bg .subtitle{
 
 color: #eae5df;
@@ -1435,10 +1443,17 @@ z-index: 10000;
 
 .cat_to_ad{
 
-font-size: 2em;
+	font-size: 1.4em;
 text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
 cursor: pointer;
 }
+
+#video_m, #picture_m, #music_m, #location_m, #other_m, #feed_m, #favourite_m, #profile_m{
+	
+	
+	display: none;
+}
+
 
 /* ******* ******* START ***** FEEDS CONTAINER ******* ******* */
 /* ******* ******* START ***** */
@@ -1646,8 +1661,7 @@ height: 80px;
 -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 }
-form#profile, form#subscribe, form#settings, form#password_retrieval,
-form#search {
+form#profile, form#subscribe, form#settings, form#password_retrieval{
 position: absolute;
 top: 40px;
 width: 600px;
@@ -1734,6 +1748,7 @@ font-size: 1.1em;
 font-weight: bold;
 width: 100px;
 }
+
 form#profile fieldset fieldset label:hover,
 form#subscribe fieldset fieldset label:hover,
 form#settings fieldset fieldset label:hover,
@@ -1853,16 +1868,33 @@ padding: 20px;
 }
 
 #badges{
+	
     margin: 20px;
+	
 }
 
 #badges img{
+	
     margin: 10px;
+	width: 70px;
+	
 }
 
 .search{
-    margin-top: 340px;
-    margin-bottom: 50px;
+	width: 600px;
+	margin: 0px auto;
+	background: #b7b2b1;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	padding: 20px;
+}
+
+.feeds.searching{
+	
+	margin-top: 20px;
+	min-height: 300px;
+	
 }
 
 #birthdate_label{

@@ -23,7 +23,7 @@ class ConnectedController extends Controller
             'current_user' => $session->get('user_id'),
         );
     }
-    
+    // blababla
     /**
      * @Route("/Profile")
      * @Template()
