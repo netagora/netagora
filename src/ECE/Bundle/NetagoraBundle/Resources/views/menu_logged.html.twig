@@ -13,21 +13,21 @@
                 
            </ul>
            <div class="nav secondary-nav">
-	           <ul id="nav2">
-		           <li id="favoris"><a href="#"><img src="{{ asset('bundles/ecenetagora/images/bigHeart.png') }}" /></a></li>
-		           <li class="menu" id="not_co">
-		                <a href="#" class="menu"><img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" /></a>
-		                <ul class="menu-dropdown">
-		                    <li><a href="#">Profile</a></li>
-		                    <li><a href="#">Settings</a></li>
-		                    <li class="divider"></li>
-		                    <li><a href="#">Logout</a></li>
-		                </ul>
-		            </li>
-		        </ul>
-	            <form action="">
-	                  <input type="text" placeholder="Search" />
-	            </form>
+               <ul id="nav2">
+                   <li id="favoris"><a href="#"><img src="{{ asset('bundles/ecenetagora/images/bigHeart.png') }}" /></a></li>
+                   <li class="menu" id="not_co">
+                        <a href="#" class="menu"><img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" /></a>
+                        <ul class="menu-dropdown">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form action="">
+                      <input type="text" placeholder="Search" />
+                </form>
            </div>
            
            
@@ -42,9 +42,9 @@
 
 <div class="body_container">
 
-	<div class="body_insider">
-	{% block content %}{% endblock %}
-	</div>
+    <div class="body_insider">
+    {% block content %}{% endblock %}
+    </div>
 
 </div>
 {% endblock %}
