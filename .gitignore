@@ -7,6 +7,7 @@ beta/config/deployment.yml
 beta/cache/*
 beta/logs/*
 vendor/*
+we/avatars/*
 web/bundles/*
 web/uploads/*
 .DS_Store

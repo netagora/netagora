@@ -3,30 +3,25 @@
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
-use ECE\Bundle\NetagoraBundle\Entity\Publication;
 
 class ConnectedController extends Controller
 {
     /**
-     * @Route("/Home/{name}", name="home")
+     * @Route("/Home", name="home")
      * @Template()
      */
-    public function homeAction($name)
+    public function homeAction(Request $request)
     {
-        $session = $this->getRequest()->getSession();
-        $user_id = $session->get('user_id');
-        
-        if (isset($user_id) && $user_id != NULL){
-            $current_user = $session->get('user_id');
-            return array('name' => $name, 'current_user' => $current_user);
-        }else{
-            return array('name' => 'anonymous', 'current_user' => '0');
-        }
+        $session = $request->getSession();
+
+        return array(
+            'name' => 'foo',
+            'current_user' => $session->get('user_id'),
+        );
     }
     
     /**
@@ -243,6 +238,7 @@ class ConnectedController extends Controller
                         'avatar_url' => $avatar_url);
         
     }
+
     /**
      * @Route("/Favourites", name="favourites")
      * @Template()
@@ -296,31 +292,5 @@ class ConnectedController extends Controller
     {
         $name = 'search';
         return array('name' => $name);
-    }
-    
-    /**
-     * @Route("/foo/login_check", name="foo_login_check")
-     * 
-     */
-    public function loginCheckAction()
-    {
-        
-    }
-    
-    /** 
-    * @Route("/connectTwitter", name="connect_twitter")
-    *
-    */
-    public function connectTwitterAction()
-    {   
-        
-        $request = $this->get('request');
-        $twitter = $this->get('fos_twitter.service');
-
-        $authURL = $twitter->getLoginUrl($request);
-        $response = new RedirectResponse($authURL);
-
-        return $response;
-
     }
 }

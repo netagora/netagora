@@ -3,16 +3,11 @@
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\BuzzBundle\DependencyInjection\SensioBuzzExtension;
-use ECE\Bundle\NetagoraBundle\Security\User\Provider\TwitterUserProvider;
 use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
-use ECE\Bundle\NetagoraBundle\Entity\Publication;
 
 class DisconnectedController extends Controller
 {
@@ -20,37 +15,30 @@ class DisconnectedController extends Controller
      * @Route("/Subscribe", name="subscribe")
      * @Template()
      */
-    public function subscribeAction()
+    public function subscribeAction(Request $request)
     {
-        $debug = 'SubscribeAction';
-        $em = $this->getDoctrine()->getEntityManager();
+        $user  = new User();
+        $form = $this->createForm(new UserType(), $user);
 
-        $request = $this->getRequest();
-        
-        /* Subscribe form */
-        $error = '';
-        $entity  = new User();
-        $entity->setUsername('Enter your username');
-        
-        $form = $this->createForm(new UserType(), $entity);
-        $form->bindRequest($request);
-        if ($form->isValid() && $error != '') {
-            $entity->setLastLogin(new \DateTime());
-            $entity->upload();
-            //Update the user $this->manager->updateUser($user);
-            $em->persist($entity);
-            $em->flush();
-            //set session
-            $session->set('user_id', $entity->getId());
-           // return $this->redirect($this->generateUrl('home', array('username' => $entity->getUsername()), 301);//permanent redirection
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $factory = $this->get('security.encoder_factory');
+                $user->encodePassword($factory->getEncoder($user));
+                $user->target = $this->container->getParameter('photos_dir');
+
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('home'));
+            }
         }
-        
-        return $this->render('ECENetagoraBundle:Disconnected:subscribe.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-            //'debug'  => $debug,
-            //'error'  => $error,
-        ));
+
+        return array(
+            'user' => $user,
+            'form' => $form->createView(),
+        );
     }
     
     /**

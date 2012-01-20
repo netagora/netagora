@@ -63,7 +63,7 @@ fos_twitter:
     file: %kernel.root_dir%/../vendor/twitteroauth/twitteroauth/twitteroauth.php
     consumer_key: Huzq3JiVnckweiDIDlhpxg
     consumer_secret: 5bNkZddwISgRSZIKMP1LGAuKECyKN04SZ4cBsiRkhr0
-    callback_url: http://netagora.hugohamon.com/twitter/login_check
+    callback_url: http://netagora.hugohamon.com/app.php/twitter/login_check
     
 #my.twitter.user:
 #    class: ECE\netagoraBundle\Security\User\Provider\TwitterProvider

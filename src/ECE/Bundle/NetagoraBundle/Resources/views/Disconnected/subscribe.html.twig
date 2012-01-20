@@ -1,62 +1,27 @@
 {% extends "ECENetagoraBundle::menu_notlogged.html.twig" %}
 
+{% form_theme form _self %}
+
+{% block field_row %}
+{% spaceless %}
+    <li>
+        {{ form_label(form, label|default(null)) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </li>
+{% endspaceless %}
+{% endblock field_row %}
+
 {% block content %}
-    {#{{debug|raw}}#}
-    {#{{error}}#}
-    <form id="subscribe" action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>
+
+    <form novalidate="novalidate" id="subscribe" action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>
         <fieldset>
             <legend class="subtitle">Subscribe</legend>
                 <ol>
-                    <li>
-                        {{ form_label(form.username) }}
-                        {{ form_widget(form.username) }}
-                        {{ form_errors(form.username) }}
-                    </li>
-                    <li>
-                        {{ form_label(form.email) }}
-                        {{ form_widget(form.email) }}
-                        {{ form_errors(form.email) }}
-                    </li>
-                    <li>
-                        {{ form_label(form.password) }}
-                        {{ form_widget(form.password) }}
-                        {{ form_errors(form.password) }}
-                        
-                    </li>
-                    <li>
-                        <label for=phone>Confirm password</label>
-                        <input id=pass name=password_again type=password placeholder="">
-                    </li>
-                    <br />
-                    <li>
-                        {{ form_label(form.file) }}
-                        {{ form_widget(form.file) }}
-                        {{ form_errors(form.file) }}
-                    </li>
-                    <br />
-                    <li>
-                        {{ form_label(form.location) }}
-                        {{ form_widget(form.location) }}
-                        {{ form_errors(form.location) }}
-                    </li>
-                    <li>
-                        {{ form_label(form.firstName) }}
-                        {{ form_widget(form.firstName) }}
-                        {{ form_errors(form.firstName) }}
-                    </li>
-                    <li>
-                        {{ form_label(form.lastName) }}
-                        {{ form_widget(form.lastName) }}
-                        {{ form_errors(form.lastName) }}
-                    </li>
-                    <li>
-                        <div id="birthdate_label">
-                            {{ form_label(form.birthdate) }}
-                        </div>
-                        {{ form_widget(form.birthdate)}}
-                        {{ form_errors(form.birthdate) }}
-                    </li>
-                  </ol>
+                {% for field in form %}
+                    {{ form_row(field) }}
+                {% endfor %}
+                </ol>
              </fieldset>
                     
            <div class="division"></div>
@@ -65,12 +30,11 @@
                 <button type=submit>Register</button>
           </fieldset>
     </form>
-    
-    
+
     <span id="twitter_connect">
         {#<a href="{{ path('twitter_login') }}">Connect with Twitter</a>#}
     </span>
-    
+
     {{ twitter_anywhere_setConfig('callbackURL', url('twitter_login_check')) }}
     {{ twitter_anywhere_queue('T("#twitter_connect").connectButton()') }}
 
