@@ -1,25 +1,29 @@
 {% extends "ECENetagoraBundle::menu_logged.html.twig" %}
 
 {% block content %}
-
-    <div class="feeds">
-            <div class="one_feed">
-                  <div class="avatar">
-                        <img src="{{avatar_url}}" />
-                  </div>                                    
-                  <div class="content">
-                        <div class="ids">
-                              <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
-                              <div class="{{networking}}"></div>
-                              <div class="fav_icon"></div>
-                              <div class="share_feed">{{social_buttons|raw}}</div>
-                        </div>
-                        <div class="feed_content {{display}}">
-                              <div class="text">{{feed_text}}</div>
-                              <div class="link_origin"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
-                        </div>
-                  </div>
-            </div>      
-    </div>
-    
+    {% if publications|length > 0 %}
+        {% for publication in publications %}
+            <div class="feeds">
+                    <div class="one_feed">
+                          <div class="avatar">
+                                <img src="{{user.picture}}" />
+                          </div>                                    
+                          <div class="content">
+                                <div class="ids">
+                                      <div class="pseudo"><a href="https://twitter.com/#!/{{publication.author}}" target="_blank">{{publication.author}}</a></div>
+                                      <div class="{{networking}}"></div>
+                                      <div class="fav_icon"></div>
+                                      <div class="share_feed">{{social_buttons|raw}}</div>
+                                </div>
+                                <div class="feed_content {{display}}">
+                                      <div class="text">{{publication.content}}</div>
+                                      <div class="link_origin"><a href="{{publication.linkUrl}}" target="_blank">{{publication.linkUrl}}</a></div>
+                                </div>
+                          </div>
+                    </div>      
+            </div>
+        {% endfor %}
+    {% else %}
+        No publications
+    {% endif %}    
 {% endblock %}
