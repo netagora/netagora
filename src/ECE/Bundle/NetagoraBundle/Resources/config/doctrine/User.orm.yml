@@ -8,45 +8,20 @@ ECE\Bundle\NetagoraBundle\Entity\User:
       id: true
       generator:
         strategy: AUTO
-    picture:
-      type: string
-      length: 70
-      nullable: true
-    location:
-      type: string
-      length: 100
-      nullable: true
-    firstName:
-      type: string
-      length: 100
-      nullable: true
-      column: first_name
-    lastName:
-      type: string
-      length: 100
-      nullable: true
-      column: last_name
-    birthdate:
-      type: date
-      nullable: true
-    registeredAt:
-      type: datetime
-      nullable: true
-      column: registered_at
-    lastLoginAt:
-      type: datetime
-      nullable: true
-      column: last_login_at
-    twitterID:
-      type: string
-      length: 10
-      column: twitter_id
-      nullable: true
-    twitterUsername:
-      type: string
-      length: 20
-      column: twitter_username
-      nullable: true
+    username:        { type: string, length: 255, unique: true }
+    salt:            { type: string, length: 255, unique: true }
+    password:        { type: string, length: 255, unique: true }
+    email:           { type: string, length: 60, unique: true }
+    firstName:       { type: string, length: 25, column: first_name }
+    lastName:        { type: string, length: 25, column: last_name }
+    picture:         { type: string, length: 70, nullable: true }
+    location:        { type: string, length: 100, nullable: true }
+    birthdate:       { type: date, nullable: true }
+    registeredAt:    { type: datetime, nullable: true, column: registered_at }
+    twitterID:       { type: string, length: 10, column: twitter_id, nullable: true, unique: true }
+    twitterUsername: { type: string, length: 25, column: twitter_username, nullable: true, unique: true }
+    roles:           { type: string, length: 255 }
+    isEnabled:       { type: boolean, column: is_enabled }
   lifecycleCallbacks:
     prePersist:  [ preUpload ]
     postPersist: [ upload ]

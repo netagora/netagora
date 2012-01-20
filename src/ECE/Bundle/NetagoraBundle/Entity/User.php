@@ -4,45 +4,81 @@ namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ECE\Bundle\NetagoraBundle\Entity\User
  *
+ * @UniqueEntity(fields={"username"}, message="This username is already used.")
+ * @UniqueEntity(fields={"email"}, message="This email is already used.")
  */
-class User extends BaseUser
+class User implements AdvancedUserInterface
 {
     /**
      * @var integer $id
      */
-    protected $id;
+    private $id;
 
     /**
-     * @var string $picture
+     * @var string $username
+     * @Assert\NotBlank()
+     * @Assert\MinLength(6)
+     * @Assert\MaxLength(15)
+     * @Assert\Regex(pattern="/^[a-zA-Z0-9]+$/", message="The username can only contains alphabetical and numeric characters.")
      */
-    private $picture;
-    
+    private $username;
+
     /**
-     * @var string $location
+     * @var string $salt
      */
-    private $location;
-    
+    private $salt;
+
+    /**
+     * @var string $password
+     * @Assert\NotBlank()
+     * @Assert\MinLength(8)
+     */
+    private $password;
+
+    /**
+     * @var string $email
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    private $email;
+
     /**
      * @var string $firstName
-     * 
+     * @Assert\NotBlank()
+     * @Assert\MinLength(2)
      */
     private $firstName;
     
     /**
      * @var string $lastName
-     * 
+     * @Assert\NotBlank()
+     * @Assert\MinLength(2)
      */
     private $lastName;
-    
+
+    /**
+     * @var string $picture
+     */
+    private $picture;
+
+    /**
+     * @var string $location
+     */
+    private $location;
+
     /**
      * @var datetime $birthdate
-     * 
+     * @Assert\Date()
      */
     private $birthdate;
     
@@ -51,49 +87,96 @@ class User extends BaseUser
      */
     private $registeredAt;
 
-    /**
-     * @var datetime $lastConnection
-     */
-    private $lastLoginAt;
-    
     /** 
      * @var string
      */
-    protected $twitterID;
+    private $twitterID;
 
     /** 
      * @var string
      */
-    protected $twitterUsername;
+    private $twitterUsername;
 
+    /** 
+     * @var array
+     */
+    private $roles;
+
+    /** 
+     * @var Boolean
+     */
+    private $isEnabled;
+
+    /** 
+     * @var ArrayCollection
+     */
     private $categories;
 
+    /** 
+     * @var ArrayCollection
+     */
     private $publications;
 
+    /** 
+     * @var ArrayCollection
+     */
     private $tokens;
 
+    /**
+     * @var UploadedFile $file
+     * @Assert\Image(maxSize="156k")
+     */
     public $file;
+
     public $target;
 
-    function __construct()
+    public function __construct()
     {
-        parent::__construct();
-
-        $this->lastLoginAt = new \DateTime();
+        $this->isEnabled = true;
+        $this->roles = 'ROLE_USER';
         $this->registeredAt = new \DateTime();
+        $this->salt = $this->generateRandomSalt();
         $this->categories = new ArrayCollection();
         $this->publications = new ArrayCollection();
         $this->tokens = new ArrayCollection();
     }
 
+    private function generateRandomSalt()
+    {
+        return md5(uniqid().'*'.time().'|'.rand(0, 999999));
+    }
+
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    public function isAccountNonLocked()
+    {
+        return true;
+    }
+
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    public function eraseCredentials()
+    {
+        
+    }
+
+    public function equals(UserInterface $user)
+    {
+        return $this->username === $user->getUsername();
+    }
+
     public function encodePassword(PasswordEncoderInterface $encoder)
     {
-        $password = $encoder->encodePassword(
-            $this->getPassword(),
-            $this->getSalt()
-        );
+        $this->salt = $this->generateRandomSalt();
 
-        $this->salt = md5(uniqid().'*'.time().'|'.rand(0, 999999));
+        $password = $encoder->encodePassword($this->password, $this->salt);
+
         $this->setPassword($password);
     }
 
@@ -122,18 +205,14 @@ class User extends BaseUser
         return $this->id;
     }
 
-    public function setUsername($username)
-    {
-        parent::setUsername($username);
-
-        $this->setUsernameCanonical($username);
-    }
-
     public function setEmail($email)
     {
-        parent::setEmail($email);
+        $this->email = $email;
+    }
 
-        $this->setEmailCanonical($email);
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     public function getTokens()
@@ -237,6 +316,56 @@ class User extends BaseUser
         if (!$publication->getUser()) {
             $publication->setUser($this);
         }
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+    }
+
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setIsEnabled($enabled)
+    {
+        $this->isEnabled = (Boolean) $enabled;
+    }
+
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
     }
 
     /**
@@ -358,26 +487,6 @@ class User extends BaseUser
     {
         return $this->registeredAt;
     }
-
-    /**
-     * Set last login date
-     *
-     * @param DateTime $lastLoginAt
-     */
-    public function setLastConnection($lastLoginAt)
-    {
-        $this->lastLoginAt = $lastLoginAt;
-    }
-
-    /**
-     * Get last login date
-     *
-     * @return DateTime 
-     */
-    public function getLastConnection()
-    {
-        return $this->lastLoginAt;
-    }
     
     /**
      * Set twitterID
@@ -421,6 +530,7 @@ class User extends BaseUser
         return $this->twitterUsername;
     }
 
+    /*
     static public function hydrateObject($userDB){
         $user = new User();
         $user->setUsername($userDB[0]['username']);
@@ -435,7 +545,8 @@ class User extends BaseUser
         $user->setTwitterID($userDB[0]['twitterID']);
         return $user;
     }
-    
+    */
+
     public function getSocialButtons($network, $tweet_id)
     {
         if($network == "f"){
