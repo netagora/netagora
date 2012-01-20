@@ -46,7 +46,11 @@ ECE\Bundle\NetagoraBundle\Entity\User:
       length: 20
       column: twitter_username
       nullable: true
-  lifecycleCallbacks: { }
+  lifecycleCallbacks:
+    prePersist:  [ preUpload ]
+    postPersist: [ upload ]
+    preUpdate:   [ preUpload ]
+    postUpdate:  [ upload ]
   oneToMany:
     tokens:
       targetEntity: ServiceToken

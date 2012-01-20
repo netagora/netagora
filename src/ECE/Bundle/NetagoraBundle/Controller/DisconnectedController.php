@@ -18,19 +18,20 @@ class DisconnectedController extends Controller
     public function subscribeAction(Request $request)
     {
         $user  = new User();
-        $user->setUsername('Enter your username');
-        
-        $form = $this->createForm(new UserType(), $entity);
+        $form = $this->createForm(new UserType(), $user);
 
         if ('POST' === $request->getMethod()) {
             $form->bindRequest($request);
             if ($form->isValid()) {
+                $factory = $this->get('security.encoder_factory');
+                $user->encodePassword($factory->getEncoder($user));
+                $user->target = $this->container->getParameter('photos_dir');
+
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($user);
                 $em->flush();
-                
-                die('do some fun things');
-                
+
+                return $this->redirect($this->generateUrl('home'));
             }
         }
 

@@ -11,15 +11,15 @@ use ECE\Bundle\NetagoraBundle\Entity\User;
 class ConnectedController extends Controller
 {
     /**
-     * @Route("/Home/{name}", name="home")
+     * @Route("/Home", name="home")
      * @Template()
      */
-    public function homeAction(Request $request, $name = 'anonymous')
+    public function homeAction(Request $request)
     {
         $session = $request->getSession();
 
         return array(
-            'name' => $name,
+            'name' => 'foo',
             'current_user' => $session->get('user_id'),
         );
     }
