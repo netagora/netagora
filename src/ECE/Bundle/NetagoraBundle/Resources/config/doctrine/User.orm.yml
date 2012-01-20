@@ -1,5 +1,6 @@
 ECE\Bundle\NetagoraBundle\Entity\User:
   type: entity
+  repositoryClass: ECE\Bundle\NetagoraBundle\Entity\UserRepository
   table: na_users
   fields:
     id:

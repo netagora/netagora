@@ -1,5 +1,6 @@
 ECE\Bundle\NetagoraBundle\Entity\Publication:
   type: entity
+  repositoryClass: ECE\Bundle\NetagoraBundle\Entity\PublicationRepository
   table: na_publications
   fields:
     id:

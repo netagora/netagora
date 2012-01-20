@@ -1,5 +1,6 @@
 ECE\Bundle\NetagoraBundle\Entity\KnownLink:
   type: entity
+  repositoryClass: ECE\Bundle\NetagoraBundle\Entity\KnownLinkRepository
   table: na_known_links
   fields:
     id:

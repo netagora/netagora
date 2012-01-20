@@ -1,5 +1,6 @@
 ECE\Bundle\NetagoraBundle\Entity\Category:
   type: entity
+  repositoryClass: ECE\Bundle\NetagoraBundle\Entity\CategoryRepository
   table: na_categories
   fields:
     id:

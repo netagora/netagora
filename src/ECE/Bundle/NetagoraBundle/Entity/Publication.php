@@ -2,9 +2,11 @@
 
 namespace ECE\Bundle\NetagoraBundle\Entity;
 
-/**
- * ECE\Bundle\NetagoraBundle\Entity\Publication
- */
+use Doctrine\ORM\Mapping as ORM;
+
+ /**
+  * ECE\Bundle\NetagoraBundle\Entity\Publication
+  */
 class Publication
 {
     /**

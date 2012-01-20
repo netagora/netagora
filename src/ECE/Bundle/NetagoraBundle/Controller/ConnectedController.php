@@ -65,8 +65,8 @@ class ConnectedController extends Controller
         //Get all publications
         $em = $this->getDoctrine()->getEntityManager();
         //Récupérer les publications category.id = 1 => publication->known_link.category_id
-        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
-        $publications = $query->getResult();
+        $publications = $em->getRepository('ECENetagoraBundle:Publication')
+                           ->findAllPublicationsByCategory('video');
           
         //?
         $display = 'display';
