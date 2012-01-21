@@ -16,10 +16,7 @@ class ConnectedController extends Controller
      */
     public function homeAction(Request $request)
     {
-        $session = $request->getSession();
-        if (!$session->has('ece_username')) {
-            $session->set('ece_username', $this->get('security.context')->getToken()->getUsername());
-        }
+        
 
         return array();
     }
