@@ -1,10 +1,12 @@
 {% extends "ECENetagoraBundle::layout.html.twig" %}
 
-{% block menu %}
+{% block main_content %}
 <div class="body_container" id="home_co">
 
       <div class="body_insider">
-    <div class="welcome_title">home.</div>
+    <div class="welcome_title">
+        Welcome {{ app.user.username }}!
+    </div>
                       
                       
                       <div class="cat_container">
@@ -158,7 +160,4 @@
                 </div>
     </div>
     </div>
-    
-    <h1>Welcome {{name}}!</h1>
-    user_id = {{current_user}}
 {% endblock %}

@@ -72,11 +72,4 @@ fos_twitter:
 #        userManager: "@fos_user.user_manager"
 #        validator: "@validator"
 #        session: "@session"
-
-fos_user:
-    db_driver:     orm
-    firewall_name: main
-    use_listener: false
-    user_class:   ECE\Bundle\NetagoraBundle\Entity\User
-    
     

@@ -14,16 +14,11 @@ class ConnectedController extends Controller
      * @Route("/Home", name="home")
      * @Template()
      */
-    public function homeAction(Request $request)
+    public function homeAction()
     {
-        $session = $request->getSession();
-
-        return array(
-            'name' => 'foo',
-            'current_user' => $session->get('user_id'),
-        );
+        return array();
     }
-    // blababla
+
     /**
      * @Route("/Profile")
      * @Template()

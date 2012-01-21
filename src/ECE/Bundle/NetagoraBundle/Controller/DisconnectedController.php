@@ -17,6 +17,10 @@ class DisconnectedController extends Controller
      */
     public function subscribeAction(Request $request)
     {
+        if ($this->get('security.context')->isGranted('ROLE_MEMBER')) {
+            return $this->redirect($this->generateUrl('home'));
+        }
+
         $user  = new User();
         $form = $this->createForm(new UserType(), $user);
 
