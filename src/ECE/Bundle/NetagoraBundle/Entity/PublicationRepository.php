@@ -30,6 +30,7 @@ class PublicationRepository extends EntityRepository
             ->leftJoin('p.knownLink', 'l')
             ->leftJoin('l.category', 'c')
             ->where('c.type = :type')
+            //->andWhere('p.user_id = :user_id')
             ->orderBy('p.publishedAt', 'desc')
             ->setParameter('type', $type)
             ->getQuery()

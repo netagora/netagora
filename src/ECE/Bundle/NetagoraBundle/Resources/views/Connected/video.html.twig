@@ -18,7 +18,11 @@
                             </a>
                         </div>
                         <div class="{{ publication.socialNetwork }}"></div>
-                        <div class="fav_icon"></div>
+                        {% if(publication.isFavorite) %}
+                            <div id="{{ publication.id }}" class="fav_publication"></div>
+                        {% else %}
+                            <div id="{{ publication.id }}" class="fav_icon"></div>
+                        {% endif %}
                         <div class="share_feed">
                         {% for type in ['tweet', 'retweet', 'favorite'] %}
                             <a class="t_reply" href="https://twitter.com/intent/{{ type }}?in_reply_to={{ publication.reference }}"></a>

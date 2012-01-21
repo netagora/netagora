@@ -6,29 +6,37 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
         <script type="text/javascript" src="{{ asset('bundles/ecenetagora/js/nav.js') }}"></script>
         <script type="text/javascript" language="javascript">
-            $(function() {
-                $('.fav_icon').click(function() {
+        $(document).ready(function() {
+                $('.fav_publication').click(function() {
+                    alert('undo favorite');
                     var publication_id = $(this).attr('id');
                     $.ajax({type: "POST",
                        url: "{{path('favouritePublication')}}",
                        data: {publication_id: publication_id},
                        success:function(data){
-                            alert('passer le coeur au rouge');
+                           $('.ids').hide('slow');
+                           $('#'+publication_id).removeClass('fav_publication');
+                           $('#'+publication_id).addClass('fav_icon');
+                           $('.ids').show('slow');
                        }
                     });
                 });
                 
-                $('.fav_publication').click(function() {
+                $('.fav_icon').click(function() {
+                    alert('put favorite');
                     var publication_id = $(this).attr('id');
                     $.ajax({type: "POST",
                        url: "{{path('favouritePublication')}}",
                        data: {publication_id: publication_id},
                        success:function(data){
-                           alert('passer le coeur au gris');
+                            $('.ids').hide('slow');
+                            $('#'+publication_id).removeClass('fav_icon');
+                            $('#'+publication_id).addClass('fav_publication');
+                            $('.ids').show('slow');
                        }
                     });
                 });
-            });
+        });
         </script>
           
         {{ twitter_anywhere_setup() }}

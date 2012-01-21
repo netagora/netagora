@@ -22,7 +22,7 @@ class ConnectedController extends Controller
     }
 
     /**
-     * @Route("/Profile")
+     * @Route("/Profile", name="profile")
      * @Template()
      */
     public function profileAction()
@@ -299,7 +299,7 @@ class ConnectedController extends Controller
               }
               $em->persist($publication);
               $em->flush();
-              return new Response('author: '.$publication->getIsFavorite());
+              return new Response($publication->getId());
           }
 
           return array();

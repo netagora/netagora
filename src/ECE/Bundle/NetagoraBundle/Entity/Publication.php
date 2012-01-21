@@ -262,12 +262,4 @@ class Publication
     {
         return $this->isFavorite;
     }
-    
-    static public function isLinkPublication($rawPublication){
-        $res = false;
-        if(1 == preg_match('#http://#', $rawPublication)){
-            $res = true;
-        }
-        return $res;
-    }
 }
