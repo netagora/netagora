@@ -193,7 +193,7 @@ class User implements AdvancedUserInterface
     public function preUpload()
     {
         if ($this->file instanceOf UploadedFile) {
-            $this->path = $this->username.'.'.$this->file->guessExtension();
+            $this->picture = $this->username.'.'.$this->file->guessExtension();
         }
     }
 
