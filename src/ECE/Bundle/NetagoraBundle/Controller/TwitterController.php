@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use ECE\Bundle\NetagoraBundle\Entity\Publication;
 
 /** 
  * @Route("/twitter")
@@ -13,6 +14,45 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  */
 class TwitterController extends Controller
 {
+    /**
+     * @Route("/refresh", name="twitter_refresh")
+     *
+     */
+    public function refreshAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $twitter = $this->get('fos_twitter.api');
+        $twitter->setOAuthToken(
+            $user->getTwitterOAuthToken(),
+            $user->getTwitterOAuthSecret()
+        );
+
+        $timeline = $twitter->get('statuses/home_timeline', array(
+            'screen_name' => $user->getTwitterID(),
+            'count' => 10
+        ));
+
+        foreach ($timeline as $tweet) {
+            $text = $tweet->text;
+            if (preg_match('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $text, $links)) {
+                $publication = new Publication();
+                $publication->setUser($user);
+                $publication->setSocialNetwork(Publication::TWITTER);
+                $publication->setAuthor($tweet->user->name);
+                $publication->setPublishedAt(new \DateTime($tweet->created_at));
+                $publication->setReference($tweet->id_str);
+                $publication->setContent($tweet->text);
+                $publication->setLinkUrl($links[0]);
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($publication);
+                $em->flush();
+            }
+        }
+
+        return $this->redirect($this->generateUrl('home'));
+    }
+
     /** 
      * @Route("/login", name="twitter_login")
      *

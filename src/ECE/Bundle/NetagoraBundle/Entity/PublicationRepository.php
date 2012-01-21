@@ -12,13 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class PublicationRepository extends EntityRepository
 {
-    
-    public function findAllPublicationsByCategory($cat_type)
+    public function getVideoPublications()
     {
-        return $this->getEntityManager()
-                    ->createQuery('SELECT p 
-                                   FROM ECENetagoraBundle:Publication p 
-                                   JOIN ECENetagoraBundle:KnownLink')
-                    ->getResult();
+        return $this->getByCategoryType('Video');
+    }
+
+    public function getMusicPublications()
+    {
+        return $this->getByCategoryType('Music');
+    }
+
+    private function getByCategoryType($type)
+    {
+        $q = $this
+            ->createQueryBuilder('p')
+            ->select('p, l, c')
+            ->leftJoin('p.knownLink', 'l')
+            ->leftJoin('l.category', 'c')
+            ->where('c.type = :type')
+            ->orderBy('p.publishedAt', 'desc')
+            ->setParameter('type', $type)
+            ->getQuery()
+        ;
+
+        return $q->getResult();
     }
 }

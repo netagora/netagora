@@ -16,8 +16,6 @@ class ConnectedController extends Controller
      */
     public function homeAction(Request $request)
     {
-        
-
         return array();
     }
 
@@ -49,33 +47,16 @@ class ConnectedController extends Controller
      */
     public function videoAction()
     {
-        $publications = '';
-        //Get the user connected
-        $user = new User();
-        $user->setTwitterUsername('Saro0h');
-        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
-        
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        
-        //Get all publications
         $em = $this->getDoctrine()->getEntityManager();
-        //Récupérer les publications category.id = 1 => publication->known_link.category_id
-        $publications = $em->getRepository('ECENetagoraBundle:Publication')
-                           ->findAllPublicationsByCategory('video');
-          
-        //?
-        $display = 'display';
-               
-        return array('publications' => $publications,
-                     'user' => $user,
-                     'display' => $display, 
-                     'networking' => $networking, 
-                     'social_buttons' => $social_buttons
-                     );
+
+        $publications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getVideoPublications()
+        ;
+
+        return array('publications' => $publications);
     }
-    
+
     /**
      * @Route("/Music", name="music")
      * @Template()
@@ -273,19 +254,6 @@ class ConnectedController extends Controller
                      'networking' => $networking, 
                      'social_buttons' => $social_buttons
                      );
-    }
-    
-    /**
-     * @Route("/Feeds", name="refresh")
-     * @Template()
-     */
-    public function refreshAction()
-    {
-
-        return array();
-        /*$this->render('ECENetagoraBundle:Connected:feeds.html.twig', array(
-                        'form' => $form->createView(),
-                        ));*/
     }
     
     /**

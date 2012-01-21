@@ -2,35 +2,51 @@
 
 {% block content %}
     <div class="page_name">Videos</div>
-    {% if publications|length > 0 %}
-        {% for publication in publications %}
-            <div class="feeds">
-                    <div class="one_feed">
-                          <div class="avatar">
-                                <img src="{{user.picture}}" />
-                          </div>                                    
-                          <div class="content">
-                                <div class="ids">
-                                      <div class="pseudo">
-                                          <a href="https://twitter.com/#!/{{publication.author}}" target="_blank">
-                                              {{publication.author}}
-                                          </a>
-                                      </div>
-                                      <div class="{{networking}}"></div>
-                                      <div class="fav_icon"></div>
-                                      <div class="share_feed">{{social_buttons|raw}}</div>
-                                </div>
-                                <div class="feed_content {{display}}">
-                                      <div class="text">{{publication.content}}</div>
-                                      <div class="link_origin"><a href="{{publication.linkUrl}}" target="_blank">{{publication.linkUrl}}</a><br />
-                                      <iframe width="280" height="157" src="{{publication.linkUrl}}" frameborder="0" style="border:0;" allowfullscreen></iframe></div>
-                                </div>
-                          </div>
+    {% for publication in publications %}
+        <div class="feeds">
+            <div class="one_feed">
+            {% if app.user.picture %}
+                <div class="avatar">
+                    <img src="{{ asset('/avatars/' ~ app.user.picture) }}" alt=""/>
+                </div>
+            {% endif %}
+                <div class="content">
+                    <div class="ids">
+                        <div class="pseudo">
+                            <a href="https://twitter.com/#!/{{ publication.author }}" target="_blank">
+                                {{ publication.author }}
+                            </a>
+                        </div>
+                        <div class="{{ publication.socialNetwork }}"></div>
+                        <div class="fav_icon"></div>
+                        <div class="share_feed">
+                        {% for type in ['tweet', 'retweet', 'favorite'] %}
+                            <a class="t_reply" href="https://twitter.com/intent/{{ type }}?in_reply_to={{ publication.reference }}"></a>
+                        {% endfor %}
+                        </div>
                     </div>
+                    <div class="feed_content display">
+                        <div class="text">{{ publication.content }}</div>
+                        <div class="link_origin">
+                            <a href="{{ publication.linkUrl }}" target="_blank">{{ publication.linkUrl }}</a>
+                            <br />
+                            <iframe width="280" height="157" src="{{ publication.linkUrl }}" frameborder="0" style="border:0;" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
+        </div>
     {% else %}
-        No publications
-    {% endif %}
-    
+        <p>No publications</p>
+        {% if app.user.twitterID %}
+            <p>
+                <a href="{{ path('twitter_refresh') }}">Refresh your timeline</a>
+            </p>
+        {% else %}
+            <p>
+                <a href="{{ path('twitter_login') }}">Connect your Twitter account</a>
+            </p>
+        {% endif %}
+    {% endfor %}
+
 {% endblock %}

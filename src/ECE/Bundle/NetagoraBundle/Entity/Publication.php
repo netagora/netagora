@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
   */
 class Publication
 {
+    const TWITTER = 'twitter';
+
     /**
      * @var integer $id
      */
@@ -62,6 +64,13 @@ class Publication
     public function __construct()
     {
         $this->isFavorite = false;
+    }
+
+    public function getCategory()
+    {
+        if ($this->knownLink) {
+            return $this->knownLink->getCategory();
+        }
     }
 
     /**
