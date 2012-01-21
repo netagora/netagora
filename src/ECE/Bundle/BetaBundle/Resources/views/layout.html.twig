@@ -2,11 +2,9 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ asset('bundles/ecebeta/css/css_body2.css') }}" type="text/css" media="screen" />
-        <link rel="stylesheet" href="{{ asset('bundles/ecebeta/css/form.css') }}" type="text/css" media="screen" />
         <!-- Scripts: inc. TableSorter -->
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-        <script type="text/javascript" src="{{ asset('bundles/ecebeta/js/nav.js') }}"></script> 
-        
+        <script type="text/javascript" src="{{ asset('bundles/ecebeta/js/nav.js') }}"></script>
     </head>
     <body>
         <div id="fb-root"></div>
@@ -18,8 +16,22 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-        {% block menu %}{% endblock %}
-        
+        {% block main_content %}
+            <div class="body_container">
+                <div class="body_insider">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+
+        {#
+        <div class="body_container">
+            <div class="body_insider">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        #}
+
         <div id="footer_body" class="fill">
             <div id="logo"><img src="{{ asset('bundles/ecebeta/images/netagora.png') }}" /></div>
             <div class="links_footer">

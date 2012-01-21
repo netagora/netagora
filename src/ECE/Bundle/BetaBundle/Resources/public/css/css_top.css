@@ -1,44 +1,41 @@
 /*!
- * Bootstrap v1.1.1
- *
- * Copyright 2011 Twitter, Inc
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Designed and built with all the love in the world @twitter by @mdo and @fat.
- * Date: Fri Aug 26 19:31:44 PDT 2011
- */
+* Bootstrap v1.1.1
+*
+* Copyright 2011 Twitter, Inc
+* Licensed under the Apache License v2.0
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Designed and built with all the love in the world @twitter by @mdo and @fat.
+* Date: Fri Aug 26 19:31:44 PDT 2011
+*/
 /* Reset.less
- * Props to Eric Meyer (meyerweb.com) for his CSS reset file. We're using an adapted version here	that cuts out some of the reset HTML elements we will never need here (i.e., dfn, samp, etc).
- * ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+* Props to Eric Meyer (meyerweb.com) for his CSS reset file. We're using an adapted version here that cuts out some of the reset HTML elements we will never need here (i.e., dfn, samp, etc).
+* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
  
  /* COLOURS */
  /*
- * TOP BAR:
- * 
- *background: #816237;
- background-color: #816237;
- background-repeat: repeat-x;
- background-image: -khtml-gradient(linear, left top, left bottom, from(#A88047), to(#816237));
- background-image: -moz-linear-gradient(top, #A88047, #816237);
- background-image: -ms-linear-gradient(top, #A88047, #816237);
- background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #A88047), color-stop(100%, #816237));
- background-image: -webkit-linear-gradient(top, #A88047, #816237);
- background-image: -o-linear-gradient(top, #A88047, #816237);
- background-image: linear-gradient(top, #A88047, #816237);
- 
- *
- *topbar a : #CE9D57
- 
- 
- * TOPBAR BG: 
- * DARKRED(grad1): #591023
- * DARKRED(grad2 base): #7F1732
- *
- * BEIGE(hover-base): #FFEFD9
- * BEIGE(liens-darker): #C4B8A7
- *
- */
+* TOP BAR:
+*
+*background: #816237;
+background-color: #816237;
+background-repeat: repeat-x;
+background-image: -khtml-gradient(linear, left top, left bottom, from(#A88047), to(#816237));
+background-image: -moz-linear-gradient(top, #A88047, #816237);
+background-image: -ms-linear-gradient(top, #A88047, #816237);
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #A88047), color-stop(100%, #816237));
+background-image: -webkit-linear-gradient(top, #A88047, #816237);
+background-image: -o-linear-gradient(top, #A88047, #816237);
+background-image: linear-gradient(top, #A88047, #816237);
+*
+*topbar a : #CE9D57
+* TOPBAR BG:
+* DARKRED(grad1): #591023
+* DARKRED(grad2 base): #7F1732
+*
+* BEIGE(hover-base): #FFEFD9
+* BEIGE(liens-darker): #C4B8A7
+*
+*/
 
 body {
   margin: 0;
@@ -188,9 +185,9 @@ table {
 }
 
 /*
- * Scaffolding
- * Basic and global styles for generating a grid system, structural layout, and page templates
- * ------------------------------------------------------------------------------------------- */
+* Scaffolding
+* Basic and global styles for generating a grid system, structural layout, and page templates
+* ------------------------------------------------------------------------------------------- */
 
 .container {
   width: 80%;
@@ -202,10 +199,10 @@ a {
   line-height: inherit;
   font-weight: inherit;
   
-  -webkit-transition: all 0.6s ease-in-out;  /* Saf3.2+, Chrome */
-  -moz-transition: all 0.6s ease-in-out;  /* FF4+ */
-  -ms-transition: all 0.6s ease-in-out;  /* IE10? */
-  -o-transition: all 0.6s ease-in-out;  /* Opera 10.5+ */
+  -webkit-transition: all 0.6s ease-in-out; /* Saf3.2+, Chrome */
+  -moz-transition: all 0.6s ease-in-out; /* FF4+ */
+  -ms-transition: all 0.6s ease-in-out; /* IE10? */
+  -o-transition: all 0.6s ease-in-out; /* Opera 10.5+ */
   transition: all 0.6s ease-in-out;
 }
 a:hover {
@@ -215,8 +212,8 @@ a:hover {
 
 }
 /* Typography.less
- * Headings, body text, lists, code, and more for a versatile and durable typography system
- * ---------------------------------------------------------------------------------------- */
+* Headings, body text, lists, code, and more for a versatile and durable typography system
+* ---------------------------------------------------------------------------------------- */
 p {
   font-size: 13px;
   font-weight: normal;
@@ -382,36 +379,36 @@ pre {
 }
 
 /* Patterns.less
- * Repeatable UI elements outside the base styles provided from the scaffolding
- * ---------------------------------------------------------------------------- */
+* Repeatable UI elements outside the base styles provided from the scaffolding
+* ---------------------------------------------------------------------------- */
  
  #nav2 ul{
- 	background:#fff; /* Adding a background makes the dropdown work properly in IE7+. Make this as close to your page's background as possible (i.e. white page == white background). */
- 	background:rgba(255,255,255,0); /* But! Let's make the background fully transparent where we can, we don't actually want to see it if we can help it... */
- 	list-style:none;
- 	position:absolute;
- 	left:-9999px; /* Hide off-screen when not needed (this is more accessible than display:none;) */
+  background:#fff; /* Adding a background makes the dropdown work properly in IE7+. Make this as close to your page's background as possible (i.e. white page == white background). */
+  background:rgba(255,255,255,0); /* But! Let's make the background fully transparent where we can, we don't actually want to see it if we can help it... */
+  list-style:none;
+  position:absolute;
+  left:-9999px; /* Hide off-screen when not needed (this is more accessible than display:none;) */
  }
  #nav2 ul li{
- 	padding-top:1px; /* Introducing a padding between the li and the a give the illusion spaced items */
- 	float:none;
+  padding-top:1px; /* Introducing a padding between the li and the a give the illusion spaced items */
+  float:none;
  }
  #nav2 ul a{
- 	white-space:nowrap; /* Stop text wrapping and creating multi-line dropdown items */
+  white-space:nowrap; /* Stop text wrapping and creating multi-line dropdown items */
  }
  #nav2 li:hover ul{ /* Display the dropdown on hover */
- 	left:0; /* Bring back on-screen when needed */
+  left:0; /* Bring back on-screen when needed */
  }
  #nav2 li:hover a{ /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
- 	background:#7F1732;
- 	text-decoration:none;
- 	
+  background:#7F1732;
+  text-decoration:none;
+ 
  }
  #nav2 li:hover ul a{ /* The persistent hover state does however create a global style for links even before they're hovered. Here we undo these effects. */
- 	text-decoration:none;
+  text-decoration:none;
  }
  #nav2 li:hover ul li a:hover{ /* Here we define the most explicit hover states--what happens when you hover each individual link. */
- 	background-color:#591023;
+  background-color:#591023;
  }
  
 .topbar {
@@ -468,7 +465,7 @@ pre {
 }
 
 .topbar form {
-  float: left;
+  float: right;
   margin: 5px 0 0 0;
   position: relative;
   filter: alpha(opacity=100);
@@ -505,7 +502,7 @@ pre {
   transition: none;
   
   outline: none;
-  text-shadow: 0 1px 0 #78535D;  
+  text-shadow: 0 1px 0 #78535D;
 
 }
 
@@ -626,12 +623,12 @@ footer {
 }
 
 .separation{
-	
-	opacity: 0.5;
-	width: 70%;
-	margin: auto;
-	border-bottom: 1px solid #816237;
-	
+
+opacity: 0.5;
+width: 70%;
+margin: auto;
+border-bottom: 1px solid #816237;
+
 }
 
 .btn {
@@ -737,74 +734,74 @@ a.signin {
 }
 
 li img{
-	
-	margin: 0;
-	height: 20px;
-	
+
+margin: 0;
+height: 20px;
+
 }
 
 
 #nav2 li#form_bar ul{
-	
-	height: auto;
-	width: 200px;
-	margin-left: -100px;
-	padding: 0 15px;
-	background-color: #7F1732;
-	
+
+height: auto;
+width: 200px;
+margin-left: -100px;
+padding: 0 15px;
+background-color: #7F1732;
+
 }
 
 #nav2 label{
-	float: left;
-	margin-top: 18px;
-	color: #C4B8A7;
-	font-size: 0.9em;
+float: left;
+margin-top: 18px;
+color: #C4B8A7;
+font-size: 0.9em;
 }
 
 #nav2 .remember label{
-	
-	margin: 0;
+
+margin: 0;
 }
 
 #nav2 input{
-	margin-top: 7px;
-	font-size: 0.9em;
-	-webkit-border-radius: 20px;
-	-moz-border-radius: 20px;
-	border-radius: 20px;
-	
+margin-top: 7px;
+font-size: 0.9em;
+-webkit-border-radius: 20px;
+-moz-border-radius: 20px;
+border-radius: 20px;
+
 }
 
 .username, .password{
-	
-	margin-top: 80px;
-	
+
+margin-top: 80px;
+
 }
 
 .remember{
-	position: relative;
-	margin-top: 80px;
-	margin-bottom: 120px;
-	
+position: relative;
+margin-top: 80px;
+margin-bottom: 120px;
+
 }
 
 .forgot-username{
-	
-	margin-top: -10px;
-	
+
+margin-top: -10px;
+
 }
 
 .forgot a, .forgot-username a{
-	
-	position: relative;
-	color: #C4B8A7;
-	font-size: 0.9em;
+
+position: relative;
+color: #C4B8A7;
+font-size: 0.9em;
 }
 
 .forgot a:hover, .forgot-username a:hover{
-	
-	color: #C4B8A7;
-	font-size: 0.9em;
+
+color: #C4B8A7;
+font-size: 0.9em;
 }
 
 
@@ -842,8 +839,8 @@ ul#navigation li a {
 }
 
 ul#navigation li a:hover{
-	
-	opacity: 1;
+
+opacity: 1;
 }
 
 ul#navigation .home a{
@@ -851,9 +848,9 @@ ul#navigation .home a{
 }
 
 #navigation img{
-	
-	height: 40px;
-	width: 40px;
-	margin: 14px;
+
+height: 40px;
+width: 40px;
+margin: 14px;
 }
 /****** END NAVIGATION HOME CONNECTED BAR *******/
