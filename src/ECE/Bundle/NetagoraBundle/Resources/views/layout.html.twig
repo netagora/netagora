@@ -4,7 +4,33 @@
         <link rel="stylesheet" href="{{ asset('bundles/ecenetagora/css/css_body2.css') }}" type="text/css" media="screen" />
         <!-- Scripts: inc. TableSorter -->
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
-        <script type="text/javascript" src="{{ asset('bundles/ecenetagora/js/nav.js') }}"></script> 
+        <script type="text/javascript" src="{{ asset('bundles/ecenetagora/js/nav.js') }}"></script>
+        <script type="text/javascript" language="javascript">
+            $(function() {
+                $('.fav_icon').click(function() {
+                    var publication_id = $(this).attr('id');
+                    $.ajax({type: "POST",
+                       url: "{{path('favouritePublication')}}",
+                       data: {publication_id: publication_id},
+                       success:function(data){
+                            alert('passer le coeur au rouge');
+                       }
+                    });
+                });
+                
+                $('.fav_publication').click(function() {
+                    var publication_id = $(this).attr('id');
+                    $.ajax({type: "POST",
+                       url: "{{path('favouritePublication')}}",
+                       data: {publication_id: publication_id},
+                       success:function(data){
+                           alert('passer le coeur au gris');
+                       }
+                    });
+                });
+            });
+        </script>
+          
         {{ twitter_anywhere_setup() }}
     </head>
     <body>

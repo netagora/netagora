@@ -1603,6 +1603,20 @@ background-image: url('../images/heart.png');
 cursor: pointer;
 }
 
+.fav_publication{
+    margin-left: 15px;
+    height: 10px;
+    width: 10px;
+    vertical-align: middle;
+    display: inline-block;
+    background-image: url('../images/heart.png');
+    cursor: pointer;
+}
+.fav_publication:hover{
+background-image: url('../images/heart_no.png');
+cursor: pointer;
+}
+
 /* ******* ******* START ***** DISPLAY OF SHARING IMGS FOR TWITTER ******* ******* */
 .feeds .one_feed .content .ids .share_feed{
 display: inline-block;
