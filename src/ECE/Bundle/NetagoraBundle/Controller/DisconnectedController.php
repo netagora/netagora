@@ -36,10 +36,11 @@ class DisconnectedController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                // Send the confirmation email
+                $this->sendConfirmationEmail($user);
+
                 // Authenticate the newly created user.
-                $token = new UsernamePasswordToken($user->getUsername(), $user->getPassword(), 'public', $user->getRoles());
-                $token->setUser($user);
-                $this->get('security.context')->setToken($token);
+                $this->authenticateUserToken($user);
 
                 return $this->redirect($this->generateUrl('home'));
             }
@@ -49,6 +50,33 @@ class DisconnectedController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         );
+    }
+
+    private function authenticateUserToken(User $user)
+    {
+        $token = new UsernamePasswordToken($user->getUsername(), $user->getPassword(), 'public', $user->getRoles());
+        $token->setUser($user);
+        $this->get('security.context')->setToken($token);
+    }
+
+    private function sendConfirmationEmail(User $user)
+    {
+        $robotName  = $this->container->getParameter('robot_name');
+        $robotEmail = $this->container->getParameter('robot_email');
+
+        $body = $this->renderView(
+            'ECENetagoraBundle:Notification:registration.txt.twig',
+            array('user' => $user)
+        );
+
+        $message = \Swift_Message::getInstance()
+            ->setFrom(array($robotEmail => $robotName))
+            ->setTo(array($user->getEmail() => $user->getFullName()))
+            ->setSubject('Welcome to the Netagora Social Platform')
+            ->setBody($body)
+        ;
+
+        $this->get('mailer')->send($message);
     }
 
     /**

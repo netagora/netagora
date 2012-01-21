@@ -458,7 +458,12 @@ class User implements AdvancedUserInterface
     {
         return $this->lastName;
     }
-    
+
+    public function getFullName()
+    {
+        return $this->getFirstName().' '.$this->getLastName();
+    }
+
     /**
      * Set birthdate
      *
