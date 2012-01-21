@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
 
-class DisconnectedController extends Controller
+class AccountController extends Controller
 {
     /**
      * @Route("/Subscribe", name="subscribe")
@@ -89,13 +89,13 @@ class DisconnectedController extends Controller
         $debug = '';
 
         $email = $request->request->get('mail');
-        
+
         //Find the user
         $em = $this->getDoctrine()->getEntityManager();
         if ($email) {
             $user = $em->getRepository('ECENetagoraBundle:User')->findOneByEmail($email);
         }
-        
+
         if (!empty($user)) {
             $message = \Swift_Message::newInstance()
                     ->setSubject('Your access to netagora.net')
@@ -113,7 +113,7 @@ class DisconnectedController extends Controller
         } else if ($request->request->get('mail') != ''){
             $error = 'Your account doesn\'t exist';
         }
-        
+
         return array('error'=>$error, 'debug' => $debug);
     }
 }
