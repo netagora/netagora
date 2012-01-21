@@ -2,8 +2,9 @@
 
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
@@ -34,6 +35,11 @@ class DisconnectedController extends Controller
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($user);
                 $em->flush();
+
+                // Authenticate the newly created user.
+                $token = new UsernamePasswordToken($user->getUsername(), $user->getPassword(), 'public', $user->getRoles());
+                $token->setUser($user);
+                $this->get('security.context')->setToken($token);
 
                 return $this->redirect($this->generateUrl('home'));
             }
