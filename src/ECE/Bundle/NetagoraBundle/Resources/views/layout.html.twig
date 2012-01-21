@@ -17,8 +17,25 @@
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));</script>
 
-        {% block menu %}{% endblock %}
-        
+        {% set tpl = 'ECENetagoraBundle:Security:'~ (is_granted('ROLE_MEMBER') ? 'authenticated' : 'anonymous') ~'.html.twig' %}
+        {% include tpl %}
+
+        {% block main_content %}
+            <div class="body_container">
+                <div class="body_insider">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+
+        {#
+        <div class="body_container">
+            <div class="body_insider">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        #}
+
         <div id="footer_body" class="fill">
             <div id="logo"><img src="{{ asset('bundles/ecenetagora/images/netagora.png') }}" /></div>
             <div class="links_footer">

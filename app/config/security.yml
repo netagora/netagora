@@ -17,9 +17,6 @@ security:
         netagora_twitter_provider:
             id: ece_netagora.twitter_provider
 
-#        fos_user:
-#            id: fos_user.user_manager
-
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/

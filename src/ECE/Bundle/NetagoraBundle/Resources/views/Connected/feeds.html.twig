@@ -1,33 +1,35 @@
-{% extends "ECENetagoraBundle::menu_logged.html.twig" %}
+{% extends "ECENetagoraBundle::layout.html.twig" %}
 
 {% block content %}
-    <div class="page_name">Feeds</div>
-    {% if publications|length > 0 %}
-        {% for publication in publications %}
-            <div class="feeds">
-                    <div class="one_feed">
-                          <div class="avatar">
-                                <img src="{{user.picture}}" />
-                          </div>                                    
-                          <div class="content">
-                                <div class="ids">
-                                      <div class="pseudo"><a href="https://twitter.com/#!/{{publication.author}}" target="_blank">{{publication.author}}</a></div>
-                                      <div class="{{networking}}"></div>
-                                      <div class="fav_icon"></div>
-                                      <div class="share_feed">{{social_buttons|raw}}</div>
-                                </div>
-                                <div class="feed_content">
-                                      <div class="text">{{publication.content}}</div>
-                                      <div class="link_origin {{display}}"><a href="{{publication.linkUrl}}" target="_blank">{{publication.linkUrl}}</a></div>
-                                </div>
-                          </div>
+<div class="page_name">Feeds</div>
+    {% for publication in publications %}
+        <div class="feeds">
+            <div class="one_feed">
+                <div class="avatar">
+                    <img src="{{ user.picture }}" alt="" />
+                </div>                                    
+                <div class="content">
+                    <div class="ids">
+                        <div class="pseudo">
+                            <a href="https://twitter.com/#!/{{ publication.author }}" target="_blank">{{ publication.author }}</a>
+                        </div>
+                        <div class="{{ networking }}"></div>
+                        <div class="fav_icon"></div>
+                        <div class="share_feed">{{ social_buttons|raw }}</div>
                     </div>
+                    <div class="feed_content">
+                        <div class="text">{{ publication.content }}</div>
+                        <div class="link_origin {{ display }}">
+                            <a href="{{ publication.linkUrl }}" target="_blank">{{ publication.linkUrl }}</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-        {% endfor %}
+        </div>
     {% else %}
         No publications
-    {% endif %}   
-     
+    {% endfor %}
+
     <!-- <form action="{{ path('refresh') }}" method="post" {#{{ form_enctype(form) }}#}>
          <p>
              <button type="submit">Create</button>

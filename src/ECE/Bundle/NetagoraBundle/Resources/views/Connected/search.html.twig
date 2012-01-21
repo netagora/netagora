@@ -1,124 +1,124 @@
-{% extends "ECENetagoraBundle::menu_logged.html.twig" %}
+{% extends "ECENetagoraBundle::layout.html.twig" %}
 
 {% block content %}
 <div class="search">
-	<form id="search">
-	   	<fieldset>
-	   		<legend class="subtitle">Search</legend>
-	   		<ol>
-	   			<li>
-	   				<label for=keyw>Keywords</label>
-	   				<input id=keyw name=keyw type=text placeholder="" autofocus>
-	   			</li>
-	   			<li>
-	   				<label for=author>Author</label>
-	   				<input id=author name=author type=text placeholder="">
-	   			</li>
-	   			<li class="cat_search"><label>
-	   			<input type="checkbox" id="videos" name="videos" />Videos</label>
-	   				<label>
-	   			<input type="checkbox" id="music" name="music" />Music</label>
-	   				<label>
-	   			<input type="checkbox" id="pictures" name="pictures" />Pictures</label>
-	   			<label>
-	   			<input type="checkbox" id="locations" name="locations" />Locations</label>
-	   			<label>
-	   			<input type="checkbox" id="other" name="other" />Other</label>
-	   			</li>
-	   		</ol>
-		</fieldset>
-    		<div class="division"></div>
-		<fieldset>
-	   		<button type=submit>Search</button>
-	   	</fieldset>
-	   </form>
+    <form id="search">
+           <fieldset>
+               <legend class="subtitle">Search</legend>
+               <ol>
+                   <li>
+                       <label for=keyw>Keywords</label>
+                       <input id=keyw name=keyw type=text placeholder="" autofocus>
+                   </li>
+                   <li>
+                       <label for=author>Author</label>
+                       <input id=author name=author type=text placeholder="">
+                   </li>
+                   <li class="cat_search"><label>
+                   <input type="checkbox" id="videos" name="videos" />Videos</label>
+                       <label>
+                   <input type="checkbox" id="music" name="music" />Music</label>
+                       <label>
+                   <input type="checkbox" id="pictures" name="pictures" />Pictures</label>
+                   <label>
+                   <input type="checkbox" id="locations" name="locations" />Locations</label>
+                   <label>
+                   <input type="checkbox" id="other" name="other" />Other</label>
+                   </li>
+               </ol>
+        </fieldset>
+            <div class="division"></div>
+        <fieldset>
+               <button type=submit>Search</button>
+           </fieldset>
+       </form>
 </div>
     <div class="feeds searching">
-		<div class="one_feed">
-			<div class="avatar">
-				<img src="{{avatar_url}}" />
-			</div>						
-			<div class="content">
-				<div class="ids">
-					<div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
-					<div class="{{networking}}"></div>
-					<div class="fav_icon"></div>
-					<div class="share_feed">{{social_buttons|raw}}</div>
-				</div>
-				<div class="feed_content">
-					<div class="text">{{feed_text}}</div>
-					<div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
-				</div>
-			</div>
-		</div>
-		<div class="one_feed">
-			<div class="avatar">
-				<img src="{{avatar_url}}" />
-			</div>						
-			<div class="content">
-				<div class="ids">
-					<div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
-					<div class="{{networking}}"></div>
-					<div class="fav_icon"></div>
-					<div class="share_feed">{{social_buttons|raw}}</div>
-				</div>
-				<div class="feed_content">
-					<div class="text">{{feed_text}}</div>
-					<div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
-				</div>
-			</div>
-		</div>
-		<div class="one_feed">
-			<div class="avatar">
-				<img src="{{avatar_url}}" />
-			</div>						
-			<div class="content">
-				<div class="ids">
-					<div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
-					<div class="{{networking}}"></div>
-					<div class="fav_icon"></div>
-					<div class="share_feed">{{social_buttons|raw}}</div>
-				</div>
-				<div class="feed_content">
-					<div class="text">{{feed_text}}</div>
-					<div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
-				</div>
-			</div>
-		</div>
-		<div class="one_feed">
-			<div class="avatar">
-				<img src="{{avatar_url}}" />
-			</div>						
-			<div class="content">
-				<div class="ids">
-					<div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
-					<div class="{{networking}}"></div>
-					<div class="fav_icon"></div>
-					<div class="share_feed">{{social_buttons|raw}}</div>
-				</div>
-				<div class="feed_content">
-					<div class="text">{{feed_text}}</div>
-					<div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
-				</div>
-			</div>
-		</div>
-		<div class="one_feed">
-			<div class="avatar">
-				<img src="{{avatar_url}}" />
-			</div>						
-			<div class="content">
-				<div class="ids">
-					<div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
-					<div class="{{networking}}"></div>
-					<div class="fav_icon"></div>
-					<div class="share_feed">{{social_buttons|raw}}</div>
-				</div>
-				<div class="feed_content">
-					<div class="text">{{feed_text}}</div>
-					<div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
-				</div>
-			</div>
-		</div>	
+        <div class="one_feed">
+            <div class="avatar">
+                <img src="{{avatar_url}}" />
+            </div>                        
+            <div class="content">
+                <div class="ids">
+                    <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
+                    <div class="{{networking}}"></div>
+                    <div class="fav_icon"></div>
+                    <div class="share_feed">{{social_buttons|raw}}</div>
+                </div>
+                <div class="feed_content">
+                    <div class="text">{{feed_text}}</div>
+                    <div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="one_feed">
+            <div class="avatar">
+                <img src="{{avatar_url}}" />
+            </div>                        
+            <div class="content">
+                <div class="ids">
+                    <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
+                    <div class="{{networking}}"></div>
+                    <div class="fav_icon"></div>
+                    <div class="share_feed">{{social_buttons|raw}}</div>
+                </div>
+                <div class="feed_content">
+                    <div class="text">{{feed_text}}</div>
+                    <div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="one_feed">
+            <div class="avatar">
+                <img src="{{avatar_url}}" />
+            </div>                        
+            <div class="content">
+                <div class="ids">
+                    <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
+                    <div class="{{networking}}"></div>
+                    <div class="fav_icon"></div>
+                    <div class="share_feed">{{social_buttons|raw}}</div>
+                </div>
+                <div class="feed_content">
+                    <div class="text">{{feed_text}}</div>
+                    <div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="one_feed">
+            <div class="avatar">
+                <img src="{{avatar_url}}" />
+            </div>                        
+            <div class="content">
+                <div class="ids">
+                    <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
+                    <div class="{{networking}}"></div>
+                    <div class="fav_icon"></div>
+                    <div class="share_feed">{{social_buttons|raw}}</div>
+                </div>
+                <div class="feed_content">
+                    <div class="text">{{feed_text}}</div>
+                    <div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
+                </div>
+            </div>
+        </div>
+        <div class="one_feed">
+            <div class="avatar">
+                <img src="{{avatar_url}}" />
+            </div>                        
+            <div class="content">
+                <div class="ids">
+                    <div class="pseudo"><a href="{{feed_author_url}}" target="_blank">{{feed_author}}</a></div>
+                    <div class="{{networking}}"></div>
+                    <div class="fav_icon"></div>
+                    <div class="share_feed">{{social_buttons|raw}}</div>
+                </div>
+                <div class="feed_content">
+                    <div class="text">{{feed_text}}</div>
+                    <div class="link_origin {{display}}"><a href="{{link_url}}" target="_blank">{{link}}</a></div>
+                </div>
+            </div>
+        </div>    
     </div>
     
 {% endblock %}

@@ -1,16 +1,25 @@
-{% extends "ECENetagoraBundle::layout.html.twig" %}
-{% block menu %}
 <div class="topbar">
     <div class="fill">
         <div class="container">
             <ul>
-                <li id="videos"><h3><a href="{{ path('videos') }}">Videos</a></h3></li>
-                <li id="pictures"><h3><a href="{{ path('photos') }}">Pictures</a></h3></li>
-                <li id="music"><h3><a href="{{ path('music') }}">Music</a></h3></li>
-                <li id="locations"><h3><a href="{{ path('location') }}">Locations</a></h3></li>
-                <li id="feeds"><h3><a href="{{ path('feeds') }}">Feeds</a></h3></li>
-                <li id="other"><h3><a href="{{ path('other') }}">Other</a></h3></li>
-                
+                <li id="videos">
+                    <h3><a href="{{ path('videos') }}">Videos</a></h3>
+                </li>
+                <li id="pictures">
+                    <h3><a href="{{ path('photos') }}">Pictures</a></h3>
+                </li>
+                <li id="music">
+                    <h3><a href="{{ path('music') }}">Music</a></h3>
+                </li>
+                <li id="locations">
+                    <h3><a href="{{ path('location') }}">Locations</a></h3>
+                </li>
+                <li id="feeds">
+                    <h3><a href="{{ path('feeds') }}">Feeds</a></h3>
+                </li>
+                <li id="other">
+                    <h3><a href="{{ path('other') }}">Other</a></h3>
+                </li>
            </ul>
            <div class="nav secondary-nav">
                <ul id="nav2">
@@ -21,7 +30,7 @@
                             <li><a href="#">Profile</a></li>
                             <li><a href="#">Settings</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="{{ path('logout') }}">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -39,9 +48,3 @@
         </a>
     </li>
 </ul>
-<div class="body_container">
-    <div class="body_insider">
-        {% block content %}{% endblock %}
-    </div>
-</div>
-{% endblock %}
