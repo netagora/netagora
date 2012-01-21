@@ -1,6 +1,5 @@
 security:
-    factories:
-        - "%kernel.root_dir%/../vendor/bundles/FOS/TwitterBundle/Resources/config/security_factories.xml"
+
     encoders:
         ECE\Bundle\NetagoraBundle\Entity\User: sha512
 
@@ -14,9 +13,6 @@ security:
         members:
             entity: { class: ECENetagoraBundle:User }
 
-        netagora_twitter_provider:
-            id: ece_netagora.twitter_provider
-
     firewalls:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
@@ -29,27 +25,9 @@ security:
                 login_path: /
                 check_path: /login_check
                 default_target_path: /Home
-            fos_twitter:
-                login_path: /twitter/login
-                check_path: /twitter/login_check
-                default_target_path: /Home
-                provider: netagora_twitter_provider
             logout:
                 path: /logout
                 target: /
-
-#        public:
-#            pattern:  /
-#            fos_twitter:
-#                provider: fos_twitter
-#                login_path: /twitter/login
-#                check_path: /twitter/login_check
-#                default_target_path: /
-#            form_login:
-#                provider: fos_user
-#                csrf_provider: form.csrf_provider
-#            logout:       true
-#            anonymous:    true
 
     access_control:
         - { path: ^/Home, roles: ROLE_MEMBER }
@@ -57,10 +35,10 @@ security:
         - { path: ^/Subscribe$, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER] }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/logout$, role: ROLE_MEMBER }
+        - { path: ^/twitter, role: ROLE_MEMBER }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: /.*, role: [IS_AUTHENTICATED_ANONYMOUSLY] }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/_internal, roles: IS_AUTHENTICATED_ANONYMOUSLY, ip: 127.0.0.1 }
 

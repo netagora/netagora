@@ -13,16 +13,14 @@ use ECE\Bundle\NetagoraBundle\Entity\UserManager;
 
 class TwitterUserProvider implements UserProviderInterface
 {
-    protected $twitter;
-    protected $userManager;
-    protected $validator;
-    protected $session;
+    private $twitter;
+    private $userManager;
+    private $session;
 
-    public function __construct(TwitterOAuth $twitter, UserManager $manager, Validator $validator, Session $session)
+    public function __construct(TwitterOAuth $twitter, UserManager $manager, Session $session)
     {
         $this->twitter = $twitter;
         $this->manager = $manager;
-        $this->validator = $validator;
         $this->session = $session;
     }
 
@@ -36,11 +34,15 @@ class TwitterUserProvider implements UserProviderInterface
         return $this->manager->findUserBy(array('twitterID' => $twitterID));
     }
 
+    public function findUserByUsername($usernane)
+    {
+        return $this->manager->findUserByUsername($username);
+    }
+
     public function loadUserByUsername($username)
     {
-        $user = $this->findUserByTwitterId($username);
-
-        if (empty($user)) {
+        $user = $this->findUserByUsername($this->session->get('ece_username'));
+        if (!$user) {
             throw new UsernameNotFoundException('The user is not authenticated on twitter');
         }
 
@@ -56,7 +58,6 @@ class TwitterUserProvider implements UserProviderInterface
         }
 
         if (!empty($info)) {
-
             $username = $info->screen_name;
 
             $user->setTwitterID($info->id);

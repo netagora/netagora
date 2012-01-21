@@ -98,6 +98,16 @@ class User implements AdvancedUserInterface
     private $twitterUsername;
 
     /** 
+     * @var string
+     */
+    private $twitterOAuthToken;
+
+    /** 
+     * @var string
+     */
+    private $twitterOAuthSecret;
+
+    /** 
      * @var array
      */
     private $roles;
@@ -497,8 +507,8 @@ class User implements AdvancedUserInterface
     public function setTwitterID($twitterID)
     {
         $this->twitterID = $twitterID;
-        $this->setTwitterUsername($twitterID);
-        $this->salt = '';
+        //$this->setTwitterUsername($twitterID);
+        //$this->salt = '';
     }
 
     /**
@@ -529,6 +539,26 @@ class User implements AdvancedUserInterface
     public function getTwitterUsername()
     {
         return $this->twitterUsername;
+    }
+
+    public function setTwitterOAuthToken($token)
+    {
+        $this->twitterOAuthToken = $token;
+    }
+
+    public function getTwitterOAuthToken()
+    {
+        return $this->twitterOAuthToken;
+    }
+
+    public function setTwitterOAuthSecret($secret)
+    {
+        $this->twitterOAuthSecret = $secret;
+    }
+
+    public function getTwitterOAuthSecret()
+    {
+        return $this->twitterOAuthSecret;
     }
 
     /*

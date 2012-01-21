@@ -10,17 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class SecurityController extends Controller
 {
     /** 
-     * @Route("/twitter/login", name="twitter_login")
-     *
-     */
-    public function twitterLoginAction(Request $request)
-    {
-        $twitter = $this->get('fos_twitter.service');
-
-        return $this->redirect($twitter->getLoginUrl($request));
-    }
-
-    /** 
      * @Route("/login", name="form_login")
      * @Template()
      */
@@ -30,8 +19,8 @@ class SecurityController extends Controller
     }
 
     /** 
-     * @Route("/twitter/login_check", name="twitter_login_check")
      * @Route("/login_check", name="form_login_check")
+     *
      */
     public function loginCheckAction()
     {

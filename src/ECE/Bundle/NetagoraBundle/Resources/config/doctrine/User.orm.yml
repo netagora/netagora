@@ -18,8 +18,30 @@ ECE\Bundle\NetagoraBundle\Entity\User:
     location:        { type: string, length: 100, nullable: true }
     birthdate:       { type: date, nullable: true }
     registeredAt:    { type: datetime, nullable: true, column: registered_at }
-    twitterID:       { type: string, length: 10, column: twitter_id, nullable: true, unique: true }
-    twitterUsername: { type: string, length: 25, column: twitter_username, nullable: true, unique: true }
+    twitterID:
+      type: string
+      length: 10
+      column: twitter_id
+      nullable: true
+      unique: true
+    twitterUsername:
+      type: string
+      length: 25
+      column: twitter_username
+      nullable: true
+      unique: true
+    twitterOAuthToken:
+      type: string
+      length: 60
+      column: twitter_oauth_token
+      nullable: true
+      unique: true
+    twitterOAuthSecret:
+      type: string
+      length: 60
+      column: twitter_oauth_secret
+      nullable: true
+      unique: true
     roles:           { type: string, length: 255 }
     isEnabled:       { type: boolean, column: is_enabled }
   lifecycleCallbacks:

@@ -44,16 +44,7 @@ class DisconnectedController extends Controller
             'form' => $form->createView(),
         );
     }
-    
-    /**
-     * @Route("/menu_notlogged", name="login")
-     * @Template()
-     */
-    public function loginAction(Request $request)
-    {
-        return array();
-    }
-    
+
     /**
      * @Route("/PasswordRetrieval", name="forgot")
      * @Template()

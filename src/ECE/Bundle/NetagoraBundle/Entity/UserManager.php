@@ -27,6 +27,17 @@ class UserManager
         $this->em->flush();
     }
 
+    public function findUserByUsername($username)
+    {
+        try {
+            $user = $this->repository->loadUserByUsername($username);
+        } catch (\Exception $e) {
+            $user = null;
+        }
+
+        return $user;
+    }
+
     public function findUserBy(array $criteria)
     {
         return $this->repository->findOneBy($criteria);
