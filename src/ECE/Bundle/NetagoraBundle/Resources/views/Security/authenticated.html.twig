@@ -31,7 +31,8 @@
                    <li class="menu" id="not_co">
                         <a href="{{ path('profile') }}" class="menu">
                         {% if app.user.picture %}
-                            <img src="{{ '/avatars/' ~ app.user.picture | apply_filter('profile_icon') }}" />
+                            {% set picture = '/avatars/' ~ app.user.picture %}
+                            <img src="{{  picture|apply_filter('profile_icon') }}" />
                         {% else %}
                             <img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" />
                         {% endif %}
