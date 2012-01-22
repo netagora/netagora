@@ -3,6 +3,7 @@
 namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * PublicationRepository
@@ -12,31 +13,66 @@ use Doctrine\ORM\EntityRepository;
  */
 class PublicationRepository extends EntityRepository
 {
-    public function getVideoPublications($user_id)
+    public function getVideoPublications($user)
     {
-        return $this->getByCategoryType('Video', $user_id);
+        return $this->getByCategoryType('Video', $user);
     }
 
-    public function getMusicPublications($user_id)
+    public function getMusicPublications($user)
     {
-        return $this->getByCategoryType('Music', $user_id);
+        return $this->getByCategoryType('Music', $user);
     }
 
-    private function getByCategoryType($type, $user_id)
+    public function getOwnerPublication($id, $user)
     {
-        $q = $this
+        $qb = $this->getUserPublicationQueryBuilder($user);
+
+        $q = $qb
+            ->addWhere('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+        ;
+
+        $publication = false;
+        try {
+            $publication = $q->getSingleResult();
+        } catch (\Exception $e) {
+            
+        }
+
+        return $publication;
+    }
+
+    private function getUserPublicationQueryBuilder($user, QueryBuilder $qb = null)
+    {
+        if (null === $qb) {
+            $qb = $this->createQueryBuilder('p');
+        }
+
+        $qb = $this
             ->createQueryBuilder('p')
             ->select('p, l, c')
             ->leftJoin('p.knownLink', 'l')
             ->leftJoin('l.category', 'c')
             ->leftJoin('p.user', 'u')
-            ->where('c.type = :type')
-            ->andWhere('u.id = :user_id')
+            ->addWhere('u.id = :user_id')
+            ->setParameter('user_id', $user)
+        ;
+
+        return $qb;
+    }
+
+    private function getByCategoryType($type, $user)
+    {
+        $qb = $this->getUserPublicationQueryBuilder($user);
+
+        $q = $qb
+            ->addWhere('c.type = :type')
             ->orderBy('p.publishedAt', 'desc')
-            ->setParameter('type', $type)
-            ->setParameter('user_id', $user_id)
+            ->setParameter('user_id', $user)
             ->getQuery()
         ;
+
         return $q->getResult();
     }
 }
