@@ -23,9 +23,19 @@
            </ul>
            <div class="nav secondary-nav">
                <ul id="nav2">
-                   <li id="favoris"><a href="{{ path('favourites') }}"><img src="{{ asset('bundles/ecenetagora/images/bigHeart.png') }}" /></a></li>
+                   <li id="favoris">
+                       <a href="{{ path('favourites') }}">
+                           <img src="{{ asset('bundles/ecenetagora/images/bigHeart.png') }}" />
+                       </a>
+                   </li>
                    <li class="menu" id="not_co">
-                        <a href="#" class="menu"><img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" /></a>
+                        <a href="{{ path('profile') }}" class="menu">
+                        {% if app.user.picture %}
+                            <img src="{{ '/avatars/' ~ app.user.picture | apply_filter('profile_icon') }}" />
+                        {% else %}
+                            <img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" />
+                        {% endif %}
+                        </a>
                         <ul class="menu-dropdown">
                             <li><a href="{{ path('profile') }}">Profile</a></li>
                             <li class="divider"></li>
