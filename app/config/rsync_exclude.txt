@@ -10,4 +10,6 @@ app/logs/*
 web/app_dev.php
 web/beta_dev.php
 web/config.php
+web/avatars/*
+web/media/cache/*
 beta/config/parameters.ini
