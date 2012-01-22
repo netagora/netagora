@@ -206,7 +206,7 @@ class User implements AdvancedUserInterface
     public function upload()
     {
         if ($this->file instanceOf UploadedFile) {
-            $this->file->move($this->target, $this->path);
+            $this->file->move($this->target, $this->picture);
             $this->file = null;
         }
     }
