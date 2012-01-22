@@ -47,6 +47,9 @@
 [plum]
     git=https://github.com/aerialls/Plum.git
 
+[imagine]
+    git=http://github.com/avalanche123/Imagine.git
+
 [SensioFrameworkExtraBundle]
     git=http://github.com/sensio/SensioFrameworkExtraBundle.git
     target=/bundles/Sensio/Bundle/FrameworkExtraBundle
@@ -88,3 +91,7 @@
 [MadalynnPlumBundle]
     git=https://github.com/aerialls/MadalynnPlumBundle.git
     target=/bundles/Madalynn/Bundle/PlumBundle
+
+[AvalancheImagineBundle]
+    git=http://github.com/avalanche123/AvalancheImagineBundle.git
+    target=bundles/Avalanche/Bundle/ImagineBundle

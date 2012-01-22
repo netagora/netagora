@@ -12,8 +12,8 @@
                     alert('undo favorite');
                     var publication_id = $(this).attr('id');
                     $.ajax({type: "POST",
-                       url: "{{path('favouritePublication')}}",
-                       data: {publication_id: publication_id},
+                       url: "{{ path('favourite_publication') }}",
+                       data: { publication_id: publication_id },
                        success:function(data){
                            $('.ids').hide('slow');
                            $('#'+publication_id).removeClass('fav_publication');
@@ -27,7 +27,7 @@
                     alert('put favorite');
                     var publication_id = $(this).attr('id');
                     $.ajax({type: "POST",
-                       url: "{{path('favouritePublication')}}",
+                       url: "{{ path('favourite_publication') }}",
                        data: {publication_id: publication_id},
                        success:function(data){
                             $('.ids').hide('slow');
@@ -39,7 +39,6 @@
                 });
         });
         </script>
-          
         {{ twitter_anywhere_setup() }}
     </head>
     <body>

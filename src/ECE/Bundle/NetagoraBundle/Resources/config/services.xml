@@ -5,12 +5,17 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
+        <parameter key="ece_netagora.twitter_api.class">ECE\Bundle\NetagoraBundle\Social\Twitter\TwitterApi</parameter>
         <parameter key="ece_netagora.twitter_provider.class">ECE\Bundle\NetagoraBundle\Security\User\Provider\TwitterUserProvider</parameter>
         <parameter key="ece_netagora.user_manager.class">ECE\Bundle\NetagoraBundle\Entity\UserManager</parameter>
         <parameter key="ece_netagora.user_entity.class">ECENetagoraBundle:User</parameter>
     </parameters>
 
     <services>
+
+        <service id="ece_netagora.twitter_api" class="%ece_netagora.twitter_api.class%">
+            <argument type="service" id="fos_twitter.api" />
+        </service>
 
         <service id="ece_netagora.user_manager" class="%ece_netagora.user_manager.class%">
             <argument type="service" id="doctrine.orm.default_entity_manager" />

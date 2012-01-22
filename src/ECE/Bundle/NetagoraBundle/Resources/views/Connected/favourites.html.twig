@@ -7,12 +7,12 @@
     <div class="feeds">
             <div class="one_feed">
                   <div class="avatar">
-                        <img src="{{user.picture}}" />
+                        <img src="{{ user.picture }}" />
                   </div>                                    
                   <div class="content">
                         <div class="ids">
-                              <div class="pseudo"><a href="https://twitter.com/#!/{{publication.author}}" target="_blank">{{publication.author}}</a></div>
-                              <div class="{{networking}}"></div>
+                              <div class="pseudo"><a href="https://twitter.com/#!/{{ publication.author }}" target="_blank">{{publication.author}}</a></div>
+                              <div class="{{ networking }}"></div>
                               <div class="fav_icon"></div>
                               <div class="share_feed">{{social_buttons|raw}}</div>
                         </div>

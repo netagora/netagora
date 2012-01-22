@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
 use ECE\Bundle\NetagoraBundle\Entity\Publication;
+use ECE\Bundle\NetagoraBundle\Social\Twitter\TwitterLoader;
 
 class ConnectedController extends Controller
 {
@@ -21,6 +22,47 @@ class ConnectedController extends Controller
     public function homeAction(Request $request)
     {
         return array();
+    }
+
+    /**
+     * @Route("/Publications/Refresh", name="twitter_refresh")
+     *
+     */
+    public function refreshAction()
+    {
+        $user       = $this->get('security.context')->getToken()->getUser();
+        $em         = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ECENetagoraBundle:Publication');
+
+        $twitter = $this->get('ece_netagora.twitter_api');
+        $twitter->setScreenName($user->getTwitterID());
+        $twitter->setOAuthToken(
+            $user->getTwitterOAuthToken(),
+            $user->getTwitterOAuthSecret()
+        );
+
+        if ($publication = $repository->getLastPublication($user->getId())) {
+            $twitter->setSinceId($publication->getReference());
+        }
+
+        $loader = new TwitterLoader($user);
+        $loader->load($twitter->getHomeTimeline());
+
+        $publications = $loader->getPublications();
+        $repository->save($publications);
+
+        /*
+        Attach kown link and category to the publications
+        
+        Find right Category
+            Appeler main(Publication $publication)
+
+                 Check the $publication->LinkUrl isn't in DB (KnownLink)
+                     if in => attribuber le KnownLink correspondant à la publication
+                     Sinon faire la tambouille
+        */
+
+        return $this->redirect($this->generateUrl('home'));
     }
 
     /**
@@ -131,7 +173,7 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/favouritePublication", name="favouritePublication")
+     * @Route("/Publication/Favorite", name="favourite_publication")
      * @Template()
      */
     public function favouritePublicationAction(Request $request)

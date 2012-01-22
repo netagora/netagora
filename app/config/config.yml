@@ -55,21 +55,21 @@ swiftmailer:
     username:  %mailer_user%
     password:  %mailer_password%
 
+# JMSSecurityExtra Configuration
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
-    
+
+# FOSTwitter Configuration  
 fos_twitter:
     file: %kernel.root_dir%/../vendor/twitteroauth/twitteroauth/twitteroauth.php
     consumer_key: Huzq3JiVnckweiDIDlhpxg
     consumer_secret: 5bNkZddwISgRSZIKMP1LGAuKECyKN04SZ4cBsiRkhr0
     callback_url: http://netagora.hugohamon.com/app.php/twitter/login_check
-    
-#my.twitter.user:
-#    class: ECE\netagoraBundle\Security\User\Provider\TwitterProvider
-#    arguments:
-#        twitter_oauth: "@fos_twitter.api"
-#        userManager: "@fos_user.user_manager"
-#        validator: "@validator"
-#        session: "@session"
-    
+
+# Avalanche Configuration
+avalanche_imagine:
+    filters:
+        profile_icon:
+            type:    thumbnail
+            options: { size: [20, 20], mode: outbound }
