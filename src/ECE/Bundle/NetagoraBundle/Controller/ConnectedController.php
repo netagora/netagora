@@ -86,7 +86,7 @@ class ConnectedController extends Controller
                 $em->persist($user);
                 $em->flush();
                 
-                return $this->redirect($this->generateUrl('Profile'));
+                return $this->redirect($this->generateUrl('profile'));
             }
         }
         return array('form' => $form->createView(), 'user' => $user);
