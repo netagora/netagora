@@ -273,11 +273,6 @@ class Publication
         $this->isFavorite = (Boolean) $favorite;
     }
 
-    public function setFavorite()
-    {
-        $this->isFavorite = true;
-    }
-
     public function getIsFavorite()
     {
         return $this->isFavorite;
@@ -286,5 +281,14 @@ class Publication
     public function isFavorite()
     {
         return $this->isFavorite;
+    }
+
+    public function changeFavoriteStatus()
+    {
+        if ($this->isFavorite()) {
+            $this->isFavorite = false;
+        } else {
+            $this->isFavorite = true;
+        }
     }
 }
