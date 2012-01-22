@@ -2,9 +2,10 @@
 
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
@@ -66,31 +67,7 @@ class ConnectedController extends Controller
      */
     public function musicAction()
     {
-        $publications = '';
-        //Get the user connected
-        $user = new User();
-        $user->setTwitterUsername('Saro0h');
-        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
-        
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        
-        //Get all publications
-        $em = $this->getDoctrine()->getEntityManager();
-        //Récupérer les publications category.id = 2 => publication->known_link.category_id
-        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
-        $publications = $query->getResult();
-          
-        //?
-        $display = 'display';
-               
-        return array('publications' => $publications,
-                     'user' => $user,
-                     'display' => $display, 
-                     'networking' => $networking, 
-                     'social_buttons' => $social_buttons
-                     );
+        return array();
     }
     
     /**
@@ -99,31 +76,7 @@ class ConnectedController extends Controller
      */
     public function photoAction()
     {
-        $publications = '';
-        //Get the user connected
-        $user = new User();
-        $user->setTwitterUsername('Saro0h');
-        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
-        
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        
-        //Get all publications
-        $em = $this->getDoctrine()->getEntityManager();
-        //Récupérer les publications category.id = 3 => publication->known_link.category_id
-        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
-        $publications = $query->getResult();
-          
-        //?
-        $display = 'display';
-               
-        return array('publications' => $publications,
-                     'user' => $user,
-                     'display' => $display, 
-                     'networking' => $networking, 
-                     'social_buttons' => $social_buttons
-                     );
+        return array();
     }
     
     /**
@@ -132,31 +85,7 @@ class ConnectedController extends Controller
      */
     public function locationSitesAction()
     {
-        $publications = '';
-        //Get the user connected
-        $user = new User();
-        $user->setTwitterUsername('Saro0h');
-        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
-        
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        
-        //Get all publications
-        $em = $this->getDoctrine()->getEntityManager();
-        //Récupérer les publications category.id = 4 => publication->known_link.category_id
-        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
-        $publications = $query->getResult();
-          
-        //?
-        $display = 'display';
-               
-        return array('publications' => $publications,
-                     'user' => $user,
-                     'display' => $display, 
-                     'networking' => $networking, 
-                     'social_buttons' => $social_buttons
-                     );
+        return array();
     }
     
     /**
@@ -165,31 +94,7 @@ class ConnectedController extends Controller
      */
     public function otherAction()
     {
-        $publications = '';
-        //Get the user connected
-        $user = new User();
-        $user->setTwitterUsername('Saro0h');
-        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
-        
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        
-        //Get all publications
-        $em = $this->getDoctrine()->getEntityManager();
-        //Récupérer les publications category.id = 4 => publication->known_link.category_id
-        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
-        $publications = $query->getResult();
-          
-        //?
-        $display = 'display';
-               
-        return array('publications' => $publications,
-                     'user' => $user,
-                     'display' => $display, 
-                     'networking' => $networking, 
-                     'social_buttons' => $social_buttons
-                     );
+        return array();
     }
     
     /**
@@ -198,32 +103,7 @@ class ConnectedController extends Controller
      */
     public function feedsAction()
     {
-        $publications = '';
-        //Get the user connected
-        $user = new User();
-        $user->setTwitterUsername('Saro0h');
-        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
-        
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        
-        //Get all publications
-        $em = $this->getDoctrine()->getEntityManager();
-        //Récupérer les publications category.id = 4 => publication->known_link.category_id
-        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
-        $publications = $query->getResult();
-          
-        //?
-        $display = 'display';
-               
-        return array('publications' => $publications,
-                     'user' => $user,
-                     'display' => $display, 
-                     'networking' => $networking, 
-                     'social_buttons' => $social_buttons
-                     );
-        
+        return array();
     }
     
     /**
@@ -232,31 +112,7 @@ class ConnectedController extends Controller
      */
     public function favouritesAction()
     {
-        $publications = '';
-        //Get the user connected
-        $user = new User();
-        $user->setTwitterUsername('Saro0h');
-        $user->setPicture('https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png');
-        
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        
-        //Get all publications
-        $em = $this->getDoctrine()->getEntityManager();
-        //Récupérer les publications category.id = 4 => publication->known_link.category_id
-        $query = $em->createQuery('SELECT p FROM ECENetagoraBundle:Publication p');
-        $publications = $query->getResult();
-          
-        //?
-        $display = 'display';
-               
-        return array('publications' => $publications,
-                     'user' => $user,
-                     'display' => $display, 
-                     'networking' => $networking, 
-                     'social_buttons' => $social_buttons
-                     );
+        return array();
     }
     
     /**
@@ -265,45 +121,29 @@ class ConnectedController extends Controller
      */
     public function searchAction()
     {
-        $name = 'search';
-        $user = new User();
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $networking = 'twitter';
-        $feed_author = 'me';
-        $feed_author_url = 'http://facebook.com';
-        $display = 'display';
-        $link_url ='http://bla.ca';
-        $link = 'mylink';
-        $feed_text = 'content';
-        $category = 'video';
-        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
-                    
-        return array('name' => $name, 'feed_author' => $feed_author, 'feed_author_url' => $feed_author_url, 'display' => $display, 'link_url' => $link_url, 'link' => $link, 'feed_text' => $feed_text, 'networking' => $networking, 'social_buttons' => $social_buttons, 'avatar_url' => $avatar_url);
-        
+        return array();
     }
     
     /**
-      * @Route("/favouritePublication", name="favouritePublication")
-      * @Template()
-      */
-      public function favouritePublicationAction(Request $request)
-      {
-          $id = $request->request->get('publication_id');
-          if ($id) {
-              $em = $this->getDoctrine()->getEntityManager();
-              $publication = $em->getRepository('ECENetagoraBundle:Publication')->findOneById($id);
-              if ($publication->getIsFavorite()){
-                  $publication->setIsFavorite(false);
-              } else {
-                  $publication->setIsFavorite(true);
-              }
-              $em->persist($publication);
-              $em->flush();
-              return new Response($publication->getId());
-          }
+     * @Route("/favouritePublication", name="favouritePublication")
+     * @Template()
+     */
+    public function favouritePublicationAction(Request $request)
+    {
+        $id         = $request->request->get('publication_id');
+        $em         = $this->getDoctrine()->getEntityManager();
+        $user       = $this->get('security.context')->getToken()->getUser();
+        $repository = $em->getRepository('ECENetagoraBundle:Publication');
 
-          return array();
-      }
+        if (!$id || !$publication = $repository->getOwnerPublication($id, $user->getId())) {
+            throw new AccessDeniedException();
+        }
+
+        $publication->changeFavoriteStatus();
+        $em->persist($publication);
+        $em->flush();
+
+        return new Response($publication->getId());
+    }
 }
 

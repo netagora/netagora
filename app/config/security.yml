@@ -35,6 +35,7 @@ security:
         - { path: ^/Feeds, roles: ROLE_MEMBER }
         - { path: ^/Videos, roles: ROLE_MEMBER }
         - { path: ^/Subscribe$, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER] }
+        - { path: ^/Account, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/logout$, role: ROLE_MEMBER }
         - { path: ^/twitter, role: ROLE_MEMBER }

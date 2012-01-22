@@ -65,7 +65,7 @@ class AccountController extends Controller
      * @param Request $request The Request object
      * @return array|RedirectResponse The redirection or template variables
      *
-     * @Route("/PasswordRetrieval", name="request_password")
+     * @Route("/Account/Password/Retrieve", name="request_password")
      * @Template("ECENetagoraBundle:Account:password.html.twig")
      */
     public function requestPasswordAction(Request $request)
@@ -97,10 +97,21 @@ class AccountController extends Controller
      * @param void
      * @return array The template variables
      *
-     * @Route("/PasswordRetrieval/Confirmation", name="request_password_confirmation")
+     * @Route("/Account/Password/Confirmation", name="request_password_confirmation")
      * @Template("ECENetagoraBundle:Account:passwordConfirmation.html.twig")
      */
     public function requestPasswordConfirmationAction()
+    {
+        return array();
+    }
+
+    /**
+     * This actions confirms the user his password has been changed.
+     *
+     * @Route("/Account/Password/Reset", name="password_changed")
+     * @Template()
+     */
+    public function passwordChangedAction()
     {
         return array();
     }
@@ -112,7 +123,7 @@ class AccountController extends Controller
      * @param string  $token   The password request token
      * @return array|RedirectResponse The Response or template variables
      *
-     * @Route("/ResetPassword/{token}", name="reset_password")
+     * @Route("/Account/Password/{token}", name="reset_password")
      * @Template()
      */
     public function resetPasswordAction(Request $request, $token)
@@ -150,17 +161,6 @@ class AccountController extends Controller
             'token' => $token,
             'form' => $form->createView()
         );
-    }
-
-    /**
-     * This actions confirms the user his password has been changed.
-     *
-     * @Route("/PasswordChanged", name="password_changed")
-     * @Template()
-     */
-    public function passwordChangedAction()
-    {
-        return array();
     }
 
     /**
