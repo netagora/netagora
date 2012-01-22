@@ -2,14 +2,15 @@
 
 namespace ECE\Bundle\NetagoraBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
 
-class DisconnectedController extends Controller
+class AccountController extends Controller
 {
     /**
      * @Route("/Subscribe", name="subscribe")
@@ -35,6 +36,12 @@ class DisconnectedController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                // Send the confirmation email
+                $this->sendConfirmationEmail($user);
+
+                // Authenticate the newly created user.
+                $this->authenticateUserToken($user);
+
                 return $this->redirect($this->generateUrl('home'));
             }
         }
@@ -43,6 +50,33 @@ class DisconnectedController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         );
+    }
+
+    private function authenticateUserToken(User $user)
+    {
+        $token = new UsernamePasswordToken($user->getUsername(), $user->getPassword(), 'public', $user->getRoles());
+        $token->setUser($user);
+        $this->get('security.context')->setToken($token);
+    }
+
+    private function sendConfirmationEmail(User $user)
+    {
+        $robotName  = $this->container->getParameter('robot_name');
+        $robotEmail = $this->container->getParameter('robot_email');
+
+        $body = $this->renderView(
+            'ECENetagoraBundle:Notification:registration.txt.twig',
+            array('user' => $user)
+        );
+
+        $message = \Swift_Message::getInstance()
+            ->setFrom(array($robotEmail => $robotName))
+            ->setTo(array($user->getEmail() => $user->getFullName()))
+            ->setSubject('Welcome to the Netagora Social Platform')
+            ->setBody($body)
+        ;
+
+        $this->get('mailer')->send($message);
     }
 
     /**
@@ -55,13 +89,13 @@ class DisconnectedController extends Controller
         $debug = '';
 
         $email = $request->request->get('mail');
-        
+
         //Find the user
         $em = $this->getDoctrine()->getEntityManager();
         if ($email) {
             $user = $em->getRepository('ECENetagoraBundle:User')->findOneByEmail($email);
         }
-        
+
         if (!empty($user)) {
             $message = \Swift_Message::newInstance()
                     ->setSubject('Your access to netagora.net')
@@ -79,7 +113,7 @@ class DisconnectedController extends Controller
         } else if ($request->request->get('mail') != ''){
             $error = 'Your account doesn\'t exist';
         }
-        
+
         return array('error'=>$error, 'debug' => $debug);
     }
 }
