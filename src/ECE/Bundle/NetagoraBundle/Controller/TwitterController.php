@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\Publication;
-use ECE\Bundle\NetagoraBundle\Social\Twitter\TwitterLoader;
 
 /** 
  * @Route("/twitter")

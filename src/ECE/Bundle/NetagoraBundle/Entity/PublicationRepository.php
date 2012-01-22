@@ -17,7 +17,7 @@ class PublicationRepository extends EntityRepository
         $references = $this->getExistingReferences($publications);
 
         foreach ($publications as $publication) {
-            if (in_array($publication->getReference(), $references)) {
+            if (!in_array($publication->getReference(), $references)) {
                 $this->_em->persist($publication);
             }
         }
@@ -103,7 +103,7 @@ class PublicationRepository extends EntityRepository
     public function getLastPublication($user)
     {
         $q = $this
-            ->getUserPublicationQueryBuilder($user);
+            ->getUserPublicationQueryBuilder($user)
             ->orderBy('p.reference', 'desc')
             ->setMaxResults(1)
             ->getQuery()
@@ -156,7 +156,7 @@ class PublicationRepository extends EntityRepository
             ->getUserPublicationQueryBuilder($user)
             ->andWhere('c.type = :type')
             ->orderBy('p.publishedAt', 'desc')
-            ->setParameter('user_id', $user)
+            ->setParameter('type', $type)
             ->getQuery()
         ;
 

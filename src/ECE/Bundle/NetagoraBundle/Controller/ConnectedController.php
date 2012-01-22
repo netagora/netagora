@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Entity\Publication;
+use ECE\Bundle\NetagoraBundle\Social\Twitter\TwitterLoader;
 
 class ConnectedController extends Controller
 {
@@ -28,36 +29,25 @@ class ConnectedController extends Controller
      */
     public function refreshAction()
     {
-        $user = $this->get('security.context')->getToken()->getUser();
-        
-        $em = $this->getDoctrine()->getEntityManager();
+        $user       = $this->get('security.context')->getToken()->getUser();
+        $em         = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('ECENetagoraBundle:Publication');
-        
-        $twitter = $this->get('fos_twitter.api');
+
+        $twitter = $this->get('ece_netagora.twitter_api');
+        $twitter->setScreenName($user->getTwitterID());
         $twitter->setOAuthToken(
             $user->getTwitterOAuthToken(),
             $user->getTwitterOAuthSecret()
         );
 
-        $lastPublication = $repository->getLastPublication($user->getId());
-
-        if ($lastPublication) {
-            $timeline = $twitter->get('statuses/home_timeline', array(
-                'screen_name' => $user->getTwitterID(),
-                'since_id' => $lastPublication->getReference()
-            ));
-        } else {
-            $timeline = $twitter->get('statuses/home_timeline', array(
-                'screen_name' => $user->getTwitterID(),
-                'count' => 10
-            ));
+        if ($publication = $repository->getLastPublication($user->getId())) {
+            $twitter->setSinceId($publication->getReference());
         }
 
         $loader = new TwitterLoader($user);
-        $loader->load($timeline);
+        $loader->load($twitter->getHomeTimeline());
 
         $publications = $loader->getPublications();
-
         $repository->save($publications);
 
         /*
