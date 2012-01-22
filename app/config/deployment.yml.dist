@@ -7,3 +7,4 @@ madalynn_plum_servers:
         password: mySecretPwd
         options:
             dry_run: true
+            rsync_options: "-azC --force --progress"
