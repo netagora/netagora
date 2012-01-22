@@ -13,7 +13,7 @@
                     var publication_id = $(this).attr('id');
                     $.ajax({type: "POST",
                        url: "{{ path('favourite_publication') }}",
-                       data: {publication_id: publication_id},
+                       data: { publication_id: publication_id },
                        success:function(data){
                            $('.ids').hide('slow');
                            $('#'+publication_id).removeClass('fav_publication');

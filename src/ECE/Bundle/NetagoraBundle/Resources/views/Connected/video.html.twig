@@ -6,7 +6,7 @@
         <div class="feeds">
             <div class="one_feed">
                 <div class="avatar">
-                        <img src="{{ publication.authorPicture }}" alt=""/>
+                    <img src="{{ publication.authorPicture }}" alt=""/>
                 </div>
                 <div class="content">
                     <div class="ids">
@@ -16,7 +16,7 @@
                             </a>
                         </div>
                         <div class="{{ publication.socialNetwork }}"></div>
-                        {% if(publication.isFavorite) %}
+                        {% if (publication.favorite) %}
                             <div id="{{ publication.id }}" class="fav_publication"></div>
                         {% else %}
                             <div id="{{ publication.id }}" class="fav_icon"></div>
