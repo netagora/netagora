@@ -1,7 +1,7 @@
 {% extends "ECENetagoraBundle::layout.html.twig" %}
 
 {% block content %}
-    <div class="page_name">Videos</div>
+    <div class="page_name">Videos Feeds</div>
     {% for publication in publications %}
         <div class="feeds">
             <div class="one_feed">
@@ -22,9 +22,9 @@
                             <div id="{{ publication.id }}" class="fav_icon"></div>
                         {% endif %}
                         <div class="share_feed">
-                        {% for type in ['tweet', 'retweet', 'favorite'] %}
-                            <a class="t_reply" href="https://twitter.com/intent/{{ type }}?in_reply_to={{ publication.reference }}"></a>
-                        {% endfor %}
+                            <a class="t_reply" href="https://twitter.com/intent/tweet?in_reply_to={{ publication.reference }}" target="_blank"></a>
+                            <a class="t_favorite" href="https://twitter.com/intent/favorite?tweet_id={{ publication.reference }}" target="_blank"> </a>
+                            <a class="t_retweet" href="https://twitter.com/intent/retweet?tweet_id={{ publication.reference }}" target="_blank"> </a>
                         </div>
                     </div>
                     <div class="feed_content display">
@@ -32,7 +32,7 @@
                         <div class="link_origin">
                             <a href="{{ publication.linkUrl }}" target="_blank">{{ publication.linkUrl }}</a>
                             <br />
-                            <iframe width="280" height="157" src="{{ publication.linkUrl }}" frameborder="0" style="border:0;" allowfullscreen></iframe>
+                            <iframe width="850" height="157" src="{{ publication.linkUrl }}" frameborder="0" style="border:0;" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>

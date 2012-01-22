@@ -30,12 +30,22 @@ class TwitterController extends Controller
             $user->getTwitterOAuthToken(),
             $user->getTwitterOAuthSecret()
         );
-
-        $timeline = $twitter->get('statuses/home_timeline', array(
-            'screen_name' => $user->getTwitterID(),
-            'count' => 10
-        ));
-
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        $lastPublication = $repository->getLastPublication($user->getId());
+        
+        if ($lastPublication) {
+            $timeline = $twitter->get('statuses/home_timeline', array(
+                'screen_name' => $user->getTwitterID(),
+                'since_id' => $lastPublication->getReference()
+            ));
+        } else {
+            $timeline = $twitter->get('statuses/home_timeline', array(
+                'screen_name' => $user->getTwitterID(),
+                'count' => 10
+            ));
+        }
+        
         foreach ($timeline as $tweet) {
             $publication = $repository->findOneByReference($tweet->id_str);
             if (!$publication) {

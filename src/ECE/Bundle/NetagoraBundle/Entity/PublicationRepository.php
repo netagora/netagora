@@ -39,4 +39,24 @@ class PublicationRepository extends EntityRepository
         ;
         return $q->getResult();
     }
+    
+    public function getLastPublication($user_id)
+    {
+        $q = $this
+            ->createQueryBuilder('p')
+            ->leftJoin('p.user', 'u')
+            ->where('u.id = :user_id')
+            ->orderBy('p.reference', 'desc')
+            ->setMaxResults(1)
+            ->setParameter('user_id', $user_id)
+            ->getQuery()
+        ;
+        try {
+            return $q->getSingleResult();
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+    
+    
 }
