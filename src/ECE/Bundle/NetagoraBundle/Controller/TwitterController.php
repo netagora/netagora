@@ -57,6 +57,14 @@ class TwitterController extends Controller
             }
         }
 
+        //Find right Category
+            //Appeler main(Publication $publication)
+        
+                //Check the $publication->LinkUrl isn't in DB (KnownLink)
+                    //if in => attribuber le KnownLink correspondant à la publication
+                    //Sinon faire la tambouille
+        
+        
         return $this->redirect($this->generateUrl('home'));
     }
 
