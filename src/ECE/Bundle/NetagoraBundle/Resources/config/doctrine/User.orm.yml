@@ -8,9 +8,9 @@ ECE\Bundle\NetagoraBundle\Entity\User:
       id: true
       generator:
         strategy: AUTO
-    username:        { type: string, length: 255, unique: true }
-    salt:            { type: string, length: 255, unique: true }
-    password:        { type: string, length: 255, unique: true }
+    username:        { type: string, length: 20, unique: true }
+    salt:            { type: string, length: 32, unique: true }
+    password:        { type: string, length: 100, unique: true }
     email:           { type: string, length: 60, unique: true }
     firstName:       { type: string, length: 25, column: first_name }
     lastName:        { type: string, length: 25, column: last_name }

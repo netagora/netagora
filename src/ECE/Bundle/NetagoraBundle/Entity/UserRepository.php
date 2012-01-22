@@ -11,6 +11,28 @@ use Doctrine\ORM\NoResultException;
 
 class UserRepository extends EntityRepository implements UserProviderInterface
 {
+    /**
+     * Returns whether or not the password request is valid.
+     *
+     * @param PasswordRequest $request The password request
+     * @return Boolean
+     */
+    public function isPasswordRequestValid(PasswordRequest $request)
+    {
+        $criteria = array(
+            'username' => $request->getUsername(),
+            'email' => $request->getEmail(),
+        );
+
+        if ($user = $this->findOneBy($criteria)) {
+            $request->setUser($user);
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function loadUserByUsername($username)
     {
         $q = $this

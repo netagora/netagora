@@ -40,10 +40,16 @@ class User implements AdvancedUserInterface
 
     /**
      * @var string $password
+     *
+     */
+    private $password;
+
+    /**
+     * @var string $password
      * @Assert\NotBlank()
      * @Assert\MinLength(8)
      */
-    private $password;
+    private $plainPassword;
 
     /**
      * @var string $email
@@ -173,7 +179,7 @@ class User implements AdvancedUserInterface
 
     public function eraseCredentials()
     {
-        
+        $this->plainPassword = null;
     }
 
     public function equals(UserInterface $user)
@@ -181,11 +187,11 @@ class User implements AdvancedUserInterface
         return $this->username === $user->getUsername();
     }
 
-    public function encodePassword(PasswordEncoderInterface $encoder)
+    public function encodePlainPassword(PasswordEncoderInterface $encoder)
     {
         $this->salt = $this->generateRandomSalt();
 
-        $password = $encoder->encodePassword($this->password, $this->salt);
+        $password = $encoder->encodePassword($this->plainPassword, $this->salt);
 
         $this->setPassword($password);
     }
@@ -356,6 +362,16 @@ class User implements AdvancedUserInterface
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
     }
 
     public function setIsEnabled($enabled)

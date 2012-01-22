@@ -12,8 +12,7 @@ class UserType extends AbstractType
         $builder
             ->add('email', 'email')
             ->add('username', 'text', array('label' => 'Pseudo'))
-            ->add('password', 'repeated', array(
-                'required'     => true,
+            ->add('plainPassword', 'repeated', array(
                 'type'         => 'password',
                 'first_name'   => 'Password',
                 'second_name'  => 'Confirmation',

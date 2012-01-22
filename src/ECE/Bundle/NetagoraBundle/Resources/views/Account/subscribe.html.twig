@@ -12,6 +12,10 @@
 {% endspaceless %}
 {% endblock field_row %}
 
+{% block title -%}
+    {{ parent() }} - Registration
+{%- endblock %}
+
 {% block content %}
 
     <form novalidate="novalidate" id="subscribe" action="{{ path('subscribe') }}" method="post" {{ form_enctype(form) }}>

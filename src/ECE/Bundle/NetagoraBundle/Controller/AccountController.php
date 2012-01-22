@@ -8,11 +8,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
+use ECE\Bundle\NetagoraBundle\Entity\PasswordRequest;
+use ECE\Bundle\NetagoraBundle\Entity\ResetPassword;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
+use ECE\Bundle\NetagoraBundle\Form\PasswordRequestType;
+use ECE\Bundle\NetagoraBundle\Form\ResetPasswordType;
 
 class AccountController extends Controller
 {
     /**
+     * This action handles the registration form.
+     *
+     * @param Request $request The Request object
+     * @return array|RedirectResponse The redirection or template variables
+     *
      * @Route("/Subscribe", name="subscribe")
      * @Template()
      */
@@ -29,8 +38,9 @@ class AccountController extends Controller
             $form->bindRequest($request);
             if ($form->isValid()) {
                 $factory = $this->get('security.encoder_factory');
-                $user->encodePassword($factory->getEncoder($user));
                 $user->target = $this->container->getParameter('photos_dir');
+                $user->encodePlainPassword($factory->getEncoder($user));
+                $user->eraseCredentials();
 
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($user);
@@ -46,12 +56,119 @@ class AccountController extends Controller
             }
         }
 
+        return array('form' => $form->createView());
+    }
+
+    /**
+     * This actions handles the password retrieval.
+     *
+     * @param Request $request The Request object
+     * @return array|RedirectResponse The redirection or template variables
+     *
+     * @Route("/PasswordRetrieval", name="request_password")
+     * @Template("ECENetagoraBundle:Account:password.html.twig")
+     */
+    public function requestPasswordAction(Request $request)
+    {
+        $token = new PasswordRequest();
+        $form = $this->createForm(new PasswordRequestType(), $token);
+
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getEntityManager();
+                $repository = $em->getRepository('ECENetagoraBundle:User');
+                if ($repository->isPasswordRequestValid($token)) {
+                    $em->persist($token);
+                    $em->flush();
+                    $this->sendPasswordRequestEmail($token);
+
+                    return $this->redirect($this->generateUrl('request_password_confirmation'));
+                }
+            }
+        }
+        
+        return array('form' => $form->createView());
+    }
+
+    /**
+     * This actions handles the password retrieval confirmation.
+     *
+     * @param void
+     * @return array The template variables
+     *
+     * @Route("/PasswordRetrieval/Confirmation", name="request_password_confirmation")
+     * @Template("ECENetagoraBundle:Account:passwordConfirmation.html.twig")
+     */
+    public function requestPasswordConfirmationAction()
+    {
+        return array();
+    }
+
+    /**
+     * This actions allows the user to reset his password.
+     *
+     * @param Request $request The Request
+     * @param string  $token   The password request token
+     * @return array|RedirectResponse The Response or template variables
+     *
+     * @Route("/ResetPassword/{token}", name="reset_password")
+     * @Template()
+     */
+    public function resetPasswordAction(Request $request, $token)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ECENetagoraBundle:PasswordRequest');
+
+        if (!$pwdRequest = $repository->getActiveRequest($token)) {
+            throw $this->createNotFoundException(sprintf('Unable to find active password request identified by token "%s".', $token));
+        }
+
+        $reset = new ResetPassword();
+        $form = $this->createForm(new ResetPasswordType(), $reset);
+
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                // Change the password
+                $factory = $this->get('security.encoder_factory');
+                $user = $pwdRequest->getUser();
+                $user->setPlainPassword($reset->getPassword());
+                $user->encodePlainPassword($factory->getEncoder($user));
+                $user->eraseCredentials();
+
+                // Update the user and remove the password request
+                $em->persist($user);
+                $em->remove($pwdRequest);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('password_changed'));
+            }
+        }
+
         return array(
-            'user' => $user,
-            'form' => $form->createView(),
+            'token' => $token,
+            'form' => $form->createView()
         );
     }
 
+    /**
+     * This actions confirms the user his password has been changed.
+     *
+     * @Route("/PasswordChanged", name="password_changed")
+     * @Template()
+     */
+    public function passwordChangedAction()
+    {
+        return array();
+    }
+
+    /**
+     * This method authenticates the newly created user.
+     *
+     * @param User $user The User entity
+     * @return void
+     */
     private function authenticateUserToken(User $user)
     {
         $token = new UsernamePasswordToken($user->getUsername(), $user->getPassword(), 'public', $user->getRoles());
@@ -59,6 +176,12 @@ class AccountController extends Controller
         $this->get('security.context')->setToken($token);
     }
 
+    /**
+     * This method sends the confirmation email to the newly created user.
+     *
+     * @param User $user The User entity
+     * @return void
+     */
     private function sendConfirmationEmail(User $user)
     {
         $robotName  = $this->container->getParameter('robot_name');
@@ -69,7 +192,7 @@ class AccountController extends Controller
             array('user' => $user)
         );
 
-        $message = \Swift_Message::getInstance()
+        $message = \Swift_Message::newInstance()
             ->setFrom(array($robotEmail => $robotName))
             ->setTo(array($user->getEmail() => $user->getFullName()))
             ->setSubject('Welcome to the Netagora Social Platform')
@@ -80,40 +203,28 @@ class AccountController extends Controller
     }
 
     /**
-     * @Route("/PasswordRetrieval", name="forgot")
-     * @Template()
+     * This method sends the confirmation email for the password change.
+     *
+     * @param PasswordRequest $request The password request entity
+     * @return void
      */
-    public function passwordRetrievalAction(Request $request)
+    private function sendPasswordRequestEmail(PasswordRequest $request)
     {
-        $error = '';
-        $debug = '';
+        $robotName  = $this->container->getParameter('robot_name');
+        $robotEmail = $this->container->getParameter('robot_email');
 
-        $email = $request->request->get('mail');
+        $body = $this->renderView(
+            'ECENetagoraBundle:Notification:password.txt.twig',
+            array('token' => $request->getToken())
+        );
 
-        //Find the user
-        $em = $this->getDoctrine()->getEntityManager();
-        if ($email) {
-            $user = $em->getRepository('ECENetagoraBundle:User')->findOneByEmail($email);
-        }
+        $message = \Swift_Message::newInstance()
+            ->setFrom(array($robotEmail => $robotName))
+            ->setTo($request->getEmail())
+            ->setSubject('Netagora - Change your password')
+            ->setBody($body)
+        ;
 
-        if (!empty($user)) {
-            $message = \Swift_Message::newInstance()
-                    ->setSubject('Your access to netagora.net')
-                    ->setFrom(array('no-reply@netagora.net'=>'Netagora Team'))
-                    ->setTo($email)
-                    ->setBody('Hi '.$user->getFirstName().'!
-                               Your username is '.$user->getUsername().'
-                               Your password is '.$user->getPassword().'
-
-                               See you soon on www.netagora.net !
-
-                               The netagora team.
-                              ');
-            $this->get('mailer')->send($message);
-        } else if ($request->request->get('mail') != ''){
-            $error = 'Your account doesn\'t exist';
-        }
-
-        return array('error'=>$error, 'debug' => $debug);
+        $this->get('mailer')->send($message);
     }
 }
