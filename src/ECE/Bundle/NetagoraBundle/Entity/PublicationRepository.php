@@ -4,9 +4,51 @@ namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Query;
 
 class PublicationRepository extends EntityRepository
 {
+    public function save(array $publications)
+    {
+        if (0 === count($publications)) {
+            return;
+        }
+
+        $references = $this->getExistingReferences($publications);
+
+        foreach ($publications as $publication) {
+            if (in_array($publication->getReference(), $references)) {
+                $this->_em->persist($publication);
+            }
+        }
+
+        $this->_em->flush();
+    }
+
+    private function getExistingReferences(array $publications)
+    {
+        $references = array();
+        foreach ($publications as $publication) {
+            $references[] = $publication->getReference();
+        }
+
+        $q = $this
+            ->createQueryBuilder('p')
+            ->select('p.id', 'p.reference')
+            ->where('p.reference IN(:references)')
+            ->groupBy('p.reference')
+            ->setParameter('references', $references)
+            ->getQuery()
+        ;
+
+        $references = array();
+        foreach ($q->getResult(Query::HYDRATE_ARRAY) as $result) {
+            $references[] = $result['reference'];
+        }
+
+        return $references;
+    }
+
     /**
      * Returns the Video publications of a single user.
      *
@@ -40,7 +82,7 @@ class PublicationRepository extends EntityRepository
     {
         $q = $this
             ->getUserPublicationQueryBuilder($user)
-            ->addWhere('p.id = :id')
+            ->andWhere('p.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
         ;
@@ -94,7 +136,7 @@ class PublicationRepository extends EntityRepository
             ->leftJoin('p.knownLink', 'l')
             ->leftJoin('l.category', 'c')
             ->leftJoin('p.user', 'u')
-            ->addWhere('u.id = :user_id')
+            ->where('u.id = :user_id')
             ->setParameter('user_id', $user)
         ;
 
@@ -112,7 +154,7 @@ class PublicationRepository extends EntityRepository
     {
         $q = $this
             ->getUserPublicationQueryBuilder($user)
-            ->addWhere('c.type = :type')
+            ->andWhere('c.type = :type')
             ->orderBy('p.publishedAt', 'desc')
             ->setParameter('user_id', $user)
             ->getQuery()

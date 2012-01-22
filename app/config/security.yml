@@ -34,7 +34,7 @@ security:
         - { path: ^/Home, roles: ROLE_MEMBER }
         - { path: ^/Feeds, roles: ROLE_MEMBER }
         - { path: ^/Videos, roles: ROLE_MEMBER }
-        - { path: ^/Publication, roles: ROLE_MEMBER }
+        - { path: ^/Publications, roles: ROLE_MEMBER }
         - { path: ^/Subscribe$, roles: [IS_AUTHENTICATED_ANONYMOUSLY, ROLE_USER] }
         - { path: ^/Account, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

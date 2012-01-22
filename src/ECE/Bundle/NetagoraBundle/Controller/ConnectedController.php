@@ -23,6 +23,58 @@ class ConnectedController extends Controller
     }
 
     /**
+     * @Route("/Publications/Refresh", name="twitter_refresh")
+     *
+     */
+    public function refreshAction()
+    {
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ECENetagoraBundle:Publication');
+        
+        $twitter = $this->get('fos_twitter.api');
+        $twitter->setOAuthToken(
+            $user->getTwitterOAuthToken(),
+            $user->getTwitterOAuthSecret()
+        );
+
+        $lastPublication = $repository->getLastPublication($user->getId());
+
+        if ($lastPublication) {
+            $timeline = $twitter->get('statuses/home_timeline', array(
+                'screen_name' => $user->getTwitterID(),
+                'since_id' => $lastPublication->getReference()
+            ));
+        } else {
+            $timeline = $twitter->get('statuses/home_timeline', array(
+                'screen_name' => $user->getTwitterID(),
+                'count' => 10
+            ));
+        }
+
+        $loader = new TwitterLoader($user);
+        $loader->load($timeline);
+
+        $publications = $loader->getPublications();
+
+        $repository->save($publications);
+
+        /*
+        Attach kown link and category to the publications
+        
+        Find right Category
+            Appeler main(Publication $publication)
+
+                 Check the $publication->LinkUrl isn't in DB (KnownLink)
+                     if in => attribuber le KnownLink correspondant à la publication
+                     Sinon faire la tambouille
+        */
+
+        return $this->redirect($this->generateUrl('home'));
+    }
+
+    /**
      * @Route("/Profile", name="profile")
      * @Template()
      */

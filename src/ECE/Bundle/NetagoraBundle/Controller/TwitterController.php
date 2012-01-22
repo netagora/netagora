@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\Publication;
+use ECE\Bundle\NetagoraBundle\Social\Twitter\TwitterLoader;
 
 /** 
  * @Route("/twitter")
@@ -14,70 +15,6 @@ use ECE\Bundle\NetagoraBundle\Entity\Publication;
  */
 class TwitterController extends Controller
 {
-    /**
-     * @Route("/refresh", name="twitter_refresh")
-     *
-     */
-    public function refreshAction()
-    {
-        $user = $this->get('security.context')->getToken()->getUser();
-        
-        $em = $this->getDoctrine()->getEntityManager();
-        $repository = $em->getRepository('ECENetagoraBundle:Publication');
-        
-        $twitter = $this->get('fos_twitter.api');
-        $twitter->setOAuthToken(
-            $user->getTwitterOAuthToken(),
-            $user->getTwitterOAuthSecret()
-        );
-        
-        $user = $this->get('security.context')->getToken()->getUser();
-        $lastPublication = $repository->getLastPublication($user->getId());
-        
-        if ($lastPublication) {
-            $timeline = $twitter->get('statuses/home_timeline', array(
-                'screen_name' => $user->getTwitterID(),
-                'since_id' => $lastPublication->getReference()
-            ));
-        } else {
-            $timeline = $twitter->get('statuses/home_timeline', array(
-                'screen_name' => $user->getTwitterID(),
-                'count' => 10
-            ));
-        }
-        
-        foreach ($timeline as $tweet) {
-            $publication = $repository->findOneByReference($tweet->id_str);
-            if (!$publication) {
-                $text = $tweet->text;
-                if (preg_match('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $text, $links)) {
-                    $publication = new Publication();
-                    $publication->setUser($user);
-                    $publication->setSocialNetwork(Publication::TWITTER);
-                    $publication->setAuthor($tweet->user->name);
-                    $publication->setPublishedAt(new \DateTime($tweet->created_at));
-                    $publication->setAuthorPicture($tweet->user->profile_image_url_https);
-                    $publication->setReference($tweet->id_str);
-                    $publication->setContent($tweet->text);
-                    $publication->setLinkUrl($links[0]);
-                    $em = $this->getDoctrine()->getEntityManager();
-                    $em->persist($publication);
-                    $em->flush();
-                }
-            }
-        }
-
-        //Find right Category
-            //Appeler main(Publication $publication)
-        
-                //Check the $publication->LinkUrl isn't in DB (KnownLink)
-                    //if in => attribuber le KnownLink correspondant à la publication
-                    //Sinon faire la tambouille
-        
-        
-        return $this->redirect($this->generateUrl('home'));
-    }
-
     /** 
      * @Route("/login", name="twitter_login")
      *
