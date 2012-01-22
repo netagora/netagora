@@ -23,12 +23,11 @@
            </ul>
            <div class="nav secondary-nav">
                <ul id="nav2">
-                   <li id="favoris"><a href="#"><img src="{{ asset('bundles/ecenetagora/images/bigHeart.png') }}" /></a></li>
+                   <li id="favoris"><a href="{{ path('favourites') }}"><img src="{{ asset('bundles/ecenetagora/images/bigHeart.png') }}" /></a></li>
                    <li class="menu" id="not_co">
                         <a href="#" class="menu"><img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" /></a>
                         <ul class="menu-dropdown">
-                            <li><a href="#">Profile</a></li>
-                            <li><a href="#">Settings</a></li>
+                            <li><a href="{{ path('profile') }}">Profile</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ path('logout') }}">Logout</a></li>
                         </ul>
@@ -43,7 +42,7 @@
 </div>
 <ul id="navigation">
     <li class="home">
-        <a title="Home" href="#">
+        <a title="Home" href="{{path('home')}}">
             <img src="{{ asset('bundles/ecenetagora/images/Home.png') }}" height="18px" />
         </a>
     </li>

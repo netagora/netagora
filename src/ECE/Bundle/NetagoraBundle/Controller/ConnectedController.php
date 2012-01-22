@@ -22,7 +22,7 @@ class ConnectedController extends Controller
     }
 
     /**
-     * @Route("/Profile")
+     * @Route("/Profile", name="profile")
      * @Template()
      */
     public function profileAction()
@@ -50,10 +50,11 @@ class ConnectedController extends Controller
     public function videoAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-
+        $user = $this->get('security.context')->getToken()->getUser();
+        
         $publications = $em
             ->getRepository('ECENetagoraBundle:Publication')
-            ->getVideoPublications()
+            ->getVideoPublications($user->getId())
         ;
 
         return array('publications' => $publications);
@@ -299,7 +300,7 @@ class ConnectedController extends Controller
               }
               $em->persist($publication);
               $em->flush();
-              return new Response('author: '.$publication->getIsFavorite());
+              return new Response($publication->getId());
           }
 
           return array();

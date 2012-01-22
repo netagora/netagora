@@ -1284,11 +1284,12 @@ margin: auto;
 
 .welcome_title{
 
-font-size: 9em;
+font-size: 7em;
 font-family: 'Oldenburg', cursive;
 letter-spacing: 0.1em;
 text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
-    text-align: center;
+text-align: center;
+margin-top: 25px;
 
 }
 

@@ -9,6 +9,7 @@ ECE\Bundle\NetagoraBundle\Entity\Publication:
       generator:         { strategy: AUTO }
     socialNetwork:       { type: string, length: 10, column: social_network, nullable: true }
     author:              { type: string, length: 50 }
+    authorPicture:       { type: string, length: 200 }
     publishedAt:         { type: datetime, column: published_at }
     reference:           { type: string, length: 200 }
     content:             { type: text }
@@ -20,9 +21,7 @@ ECE\Bundle\NetagoraBundle\Entity\Publication:
       targetEntity: User
       inversedBy:   publications
       cascade:      ["persist", "delete", "merge"]
-  oneToOne:
     knownLink:
       targetEntity: KnownLink
-      joinColumn:
-        name: known_link_id
-        referencedColumnName: id
+      inversedBy:   publications
+      cascade:      ["persist", "delete", "merge"]
