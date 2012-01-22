@@ -1,54 +1,49 @@
 {% extends "ECENetagoraBundle::layout.html.twig" %}
 
+{% form_theme form _self %}
+
+{% block field_row %}
+{% spaceless %}
+    <li>
+        {{ form_label(form, label|default(null)) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </li>
+{% endspaceless %}
+{% endblock field_row %}
+
 {% block content %}
 
-    <form id="profile">
+    <form id="profile" action="{{ path('profile') }}" method="post" {{ form_enctype(form) }}>
           <fieldset>
                 <legend class="subtitle">Profile</legend>
                 <ol>
-                      <li>
-                            <label for=name>Name</label>
-                            <input id=name name=name type=text placeholder="{{name}}" required autofocus>
-                      </li>
-                      <li>
-                            <label for=email>Email</label>
-                            <input id=email name=email type=email placeholder="{{mail_address}}" required>
-                      </li>
-                      <li>
-                            <label for=location>Location</label>
-                            <input id=location name=location type=text placeholder="{{location}}" required>
-                      </li>
-                      <li>
-                            <label for=phone>Old password</label>
-                            <input id=oldpass name=password type=password placeholder="" required>
-                      </li>
-                      <li>
-                            <label for=phone>New password</label>
-                            <input id=newpass name=password type=password placeholder="">
-                      </li>
-                      <li>
-                            <label for=phone>New password</label>
-                            <input id=newpass2 name=password type=password placeholder="">
-                      </li>
+                    {{ form_row(form.username) }}
+                    {{ form_row(form.email) }}
+                    {{ form_row(form.plainPassword) }}
+                    {{ form_row(form.firstName) }}
+                    {{ form_row(form.lastName) }}
+                    {{ form_row(form.birthdate) }}
+                    {{ form_row(form.location) }}
                 </ol>
                 
                 <div class="division"></div>
                 
                 <legend class="subtitle">Picture</legend>
-                <ol>
-                      <li>
-                            <label for=name>Profile picture</label>
-                            <input id=avatar name=avatar type=file >
-                            <div class="avatar"><img src="{{avatar_url}}" /></div>
-                      </li>
-                      
+                <ol>{% if (user.picture) %}
+                        <div class="avatar"><img src="{{ asset('/avatars/' ~ user.picture) }}" /></div>
+                    {% else %}
+                        <i> No picture yet! </i>
+                    {% endif %}
+                    
+                    {{ form_row(form.file) }}
                 </ol>
                 
           </fieldset>
                     
            <div class="division"></div>
- 
             <fieldset>
+                {{ form_rest(form) }}
                 <button type=submit>Save changes</button>
           </fieldset>
     </form>

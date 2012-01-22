@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use ECE\Bundle\NetagoraBundle\Entity\User;
+use ECE\Bundle\NetagoraBundle\Form\UserType;
 use ECE\Bundle\NetagoraBundle\Entity\Publication;
 
 class ConnectedController extends Controller
@@ -26,22 +27,27 @@ class ConnectedController extends Controller
      * @Route("/Profile", name="profile")
      * @Template()
      */
-    public function profileAction()
+    public function profileAction(Request $request)
     {
-        $name = 'profile';
-        $user = new User();
-        $network = "t";
-        $social_buttons = $user->getSocialButtons($network,'158903826945024000');
-        $mail_address = 'bla@gmail.com';
-        $name = 'first last';
-        $location = 'paris';
-        $avatar_url = 'https://si0.twimg.com/profile_images/1547581423/moy_reasonably_small.png';
-               
-        return array('name' => $name, 
-                     'mail_address' => $mail_address, 
-                     'name' => $name, 
-                     'location' => $location, 
-                     'avatar_url' => $avatar_url);
+        $user = $this->get('security.context')->getToken()->getUser();
+        $form = $this->createForm(new UserType(), $user);
+        
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $factory = $this->get('security.encoder_factory');
+                $user->target = $this->container->getParameter('photos_dir');
+                $user->encodePlainPassword($factory->getEncoder($user));
+                $user->eraseCredentials();
+
+                $em = $this->getDoctrine()->getEntityManager();
+                $em->persist($user);
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('Profile'));
+            }
+        }
+        return array('form' => $form->createView(), 'user' => $user);
     }
     
     /**
