@@ -35,6 +35,11 @@ class Publication
      * @var string $author
      */
     private $author;
+    
+    /**
+     * @var string $authorPicture
+     */
+    private $authorPicture;
 
     /**
      * @var datetime $publishedAt
@@ -106,9 +111,9 @@ class Publication
     /**
      * Set known_link
      *
-     * @param string $knownLink
+     * @param KnownLink $knownLink
      */
-    public function setKnownLink($knownLink)
+    public function setKnownLink(KnownLink $knownLink)
     {
         $this->knownLink = $knownLink;
     }
@@ -116,7 +121,7 @@ class Publication
     /**
      * Get known_link
      *
-     * @return string 
+     * @return KnownLink 
      */
     public function getKnownLink()
     {
@@ -161,6 +166,26 @@ class Publication
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set authorPicture
+     *
+     * @param string $authorPicture
+     */
+    public function setAuthorPicture($authorPicture)
+    {
+        $this->authorPicture = $authorPicture;
+    }
+
+    /**
+     * Get authorPicture
+     *
+     * @return string 
+     */
+    public function getAuthorPicture()
+    {
+        return $this->authorPicture;
     }
 
     /**

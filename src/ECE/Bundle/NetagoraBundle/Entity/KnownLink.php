@@ -43,6 +43,16 @@ class KnownLink
      * @var string $keywords
      */
     private $keywords;
+    
+    /** 
+     * @var ArrayCollection
+     */
+    private $publications;
+
+    public function __construct()
+    {
+        $this->publications = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -210,5 +220,41 @@ class KnownLink
     public function getKeywordsList()
     {
         return array_unique(explode(', ', $this->keywords));
+    }
+
+    public function getFavoritePublications()
+    {
+        $favorites = array();
+        foreach ($this->publications as $publication) {
+            if ($publication->isFavorite()) {
+                $favorites[] = $publication;
+            }
+        }
+
+        return $favorites;
+    }
+
+    public function addPublication(Publication $publication)
+    {
+        if (!$this->publications->contains($publication)) {
+            $this->publications->add($publication);
+        }
+
+        if (!$publication->getKnownLink()) {
+            $publication->setKnownLink($this);
+        }
+    }
+
+    public function getPublications()
+    {
+        return $this->publications;
+    }
+
+    public function setPublications($publications)
+    {
+        $this->publications = array();
+        foreach ($publications as $publication) {
+            $this->addPublication($publication);
+        }
     }
 }

@@ -50,10 +50,11 @@ class ConnectedController extends Controller
     public function videoAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-
+        $user = $this->get('security.context')->getToken()->getUser();
+        
         $publications = $em
             ->getRepository('ECENetagoraBundle:Publication')
-            ->getVideoPublications()
+            ->getVideoPublications($user->getId())
         ;
 
         return array('publications' => $publications);

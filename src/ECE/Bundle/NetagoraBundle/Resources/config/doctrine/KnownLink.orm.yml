@@ -18,4 +18,9 @@ ECE\Bundle\NetagoraBundle\Entity\KnownLink:
     category:
       targetEntity:   Category
       inversedBy:     knownLinks
+  oneToMany:
+    publications:
+      targetEntity: Publication
+      mappedBy: knownLink
+      cascade: ["persist", "delete", "merge"]
   

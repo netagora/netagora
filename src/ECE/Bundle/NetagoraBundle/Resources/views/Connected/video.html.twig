@@ -5,11 +5,9 @@
     {% for publication in publications %}
         <div class="feeds">
             <div class="one_feed">
-            {% if app.user.picture %}
                 <div class="avatar">
-                    <img src="{{ asset('/avatars/' ~ app.user.picture) }}" alt=""/>
+                        <img src="{{ publication.authorPicture }}" alt=""/>
                 </div>
-            {% endif %}
                 <div class="content">
                     <div class="ids">
                         <div class="pseudo">

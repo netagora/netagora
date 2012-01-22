@@ -21,7 +21,10 @@ class TwitterController extends Controller
     public function refreshAction()
     {
         $user = $this->get('security.context')->getToken()->getUser();
-
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $repository = $em->getRepository('ECENetagoraBundle:Publication');
+        
         $twitter = $this->get('fos_twitter.api');
         $twitter->setOAuthToken(
             $user->getTwitterOAuthToken(),
@@ -34,19 +37,23 @@ class TwitterController extends Controller
         ));
 
         foreach ($timeline as $tweet) {
-            $text = $tweet->text;
-            if (preg_match('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $text, $links)) {
-                $publication = new Publication();
-                $publication->setUser($user);
-                $publication->setSocialNetwork(Publication::TWITTER);
-                $publication->setAuthor($tweet->user->name);
-                $publication->setPublishedAt(new \DateTime($tweet->created_at));
-                $publication->setReference($tweet->id_str);
-                $publication->setContent($tweet->text);
-                $publication->setLinkUrl($links[0]);
-                $em = $this->getDoctrine()->getEntityManager();
-                $em->persist($publication);
-                $em->flush();
+            $publication = $repository->findOneByReference($tweet->id_str);
+            if (!$publication) {
+                $text = $tweet->text;
+                if (preg_match('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $text, $links)) {
+                    $publication = new Publication();
+                    $publication->setUser($user);
+                    $publication->setSocialNetwork(Publication::TWITTER);
+                    $publication->setAuthor($tweet->user->name);
+                    $publication->setPublishedAt(new \DateTime($tweet->created_at));
+                    $publication->setAuthorPicture($tweet->user->profile_image_url_https);
+                    $publication->setReference($tweet->id_str);
+                    $publication->setContent($tweet->text);
+                    $publication->setLinkUrl($links[0]);
+                    $em = $this->getDoctrine()->getEntityManager();
+                    $em->persist($publication);
+                    $em->flush();
+                }
             }
         }
 
