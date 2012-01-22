@@ -4,9 +4,6 @@ namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
- /**
-  * ECE\Bundle\NetagoraBundle\Entity\Publication
-  */
 class Publication
 {
     const TWITTER = 'twitter';
@@ -285,10 +282,6 @@ class Publication
 
     public function changeFavoriteStatus()
     {
-        if ($this->isFavorite()) {
-            $this->isFavorite = false;
-        } else {
-            $this->isFavorite = true;
-        }
+        $this->isFavorite = !$this->isFavorite();
     }
 }

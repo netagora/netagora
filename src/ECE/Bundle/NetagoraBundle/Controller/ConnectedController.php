@@ -125,7 +125,7 @@ class ConnectedController extends Controller
     }
     
     /**
-     * @Route("/favouritePublication", name="favouritePublication")
+     * @Route("/Publication/Favorite", name="favourite_publication")
      * @Template()
      */
     public function favouritePublicationAction(Request $request)
