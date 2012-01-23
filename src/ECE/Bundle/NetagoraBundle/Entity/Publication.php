@@ -284,4 +284,133 @@ class Publication
     {
         $this->isFavorite = !$this->isFavorite();
     }
+    
+    /* Methods for algorithm attach category to a publication */
+    static public function lengthener($url)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+        curl_exec($ch);
+        $result = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . "</br>";
+
+    	return $result;
+    }
+    
+    static public function urlImage($url)
+    {
+        $modele='#image|photo|picture|img#';
+        $test=preg_match($modele, $url, $result);
+        if ($test && $test>0 ){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    static public function urlVideo($url)
+    {
+        $modele='#video|watch|film|trailer#';
+        $test=preg_match($modele, $url, $result);
+        if ($test && $test>0 ){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    static public function urlMusic($url)
+    {
+        $modele='#music|musique|audio|playlist|chanson|song|listen#';
+        $test=preg_match($modele, $url, $result);
+        if ($test && $test>0 ){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    static public function urlMap($url){
+        $modele='#map|foursquare.com|loopt.com|4sq.com#';
+        $test=preg_match($modele, $url, $result);
+        if ($test && $test>0 ){
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    static public function testImage($url)
+    {
+        if (@exif_imagetype($url) != FALSE) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    static public function compare($tab, $argument)
+    {
+        foreach($tab as $text){
+            foreach($argument as $regex){
+                $test = preg_match($regex, $text, $result);
+                if ($test && $test>0){
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
+            }
+        }
+    }
+    
+    static public function getHtmlContent($url)
+    {
+        if (!$code_html=file_get_contents($url)){
+            throw new Exception('Fetching HTML source code failed');
+        }else{
+            return $code_html;
+        }
+
+
+    }
+    
+    static public function search_type($url)
+    {
+        $model = '#<meta property="og:type" content="(.*)".*>#';
+        $code_html = Publication::getHtmlContent($url);
+        preg_match($model, $code_html, $type);
+        return $type;
+    }
+    
+    static public function search_keywords($url)
+    {
+        $model = '#<meta.*name="keywords".*content="(.*?)".*>#';
+        $code_html = Publication::getHtmlContent($url);
+        preg_match($model, $code_html, $keywords);
+        return $keywords;
+    }
+    
+    static public function search_title($url)
+    {
+        $modele_title = '#<title.*?>(.*)</title>#is';
+        $code_html = Publication::getHtmlContent($url);
+        preg_match($modele_title, $code_html, $title);
+        return $title;
+    }
+    
+    static public function search_h1($url)
+    {
+        $modele_title = '#<h1.*?>(.*?)</h1>#is';
+        $code_html = Publication::getHtmlContent($url);
+        preg_match($modele_title, $code_html, $h1);
+        return $h1;
+    }
+    
+    static public function search_h2($url)
+    {
+        $modele_title = '#<h2.*?>(.*?)</h2>#is';
+        $code_html = Publication::getHtmlContent($url);
+        preg_match($modele_title, $code_html, $h2);
+        return $h2;
+    }
 }

@@ -162,4 +162,123 @@ class PublicationRepository extends EntityRepository
 
         return $q->getResult();
     }
+    
+    private function attachCategory()
+    {
+        /* Initialize score */
+        $score = array('image' => 0, 'video' => 0, 'music' => 0, 'location' => 0);
+
+        $url = Publication::lengthener($this->getLinkUrl());
+
+        if (Publication::urlImage($url)) $score['image']++;
+        if (Publication::urlVideo($url)) $score['video']++;
+        if (Publication::urlMusic($url)) $score['music']++;
+        if (Publication::urlMap($url)) $score['location']++;
+        if (Publication::testImage($url)) $score['image'] = $score['image']+2;
+
+
+        $description = Publication::search_description($url);
+        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
+        if (Publication::compare($description, $synonyme)) $score['image'] = $score['image']+1;
+
+        $description = Publication::search_description($url);
+        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
+        if (Publication::compare($description, $synonyme)) $score['video'] = $score['video']+1;
+
+        $description = Publication::search_description($url);
+        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
+        if (Publication::compare($description, $synonyme)) $score['music'] = $score['music']+1;
+
+        $description = Publication::search_description($url);
+        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
+        if (Publication::compare($description, $synonyme)) $score['location'] = $score['location']+1;
+
+        $type = Publication::search_type($url);
+        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
+        if (Publication::compare($type, $synonyme)) $score['image'] = $score['image']+1;
+
+        $type = Publication::search_type($url);
+        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
+        if (Publication::compare($type, $synonyme)) $score['video'] = $score['video']+1;
+
+        $type = Publication::search_type($url);
+        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
+        if (Publication::compare($type, $synonyme)) $score['music'] = $score['music']+1;
+
+        $type = Publication::search_type($url);
+        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
+        if (Publication::compare($type, $synonyme)) $score['location'] = $score['location']+1;
+
+        $keyword = Publication::search_keywords($url);
+        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
+        if (Publication::compare($keyword, $synonyme)) $score['image'] = $score['image']+1;
+
+        $keyword = Publication::search_keywords($url);
+        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
+        if (Publication::compare($keyword, $synonyme)) $score['video'] = $score['video']+1;
+        
+        $keyword = Publication::search_keywords($url);
+        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
+        if (Publication::compare($keyword, $synonyme)) $score['music'] = $score['music']+1;
+
+        $keyword = Publication::search_keywords($url);
+        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
+        if (Publication::compare($keyword, $synonyme)) $score['location'] = $score['location']+1;
+
+        $title = Publication::search_title($url);
+        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
+        if (Publication::compare($title, $synonyme)) $score['image'] = $score['image']+1;
+
+        $title = Publication::search_title($url);
+        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
+        if (Publication::compare($title, $synonyme)) $score['video'] = $score['video']+1;
+
+        $title = Publication::search_title($url);
+        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
+        if (Publication::compare($title, $synonyme)) $score['music'] = $score['music']+1;
+
+        $title = Publication::search_title($url);
+        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
+        if (Publication::compare($title, $synonyme)) $score['location'] = $score['location']+1;
+
+        $h1 = Publication::search_h1($url);
+        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
+        if (Publication::compare($h1, $synonyme)) $score['image'] = $score['image']+1;
+        
+        $h1 = Publication::search_h1($url);
+        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
+        if (Publication::compare($h1, $synonyme)) $score['video'] = $score['video']+1;
+
+        $h1 = Publication::search_h1($url);
+        $synonyme=array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
+        if (compare($h1, $synonyme)) $score['music'] = $score['music']+1;
+
+        $h1 = Publication::search_h1($url);
+        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
+        if (Publication::compare($h1, $synonyme)) $score['location']=$score['location']+1;
+
+        $h2 = Publication::search_h2($url);
+        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
+        if (Publication::compare($h2, $synonyme)) $score['image']=$score['image']+1;
+
+        $h2 = Publication::search_h2($url);
+        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
+        if(Publication::compare($h2, $synonyme)) $score['video']=$score['video']+1;
+
+        $h2 = Publication::search_h2($url);
+        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
+        if (Publication::compare($h2, $synonyme)) $score['music']=$score['music']+1;
+
+        $h2 = Publication::search_h2($url);
+        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
+        if (Publication::compare($h2, $synonyme)) $score['location'] = $score['location']+1;
+        
+        $results = array_keys($score, max($score));
+        
+        echo '<pre>';
+        var_dump($cles);
+        echo '</pre>';
+        die('end algo');
+        
+
 }
