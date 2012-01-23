@@ -7,7 +7,7 @@ class LocationGuesser extends AbstractGuesser
     public function guess()
     {
         if (preg_match_all('#map|foursquare.com|loopt.com|4sq.com#i', $this->url, $matches) > 0) {
-            $this->score += count($matches[0]);
+            $this->score += (self::LOW_CONFIDENCE * count($matches[0]));
         }
     }
 

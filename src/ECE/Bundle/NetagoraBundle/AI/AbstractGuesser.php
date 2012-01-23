@@ -7,6 +7,10 @@ use Symfony\Component\DomCrawler\Crawler;
 
 abstract class AbstractGuesser implements GuesserStrategyInterface
 {
+    const LOW_CONFIDENCE = 1;
+    const MEDIUM_CONFIDENCE = 5;
+    const HIGH_CONFIDENCE = 10;
+
     protected $score;
     protected $url;
     protected $response;

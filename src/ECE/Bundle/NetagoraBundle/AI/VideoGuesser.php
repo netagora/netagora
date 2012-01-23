@@ -7,7 +7,7 @@ class VideoGuesser extends AbstractGuesser
     public function guess()
     {
         if (preg_match_all('#video|watch|film|trailer|movie#i', $this->url, $matches) > 0) {
-            $this->score += count($matches[0]);
+            $this->score += (self::LOW_CONFIDENCE * count($matches[0]));
         }
     }
 
