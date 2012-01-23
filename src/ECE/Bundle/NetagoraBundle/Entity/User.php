@@ -140,7 +140,7 @@ class User implements AdvancedUserInterface
 
     /**
      * @var UploadedFile $file
-     * @Assert\Image(maxSize="156k")
+     * @Assert\Image(maxSize="1M")
      */
     public $file;
 

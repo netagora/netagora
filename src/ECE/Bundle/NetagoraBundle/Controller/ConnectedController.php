@@ -85,9 +85,11 @@ class ConnectedController extends Controller
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($user);
                 $em->flush();
+                $user->file = null;
                 
                 return $this->redirect($this->generateUrl('profile'));
             }
+            $user->file = null;
         }
         return array('form' => $form->createView(), 'user' => $user);
     }
