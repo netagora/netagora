@@ -140,6 +140,28 @@ class PublicationRepository extends EntityRepository
     {
         return $this->getByCategoryType('Music', $user);
     }
+    
+    /**
+     * Returns the Photo publications of a single user.
+     *
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    public function getPhotoPublications($user)
+    {
+        return $this->getByCategoryType('Photo', $user);
+    }
+    
+    /**
+     * Returns the Location publications of a single user.
+     *
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    public function getLocationPublications($user)
+    {
+        return $this->getByCategoryType('Location', $user);
+    }
 
     /**
      * Returns a Publication instance related to a single user.
