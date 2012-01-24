@@ -2,6 +2,12 @@
 
 {% block content %}
     <div class="page_name">Videos Feeds</div>
+    {% if app.user.twitterID %}
+        <p id="refresh_timeline">
+            <a href="{{ path('twitter_refresh') }}">Refresh your timeline</a>
+        </p>
+    {% endif %}
+    
     {% for publication in publications %}
         <div class="feeds">
             <div class="one_feed">
@@ -38,6 +44,7 @@
             </div>
         </div>
     {% else %}
+    <center>
         <p>No publications</p>
         {% if app.user.twitterID %}
             <p>
@@ -48,6 +55,7 @@
                 <a href="{{ path('profile') }}">Connect your Twitter account via your profile</a>
             </p>
         {% endif %}
+    </center>
     {% endfor %}
 
 {% endblock %}

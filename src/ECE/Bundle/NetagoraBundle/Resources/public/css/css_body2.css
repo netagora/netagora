@@ -2019,3 +2019,13 @@ cursor: pointer;
     border: 1px solid #C1C1C1;
     font-size: 16px;
 }
+
+#refresh_timeline{
+    font-size: 20px;
+    margin: 0;
+}
+
+#refresh_timeline a{
+    color: #101212;
+    text-decoration: underline;
+}
