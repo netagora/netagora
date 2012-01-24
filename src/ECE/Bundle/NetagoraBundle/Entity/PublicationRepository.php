@@ -9,6 +9,7 @@ use Doctrine\ORM\Query;
 use ECE\Bundle\NetagoraBundle\AI\CategoryGuesser;
 use ECE\Bundle\NetagoraBundle\Entity\KnownLink;
 use ECE\Bundle\NetagoraBundle\Entity\KnownLinkRepository;
+use Symfony\Component\DomCrawler\Crawler;
 
 class PublicationRepository extends EntityRepository
 {
