@@ -42,7 +42,7 @@ class PublicationRepository extends EntityRepository
                 // Scrap the publication and get the latest uri
                 $response = $this->browser->get($publication->getLinkUrl());
                 $urls = explode("\n", $response->getHeader('Location'));
-                $url = array_pop($uris);
+                $url = array_pop($urls);
 
                 $knownLink = $this
                     ->_em
