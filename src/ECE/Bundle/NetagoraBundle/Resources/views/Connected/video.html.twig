@@ -30,9 +30,9 @@
                     <div class="feed_content display">
                         <div class="text">{{ publication.content }}</div>
                         <div class="link_origin">
-                            <a href="{{ publication.linkUrl }}" target="_blank">{{ publication.linkUrl }}</a>
-                            <br />
-                            <iframe width="850" height="157" src="{{ publication.linkUrl }}" frameborder="0" style="border:0;" allowfullscreen></iframe>
+                            <a href="{{ publication.linkUrl }}" target="_blank">{{ publication.KnownLink.url }}</a>
+                            <br /><br />
+                            <iframe width="850" height="157" src="{{ publication.KnownLink.url }}" frameborder="0" style="border:0;" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
             </p>
         {% else %}
             <p>
-                <a href="{{ path('twitter_login') }}">Connect your Twitter account</a>
+                <a href="{{ path('profile') }}">Connect your Twitter account via your profile</a>
             </p>
         {% endif %}
     {% endfor %}

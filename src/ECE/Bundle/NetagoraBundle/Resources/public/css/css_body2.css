@@ -1223,7 +1223,7 @@ color: #ffffff;
 
 margin: 100px;
 margin-bottom: 20px;
-min-height: 600px;
+min-height: 670px;
 color: #591023;
 overflow: auto;
 }
@@ -2005,4 +2005,17 @@ background-image: linear-gradient(top, #591023, #7F1732);
 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 
 cursor: pointer;
+}
+
+.twitter_connect_link{
+    color: #C70101;
+    font-size: 18px;
+    padding-bottom: 30px;
+    font-size: 18px;
+}
+
+.span_twitter_connect{
+    margin: 0 0 0 354px;
+    border: 1px solid #C1C1C1;
+    font-size: 16px;
 }

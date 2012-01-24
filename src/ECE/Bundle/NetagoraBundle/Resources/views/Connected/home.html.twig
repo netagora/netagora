@@ -161,11 +161,4 @@
     </div>
     </div>
 
-    <span id="twitter_connect">
-        <a href="{{ path('twitter_login') }}">Connect with Twitter</a>
-    </span>
-
-    {{ twitter_anywhere_setConfig('callbackURL', url('twitter_login_check')) }}
-    {{ twitter_anywhere_queue('T("#twitter_connect").connectButton()') }}
-
 {% endblock %}

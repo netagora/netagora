@@ -17,6 +17,17 @@
     <form id="profile" action="{{ path('profile') }}" method="post" {{ form_enctype(form) }}>
           <fieldset>
                 <legend class="subtitle">Profile</legend>
+                {% if app.user.twitterID %}
+                    <span id="twitter_connect" class="span_twitter_connect">
+                        Twitter account linked: <b>{{ app.user.twitterUsername }}</b>
+                    </span>
+                    <br /><br />
+                {% else %}
+                    <span id="twitter_connect" class="span_twitter_connect">
+                        <a class="twitter_connect_link" href="{{ path('twitter_login') }}">Connect your Twitter account</a>
+                    </span>
+                    <br /><br />
+                {% endif %}
                 <ol>
                     {{ form_row(form.username) }}
                     {{ form_row(form.email) }}
@@ -46,5 +57,4 @@
                 <button type=submit>Save changes</button>
           </fieldset>
     </form>
-
 {% endblock %}
