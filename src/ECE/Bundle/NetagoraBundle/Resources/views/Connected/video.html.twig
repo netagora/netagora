@@ -29,10 +29,9 @@
                     </div>
                     <div class="feed_content display">
                         <div class="text">{{ publication.content }}</div>
+                         <br />
                         <div class="link_origin">
-                            <a href="{{ publication.linkUrl }}" target="_blank">{{ publication.KnownLink.url }}</a>
-                            <br /><br />
-                            <iframe width="850" height="157" src="{{ publication.KnownLink.url }}" frameborder="0" style="border:0;" allowfullscreen></iframe>
+                            <b>Link</b>: <a href="{{ publication.linkUrl }}" target="_blank">{{ publication.KnownLink.url }}</a>
                         </div>
                     </div>
                 </div>
