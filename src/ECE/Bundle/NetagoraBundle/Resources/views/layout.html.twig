@@ -9,7 +9,7 @@
         <script type="text/javascript" language="javascript">
         $(document).ready(function() {
                 $('.fav_publication').click(function() {
-                    alert('undo favorite');
+                    //alert('undo favorite');
                     var publication_id = $(this).attr('id');
                     $.ajax({type: "POST",
                        url: "{{ path('favourite_publication') }}",
@@ -24,7 +24,7 @@
                 });
                 
                 $('.fav_icon').click(function() {
-                    alert('put favorite');
+                    //alert('put favorite');
                     var publication_id = $(this).attr('id');
                     $.ajax({type: "POST",
                        url: "{{ path('favourite_publication') }}",

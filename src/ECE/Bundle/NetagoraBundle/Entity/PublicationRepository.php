@@ -164,6 +164,28 @@ class PublicationRepository extends EntityRepository
     }
 
     /**
+     * Returns the Other publications of a single user.
+     *
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    public function getOtherPublications($user)
+    {
+        return $this->getByCategoryType('Other', $user);
+    }
+    
+    /**
+     * Returns all publications of a single user.
+     *
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    public function getAllPublications($user)
+    {
+        return $this->getByUser($user);
+    }
+
+    /**
      * Returns a Publication instance related to a single user.
      *
      * @param integer $id   The publication identifier
@@ -249,6 +271,23 @@ class PublicationRepository extends EntityRepository
             ->andWhere('c.type = :type')
             ->orderBy('p.publishedAt', 'desc')
             ->setParameter('type', $type)
+            ->getQuery()
+        ;
+
+        return $q->getResult();
+    }
+    
+    /**
+     * Returns the publications of a single user.
+     *
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    private function getByUser($user)
+    {
+        $q = $this
+            ->getUserPublicationQueryBuilder($user)
+            ->orderBy('p.publishedAt', 'desc')
             ->getQuery()
         ;
 

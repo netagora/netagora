@@ -1623,7 +1623,7 @@ cursor: pointer;
 /* ******* ******* START ***** DISPLAY OF SHARING IMGS FOR TWITTER ******* ******* */
 .feeds .one_feed .content .ids .share_feed{
 display: inline-block;
-width: 200px;
+width: 265px;
 vertical-align: middle;
 
 text-align: center;

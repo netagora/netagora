@@ -31,6 +31,7 @@
                             <a class="t_reply" href="https://twitter.com/intent/tweet?in_reply_to={{ publication.reference }}" target="_blank"></a>
                             <a class="t_favorite" href="https://twitter.com/intent/favorite?tweet_id={{ publication.reference }}" target="_blank"> </a>
                             <a class="t_retweet" href="https://twitter.com/intent/retweet?tweet_id={{ publication.reference }}" target="_blank"> </a>
+                         Published at: {{ publication.publishedAt|date("d/m/Y g:ia") }}
                         </div>
                     </div>
                     <div class="feed_content display">

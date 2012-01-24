@@ -1,31 +1,61 @@
 {% extends "ECENetagoraBundle::layout.html.twig" %}
 
 {% block content %}
-    <div class="page_name">Locations</div>
-    {% if publications|length > 0 %}
-        {% for publication in publications %}
-            <div class="feeds">
-                    <div class="one_feed">
-                          <div class="avatar">
-                                <img src="{{user.picture}}" />
-                          </div>                                    
-                          <div class="content">
-                                <div class="ids">
-                                      <div class="pseudo"><a href="https://twitter.com/#!/{{publication.author}}" target="_blank">{{publication.author}}</a></div>
-                                      <div class="{{networking}}"></div>
-                                      <div class="fav_icon"></div>
-                                      <div class="share_feed">{{social_buttons|raw}}</div>
-                                </div>
-                                <div class="feed_content">
-                                      <div class="text">{{publication.content}}</div>
-                                      <div class="link_origin {{display}}"><a href="{{publication.linkUrl}}" target="_blank">{{publication.linkUrl}}</a></div>
-                                </div>
-                          </div>
-                    </div>
-            </div>
-        {% endfor %}
-    {% else %}
-        No publications
+    <div class="page_name">Location Feeds</div>
+    {% if app.user.twitterID %}
+        <p id="refresh_timeline">
+            <a href="{{ path('twitter_refresh') }}">Refresh your timeline</a>
+        </p>
     {% endif %}
     
+    {% for publication in publications %}
+        <div class="feeds">
+            <div class="one_feed">
+                <div class="avatar">
+                    <img src="{{ publication.authorPicture }}" alt=""/>
+                </div>
+                <div class="content">
+                    <div class="ids">
+                        <div class="pseudo">
+                            <a href="https://twitter.com/#!/{{ publication.authorScreenName }}" target="_blank">
+                                {{ publication.author }}
+                            </a>
+                        </div>
+                        <div class="{{ publication.socialNetwork }}"></div>
+                        {% if (publication.favorite) %}
+                            <div id="{{ publication.id }}" class="fav_publication"></div>
+                        {% else %}
+                            <div id="{{ publication.id }}" class="fav_icon"></div>
+                        {% endif %}
+                        <div class="share_feed">
+                            <a class="t_reply" href="https://twitter.com/intent/tweet?in_reply_to={{ publication.reference }}" target="_blank"></a>
+                            <a class="t_favorite" href="https://twitter.com/intent/favorite?tweet_id={{ publication.reference }}" target="_blank"> </a>
+                            <a class="t_retweet" href="https://twitter.com/intent/retweet?tweet_id={{ publication.reference }}" target="_blank"> </a>
+                          Published at: {{ publication.publishedAt|date("d/m/Y g:ia") }}
+                        </div>
+                    </div>
+                    <div class="feed_content display">
+                        <div class="text">{{publication.content}}</div>
+                          <div class="link_origin display">
+                              <a href="{{ publication.KnownLink.url }}" target="_blank">{{ publication.KnownLink.url }}</a>
+                           </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+    <center>
+        <p>No publications</p>
+        {% if app.user.twitterID %}
+            <p>
+                <a href="{{ path('twitter_refresh') }}">Refresh your timeline</a>
+            </p>
+        {% else %}
+            <p>
+                <a href="{{ path('profile') }}">Connect your Twitter account via your profile</a>
+            </p>
+        {% endif %}
+    </center>
+    {% endfor %}
+
 {% endblock %}

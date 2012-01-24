@@ -141,7 +141,15 @@ class ConnectedController extends Controller
      */
     public function locationSitesAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $publications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getLocationPublications($user->getId())
+        ;
+
+        return array('publications' => $publications);
     }
     
     /**
@@ -150,7 +158,15 @@ class ConnectedController extends Controller
      */
     public function otherAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $publications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getOtherPublications($user->getId())
+        ;
+
+        return array('publications' => $publications);
     }
     
     /**
@@ -159,7 +175,15 @@ class ConnectedController extends Controller
      */
     public function feedsAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $publications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getAllPublications($user->getId())
+        ;
+
+        return array('publications' => $publications);
     }
     
     /**
