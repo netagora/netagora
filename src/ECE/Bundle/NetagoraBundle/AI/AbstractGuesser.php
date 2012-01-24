@@ -44,15 +44,18 @@ abstract class AbstractGuesser implements GuesserStrategyInterface
     protected function analyzeContentTag($selector, $pattern = null, $confidence = self::LOW_CONFIDENCE)
     {
         $results = array();
-        $filter = function ($node, $i) use ($selector, $pattern, $confidence, &$results) {
+        $score = 0;
+        $filter = function ($node, $i) use ($selector, $pattern, $confidence, &$score, &$results) {
             $content = (string) $node->nodeValue;
             $results[] = $content;
             if (null !== $pattern && preg_match_all($pattern, $content, $matches) > 0) {
-                $this->scores += ($confidence * count($matches[0]));
+                $score += ($confidence * count($matches[0]));
             }
         };
 
         $this->crawler->filter($selector)->each($filter);
+
+        $this->score += $score;
 
         return $results;
     }
@@ -63,7 +66,7 @@ abstract class AbstractGuesser implements GuesserStrategyInterface
         $crawler = $this->crawler->filter($selector);
 
         if ($crawler->count() > 0) {
-            $content = $crawler->node(0)->attr('content');
+            $content = $crawler->eq(0)->attr('content');
         }
 
         if (!empty($content) && null !== $pattern) {

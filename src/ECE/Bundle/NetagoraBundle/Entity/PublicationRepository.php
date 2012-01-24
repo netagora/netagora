@@ -41,7 +41,13 @@ class PublicationRepository extends EntityRepository
             if (!in_array($publication->getReference(), $references)) {
 
                 // Scrap the publication and get the latest uri
-                $response = $this->browser->get($publication->getLinkUrl());
+                try {
+                    $response = $this->browser->get($publication->getLinkUrl());
+                } catch (\Exception $e) {
+                    // The Http request failed...
+                    continue;
+                }
+                
                 $urls = explode("\n", $response->getHeader('Location'));
                 $url = array_pop($urls);
 
@@ -62,6 +68,7 @@ class PublicationRepository extends EntityRepository
                 $crawler = new Crawler();
                 $crawler->addContent($response->getContent());
                 $guesser = new CategoryGuesser($url, $response, $crawler);
+                $guesser->guess();
 
                 $category = $this
                     ->_em
@@ -69,11 +76,16 @@ class PublicationRepository extends EntityRepository
                     ->findOneByType($guesser->getCategory())
                 ;
 
+                /*if (null === $category) {
+                    var_dump($guesser->getScores());die;
+                    echo $guesser->getCategory();die;
+                }*/
+
                 $knownLink = new KnownLink();
                 $knownLink->setCategory($category);
                 $knownLink->setUrl($url);
                 $knownLink->fromArray($guesser->getMetadata());
-                $publication->setKnownLink($publication);
+                $publication->setKnownLink($knownLink);
 
                 $this->_em->persist($knownLink);
                 $this->_em->persist($publication);

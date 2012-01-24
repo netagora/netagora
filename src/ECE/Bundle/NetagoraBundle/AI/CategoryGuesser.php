@@ -24,6 +24,11 @@ class CategoryGuesser extends AbstractGuesser
         ;
     }
 
+    public function getName()
+    {
+        return 'Category';
+    }
+
     public function getMetadata()
     {
         return array(
@@ -42,17 +47,17 @@ class CategoryGuesser extends AbstractGuesser
         return max($this->scores);
     }
 
-    public function getCategory()
+    public function getCategory($default = 'Other')
     {
         $keys = array_keys($this->scores, $this->getScore());
 
         // Equalty, so Other by default
         if (0 === count($keys) || count($keys) > 1) {
-            return 'Other';
+            return $default;
         }
 
         // The category (guesser name) whose score is the highest among others.
-        return $this->scores[current($keys)];
+        return current($keys);
     }
 
     public function addGuesser(GuesserStrategyInterface $guesser)
@@ -66,13 +71,12 @@ class CategoryGuesser extends AbstractGuesser
     {
         foreach ($this->guessers as $guesser) {
             $guesser->guess();
+            $this->scores[$guesser->getName()] = $guesser->getScore();
         }
     }
 
     public function getScores()
     {
-        foreach ($this->guessers as $guesser) {
-            $this->scores[$guesser->getName()] = $this->getScore();
-        }
+        return $this->scores;
     }
 }
