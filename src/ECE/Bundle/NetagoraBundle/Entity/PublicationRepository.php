@@ -60,7 +60,7 @@ class PublicationRepository extends EntityRepository
 
                 // Otherwise, we need to create a new KnownLink and guess the category
                 $crawler = new Crawler();
-                $crawler->setContent($response->getContent());
+                $crawler->addContent($response->getContent());
                 $guesser = new CategoryGuesser($url, $response, $crawler);
 
                 $category = $this
