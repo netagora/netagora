@@ -1,8 +1,7 @@
 {% extends "ECENetagoraBundle::layout.html.twig" %}
 
 {% block content %}
-    <div class="page_name">Music</div>
-    
+    <div class="page_name">Music Feeds</div>
     {% if app.user.twitterID %}
         <p id="refresh_timeline">
             <a href="{{ path('twitter_refresh') }}">Refresh your timeline</a>
@@ -18,7 +17,7 @@
                 <div class="content">
                     <div class="ids">
                         <div class="pseudo">
-                            <a href="https://twitter.com/#!/{{ publication.author }}" target="_blank">
+                            <a href="https://twitter.com/#!/{{ publication.authorScreenName }}" target="_blank">
                                 {{ publication.author }}
                             </a>
                         </div>
@@ -58,3 +57,5 @@
         {% endif %}
     </center>
     {% endfor %}
+
+{% endblock %}
