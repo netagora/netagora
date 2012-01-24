@@ -42,6 +42,7 @@ class TwitterLoader
         $publication->setUser($this->user);
         $publication->setSocialNetwork(Publication::TWITTER);
         $publication->setAuthor($tweet->user->name);
+        $publication->setAuthorScreenName($tweet->user->screen_name);
         $publication->setPublishedAt(new \DateTime($tweet->created_at));
         $publication->setAuthorPicture($tweet->user->profile_image_url_https);
         $publication->setReference($tweet->id_str);

@@ -107,7 +107,15 @@ class ConnectedController extends Controller
      */
     public function musicAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $publications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getMusicPublications($user->getId())
+        ;
+
+        return array('publications' => $publications);
     }
     
     /**

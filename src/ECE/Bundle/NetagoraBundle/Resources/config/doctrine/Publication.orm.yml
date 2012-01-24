@@ -10,6 +10,7 @@ ECE\Bundle\NetagoraBundle\Entity\Publication:
     socialNetwork:       { type: string, length: 10, column: social_network, nullable: true }
     author:              { type: string, length: 50 }
     authorPicture:       { type: string, length: 200 }
+    authorScreenName:    { type: string, length: 100 }
     publishedAt:         { type: datetime, column: published_at }
     reference:           { type: string, length: 200 }
     content:             { type: text }

@@ -37,6 +37,11 @@ class Publication
      * @var string $authorPicture
      */
     private $authorPicture;
+    
+    /**
+     * @var string $authorScreenName
+     */
+    private $authorScreenName;
 
     /**
      * @var datetime $publishedAt
@@ -183,6 +188,26 @@ class Publication
     public function getAuthorPicture()
     {
         return $this->authorPicture;
+    }
+
+    /**
+     * Set authorScreenName
+     *
+     * @param string $authorScreenName
+     */
+    public function setAuthorScreenName($authorScreenName)
+    {
+        $this->authorScreenName = $authorScreenName;
+    }
+
+    /**
+     * Get authorScreenName
+     *
+     * @return string 
+     */
+    public function getAuthorScreenName()
+    {
+        return $this->authorScreenName;
     }
 
     /**
