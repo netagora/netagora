@@ -2,13 +2,13 @@
 
 namespace ECE\Bundle\NetagoraBundle\Tests\AI;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 abstract class AbstractGuesserTestCase extends \PHPUnit_Framework_TestCase
 {
     protected function getMockCrawler()
     {
-        $mock = $this->getMock('Symfony\Component\DomCrawler\Crawler');
-
-        return $mock;
+        return new Crawler();
     }
 
     protected function getMockResponse()

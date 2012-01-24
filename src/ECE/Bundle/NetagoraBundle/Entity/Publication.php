@@ -288,19 +288,37 @@ class Publication
     /* Methods for algorithm attach category to a publication */
     static public function lengthener($url)
     {
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-        curl_exec($ch);
-        $result = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL) . "</br>";
-
-    	return $result;
+        $res = array();
+        $options = array( 
+            CURLOPT_RETURNTRANSFER => true,     // return web page 
+            CURLOPT_HEADER         => true,    // do not return headers 
+            CURLOPT_FOLLOWLOCATION => false,     // follow redirects 
+            CURLOPT_USERAGENT      => "spider", // who am i 
+            CURLOPT_AUTOREFERER    => true,     // set referer on redirect 
+            CURLOPT_CONNECTTIMEOUT => 120,      // timeout on connect 
+            CURLOPT_TIMEOUT        => 120,      // timeout on response 
+            CURLOPT_MAXREDIRS      => 10,       // stop after 10 redirects 
+        ); 
+        $ch      = curl_init( $url ); 
+        curl_setopt_array( $ch, $options ); 
+        $content = curl_exec( $ch ); 
+        $err     = curl_errno( $ch ); 
+        $errmsg  = curl_error( $ch ); 
+        $header  = curl_getinfo( $ch ); 
+        curl_close( $ch );
+        $headers = explode("\n", $content);
+        foreach ($headers as $header) {
+            if ('Location' === substr($header, 0, 8)) {
+            $url = substr($header, 10);
+            }
+        }
+    	return $url;
     }
     
     static public function urlImage($url)
     {
-        $modele='#image|photo|picture|img#';
-        $test=preg_match($modele, $url, $result);
+        $modele = '#image|photo|picture|img#';
+        $test   = preg_match($modele, $url, $result);
         if ($test && $test>0 ){
             return TRUE;
         } else {
@@ -310,9 +328,10 @@ class Publication
     
     static public function urlVideo($url)
     {
-        $modele='#video|watch|film|trailer#';
-        $test=preg_match($modele, $url, $result);
-        if ($test && $test>0 ){
+        $modele = '#video|watch|film|trailer#';
+        $test   = preg_match($modele, $url, $result);
+        
+        if ($test && $test>0){
             return TRUE;
         } else {
             return FALSE;
@@ -321,9 +340,10 @@ class Publication
     
     static public function urlMusic($url)
     {
-        $modele='#music|musique|audio|playlist|chanson|song|listen#';
-        $test=preg_match($modele, $url, $result);
-        if ($test && $test>0 ){
+        $modele = '#music|musique|audio|playlist|chanson|song|listen#';
+        $test   = preg_match($modele, $url, $result);
+        
+        if ($test && $test>0){
             return TRUE;
         } else {
             return FALSE;
@@ -333,6 +353,7 @@ class Publication
     static public function urlMap($url){
         $modele='#map|foursquare.com|loopt.com|4sq.com#';
         $test=preg_match($modele, $url, $result);
+        
         if ($test && $test>0 ){
             return TRUE;
         } else {
@@ -342,13 +363,9 @@ class Publication
     
     static public function testImage($url)
     {
-        if (@exif_imagetype($url) != FALSE) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
+        return false !== @exif_imagetype($url);
     }
-    
+
     static public function compare($tab, $argument)
     {
         foreach($tab as $text){
@@ -365,18 +382,17 @@ class Publication
     
     static public function getHtmlContent($url)
     {
-        if (!$code_html=file_get_contents($url)){
-            throw new Exception('Fetching HTML source code failed');
-        }else{
-            return $code_html;
+        try {
+            return file_get_contents($url);
+        } catch (\Exception $e) {
+            var_dump($e);
+            return false;
         }
-
-
     }
-    
+
     static public function search_type($url)
     {
-        $model = '#<meta property="og:type" content="(.*)".*>#';
+        $model     = '#<meta property="og:type" content="(.*)".*>#';
         $code_html = Publication::getHtmlContent($url);
         preg_match($model, $code_html, $type);
         return $type;
@@ -384,7 +400,7 @@ class Publication
     
     static public function search_keywords($url)
     {
-        $model = '#<meta.*name="keywords".*content="(.*?)".*>#';
+        $model     = '#<meta.*name="keywords".*content="(.*?)".*>#';
         $code_html = Publication::getHtmlContent($url);
         preg_match($model, $code_html, $keywords);
         return $keywords;
@@ -393,7 +409,7 @@ class Publication
     static public function search_title($url)
     {
         $modele_title = '#<title.*?>(.*)</title>#is';
-        $code_html = Publication::getHtmlContent($url);
+        $code_html    = Publication::getHtmlContent($url);
         preg_match($modele_title, $code_html, $title);
         return $title;
     }
@@ -401,7 +417,7 @@ class Publication
     static public function search_h1($url)
     {
         $modele_title = '#<h1.*?>(.*?)</h1>#is';
-        $code_html = Publication::getHtmlContent($url);
+        $code_html    = Publication::getHtmlContent($url);
         preg_match($modele_title, $code_html, $h1);
         return $h1;
     }
@@ -409,8 +425,18 @@ class Publication
     static public function search_h2($url)
     {
         $modele_title = '#<h2.*?>(.*?)</h2>#is';
-        $code_html = Publication::getHtmlContent($url);
+        $code_html    = Publication::getHtmlContent($url);
         preg_match($modele_title, $code_html, $h2);
         return $h2;
+    }
+    
+    static public function search_description($url)
+    {
+        $model     = '#.*<meta name="description" content="(.*)".*>.*#';
+        $code_html = Publication::getHtmlContent($url);
+        echo $code_html;
+        die;
+        preg_match($model, $code_html, $description);
+        return $description;
     }
 }

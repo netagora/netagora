@@ -2,6 +2,9 @@ imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
 
+parameters:
+    buzz.client.class: Buzz\Client\FileGetContents
+
 framework:
     #esi:             ~
     #translator:      { fallback: %locale% }

@@ -7,12 +7,12 @@ ECE\Bundle\NetagoraBundle\Entity\KnownLink:
       type: integer
       id: true
       generator:         { strategy: AUTO }
-    title:               { type: string, length: 200 }
-    h1:                  { type: string, length: 200 }
-    h2:                  { type: string, length: 200 }
-    tags:                { type: string, length: 200 }
+    title:               { type: string, length: 200, nullable: true }
+    h1:                  { type: string, length: 200, nullable: true }
+    h2:                  { type: string, length: 200, nullable: true }
+    tags:                { type: string, length: 200, nullable: true }
     url:                 { type: string, length: 200 }
-    keywords:            { type: string, length: 200 }
+    keywords:            { type: string, length: 200, nullable: true }
   lifecycleCallbacks:    {}
   manyToOne:
     category:

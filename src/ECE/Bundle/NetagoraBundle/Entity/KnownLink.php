@@ -2,6 +2,8 @@
 
 namespace ECE\Bundle\NetagoraBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * ECE\Bundle\NetagoraBundle\Entity\KnownLink
  */
@@ -147,15 +149,11 @@ class KnownLink
     /**
      * Set tags
      *
-     * @param string|array $tags
+     * @param string $tags
      */
     public function setTags($tags)
     {
-        if (is_array($tags)) {
-            $tags = implode(', ', $tags);
-        }
-
-        $this->tags = $tags;
+        $this->tags = trim($tags);
     }
 
     /**
@@ -200,11 +198,7 @@ class KnownLink
      */
     public function setKeywords($keywords)
     {
-        if (is_array($keywords)) {
-            $keywords = implode(', ', $keywords);
-        }
-
-        $this->keywords = $keywords;
+        $this->keywords = trim($keywords);
     }
 
     /**
@@ -215,6 +209,29 @@ class KnownLink
     public function getKeywords()
     {
         return $this->keywords;
+    }
+
+    public function fromArray(array $data)
+    {
+        if (!empty($data['title'])) {
+            $this->title = $data['title'];
+        }
+
+        if (!empty($data['h1'])) {
+            $this->h1 = $data['h1'];
+        }
+
+        if (!empty($data['h2'])) {
+            $this->h2 = $data['h2'];
+        }
+
+        if (!empty($data['meta_keywords'])) {
+            $this->setKeywords($data['meta_keywords']);
+        }
+
+        if (!empty($data['meta_description'])) {
+            $this->setTags($data['meta_description']);
+        }
     }
 
     public function getKeywordsList()

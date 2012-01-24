@@ -29,20 +29,49 @@ abstract class AbstractGuesser implements GuesserStrategyInterface
         return $this->score;
     }
 
-    /*protected function guessOther()
+    public function getMetadata()
     {
-        if (0 === array_sum($this->scores)) {
-            $this->resetScores();
-            $this->incrementScore(static::TYPE_OTHER);
-            return;
+        return $this->metadata;
+    }
+
+    protected function analyzeUrl($pattern, $confidence = self::LOW_CONFIDENCE)
+    {
+        if (preg_match_all($pattern, $this->url, $matches) > 0) {
+            $this->score += ($confidence * count($matches[0]));
+        }
+    }
+
+    protected function analyzeContentTag($selector, $pattern = null, $confidence = self::LOW_CONFIDENCE)
+    {
+        $results = array();
+        $filter = function ($node, $i) use ($selector, $pattern, $confidence, &$results) {
+            $content = (string) $node->nodeValue;
+            $results[] = $content;
+            if (null !== $pattern && preg_match_all($pattern, $content, $matches) > 0) {
+                $this->scores += ($confidence * count($matches[0]));
+            }
+        };
+
+        $this->crawler->filter($selector)->each($filter);
+
+        return $results;
+    }
+
+    protected function analyzeMetaTag($selector, $pattern = null, $confidence = self::LOW_CONFIDENCE)
+    {
+        $content = '';
+        $crawler = $this->crawler->filter($selector);
+
+        if ($crawler->count() > 0) {
+            $content = $crawler->node(0)->attr('content');
         }
 
-        $max = max($this->scores);
-        $values = array_count_values($this->scores);
-        // Check for an equalty
-        if ($values[$max] > 1) {
-            $this->resetScores();
-            $this->incrementScore(static::TYPE_OTHER);
+        if (!empty($content) && null !== $pattern) {
+            if (preg_match_all($pattern, $content, $matches) > 0) {
+                $this->score += ($confidence * count($matches[0]));
+            }
         }
-    }*/
+
+        return $content;
+    }
 }

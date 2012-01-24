@@ -4,12 +4,12 @@ namespace ECE\Bundle\NetagoraBundle\AI;
 
 class PhotoGuesser extends AbstractGuesser
 {
+    const PATTERN = '#image|photo|picture|img#i';
+
     public function guess()
     {
-        // Check the image url: low confidence
-        if (preg_match_all('#image|photo|picture|img#i', $this->url, $matches) > 0) {
-            $this->score += (self::LOW_CONFIDENCE * count($matches[0]));
-        }
+        // Url analysis: low confidence
+        $this->analyzeUrl(self::PATTERN);
 
         // Check the response content type: medium confidence
         if (preg_match('#image/(jpe?g|png|gif)#i', $this->response->getHeader('Content-Type'))) {
@@ -21,6 +21,18 @@ class PhotoGuesser extends AbstractGuesser
         if (is_array($infos) && in_array($infos[2], array(IMG_GIF, IMG_PNG, IMG_JPG, IMG_JPEG))) {
             $this->score += self::HIGH_CONFIDENCE;
         }
+
+        // Page title analysis: low confidence
+        $this->analyzeContentTag('title', self::PATTERN);
+
+        // h1 & h2 analysis: low confidence
+        $this->analyzeContentTag('h1', self::PATTERN);
+        $this->analyzeContentTag('h2', self::PATTERN);
+
+        // Meta tags analysis: low confidence
+        $this->analyzeMetaTag('meta[name="description"]', self::PATTERN);
+        $this->analyzeMetaTag('meta[name="og:type"]', self::PATTERN);
+        $this->analyzeMetaTag('meta[name="keywords"]', self::PATTERN);
     }
 
     public function getName()

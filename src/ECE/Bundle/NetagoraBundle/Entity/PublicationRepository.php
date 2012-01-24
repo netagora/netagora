@@ -2,22 +2,79 @@
 
 namespace ECE\Bundle\NetagoraBundle\Entity;
 
+use Buzz\Browser;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query;
+use ECE\Bundle\NetagoraBundle\AI\CategoryGuesser;
+use ECE\Bundle\NetagoraBundle\Entity\KnownLink;
+use ECE\Bundle\NetagoraBundle\Entity\KnownLinkRepository;
 
 class PublicationRepository extends EntityRepository
 {
+    private $browser;
+
+    public function setBrowser($browser)
+    {
+        $this->browser = $browser;
+    }
+
+    // Check de l'url dans la table known link
+    // Si déjà utilisée, on affecte le KnownLink dans la publication
+    // Sinon on crée un nouveau KnowLink
+    //      -> on lance le CategoryGuesser
+    //      -> on trouve la catégorie associé au KnownLink
+    //      -> on remplit le KnownLink
+    //      -> on persiste et flush la publication
     public function save(array $publications)
     {
         if (0 === count($publications)) {
             return;
         }
 
+        $repository = $this->_em->getRepository('ECENetagoraBundle:KnownLink');
+
         $references = $this->getExistingReferences($publications);
 
         foreach ($publications as $publication) {
             if (!in_array($publication->getReference(), $references)) {
+
+                // Scrap the publication and get the latest uri
+                $response = $this->browser->get($publication->getLinkUrl());
+                $urls = explode("\n", $response->getHeader('Location'));
+                $url = array_pop($uris);
+
+                $knownLink = $this
+                    ->_em
+                    ->getRepository('ECENetagoraBundle:KnownLink')
+                    ->findOneByUrl($url)
+                ;
+
+                // We found a corresponding KnownLink that we can affect to the publication
+                if ($knownLink) {
+                    $publication->setKnownLink();
+                    $this->_em->persist($publication);
+                    continue;
+                }
+
+                // Otherwise, we need to create a new KnownLink and guess the category
+                $crawler = new Crawler();
+                $crawler->setContent($response->getContent());
+                $guesser = new CategoryGuesser($url, $response, $crawler);
+
+                $category = $this
+                    ->_em
+                    ->getRepository('ECENetagoraBundle:Category')
+                    ->findOneByType($guesser->getCategory())
+                ;
+
+                $knownLink = new KnownLink();
+                $knownLink->setCategory($category);
+                $knownLink->setUrl($url);
+                $knownLink->fromArray($guesser->getMetadata());
+                $publication->setKnownLink($publication);
+
+                $this->_em->persist($knownLink);
                 $this->_em->persist($publication);
             }
         }
@@ -162,123 +219,4 @@ class PublicationRepository extends EntityRepository
 
         return $q->getResult();
     }
-    
-    private function attachCategory()
-    {
-        /* Initialize score */
-        $score = array('image' => 0, 'video' => 0, 'music' => 0, 'location' => 0);
-
-        $url = Publication::lengthener($this->getLinkUrl());
-
-        if (Publication::urlImage($url)) $score['image']++;
-        if (Publication::urlVideo($url)) $score['video']++;
-        if (Publication::urlMusic($url)) $score['music']++;
-        if (Publication::urlMap($url)) $score['location']++;
-        if (Publication::testImage($url)) $score['image'] = $score['image']+2;
-
-
-        $description = Publication::search_description($url);
-        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
-        if (Publication::compare($description, $synonyme)) $score['image'] = $score['image']+1;
-
-        $description = Publication::search_description($url);
-        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
-        if (Publication::compare($description, $synonyme)) $score['video'] = $score['video']+1;
-
-        $description = Publication::search_description($url);
-        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
-        if (Publication::compare($description, $synonyme)) $score['music'] = $score['music']+1;
-
-        $description = Publication::search_description($url);
-        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
-        if (Publication::compare($description, $synonyme)) $score['location'] = $score['location']+1;
-
-        $type = Publication::search_type($url);
-        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
-        if (Publication::compare($type, $synonyme)) $score['image'] = $score['image']+1;
-
-        $type = Publication::search_type($url);
-        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
-        if (Publication::compare($type, $synonyme)) $score['video'] = $score['video']+1;
-
-        $type = Publication::search_type($url);
-        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
-        if (Publication::compare($type, $synonyme)) $score['music'] = $score['music']+1;
-
-        $type = Publication::search_type($url);
-        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
-        if (Publication::compare($type, $synonyme)) $score['location'] = $score['location']+1;
-
-        $keyword = Publication::search_keywords($url);
-        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
-        if (Publication::compare($keyword, $synonyme)) $score['image'] = $score['image']+1;
-
-        $keyword = Publication::search_keywords($url);
-        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
-        if (Publication::compare($keyword, $synonyme)) $score['video'] = $score['video']+1;
-        
-        $keyword = Publication::search_keywords($url);
-        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
-        if (Publication::compare($keyword, $synonyme)) $score['music'] = $score['music']+1;
-
-        $keyword = Publication::search_keywords($url);
-        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
-        if (Publication::compare($keyword, $synonyme)) $score['location'] = $score['location']+1;
-
-        $title = Publication::search_title($url);
-        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
-        if (Publication::compare($title, $synonyme)) $score['image'] = $score['image']+1;
-
-        $title = Publication::search_title($url);
-        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
-        if (Publication::compare($title, $synonyme)) $score['video'] = $score['video']+1;
-
-        $title = Publication::search_title($url);
-        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
-        if (Publication::compare($title, $synonyme)) $score['music'] = $score['music']+1;
-
-        $title = Publication::search_title($url);
-        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
-        if (Publication::compare($title, $synonyme)) $score['location'] = $score['location']+1;
-
-        $h1 = Publication::search_h1($url);
-        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
-        if (Publication::compare($h1, $synonyme)) $score['image'] = $score['image']+1;
-        
-        $h1 = Publication::search_h1($url);
-        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
-        if (Publication::compare($h1, $synonyme)) $score['video'] = $score['video']+1;
-
-        $h1 = Publication::search_h1($url);
-        $synonyme=array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
-        if (compare($h1, $synonyme)) $score['music'] = $score['music']+1;
-
-        $h1 = Publication::search_h1($url);
-        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
-        if (Publication::compare($h1, $synonyme)) $score['location']=$score['location']+1;
-
-        $h2 = Publication::search_h2($url);
-        $synonyme = array('#.*image.*#', '#.*img.*#', '#.*photo.*#', '#.*picture.*#');
-        if (Publication::compare($h2, $synonyme)) $score['image']=$score['image']+1;
-
-        $h2 = Publication::search_h2($url);
-        $synonyme = array('#.*video.*#', '#.*watch.*#', '#.*film.*#', '#.*trailer.*#');
-        if(Publication::compare($h2, $synonyme)) $score['video']=$score['video']+1;
-
-        $h2 = Publication::search_h2($url);
-        $synonyme = array('#.*music.*#', '#.*musique.*#', '#.*audio.*#', '#.*playlist.*#','#.*chanson.*#', '#.*song.*#', '#.*listen.*#');
-        if (Publication::compare($h2, $synonyme)) $score['music']=$score['music']+1;
-
-        $h2 = Publication::search_h2($url);
-        $synonyme = array('#.*map.*#', '#.*foursquare\.com.*#', '#.*loopt\.com.*#', '#.*4sqp\.com.*#');
-        if (Publication::compare($h2, $synonyme)) $score['location'] = $score['location']+1;
-        
-        $results = array_keys($score, max($score));
-        
-        echo '<pre>';
-        var_dump($cles);
-        echo '</pre>';
-        die('end algo');
-        
-
 }

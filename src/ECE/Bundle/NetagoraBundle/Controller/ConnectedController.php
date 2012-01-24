@@ -49,18 +49,8 @@ class ConnectedController extends Controller
         $loader->load($twitter->getHomeTimeline());
 
         $publications = $loader->getPublications();
+        $repository->setBrowser($this->get('buzz'));
         $repository->save($publications);
-
-        /*
-        Attach kown link and category to the publications
-        
-        Find right Category
-            Appeler main(Publication $publication)
-
-                 Check the $publication->LinkUrl isn't in DB (KnownLink)
-                     if in => attribuber le KnownLink correspondant à la publication
-                     Sinon faire la tambouille
-        */
 
         return $this->redirect($this->generateUrl('home'));
     }

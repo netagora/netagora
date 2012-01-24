@@ -56,6 +56,7 @@ class AccountController extends Controller
                 return $this->redirect($this->generateUrl('home'));
             }
         }
+        $user->file = null;
 
         return array('form' => $form->createView());
     }
