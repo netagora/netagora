@@ -184,6 +184,17 @@ class PublicationRepository extends EntityRepository
     {
         return $this->getByUser($user);
     }
+    
+    /**
+     * Returns all publications of a single user.
+     *
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    public function getFavoritesPublications($user)
+    {
+        return $this->getByFavorite($user);
+    }
 
     /**
      * Returns a Publication instance related to a single user.
@@ -287,6 +298,24 @@ class PublicationRepository extends EntityRepository
     {
         $q = $this
             ->getUserPublicationQueryBuilder($user)
+            ->orderBy('p.publishedAt', 'desc')
+            ->getQuery()
+        ;
+
+        return $q->getResult();
+    }
+    
+    /**
+     * Returns the publications of a single user favourited.
+     *
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    private function getByFavorite($user)
+    {
+        $q = $this
+            ->getUserPublicationQueryBuilder($user)
+            ->andWhere('p.isFavorite = 1')
             ->orderBy('p.publishedAt', 'desc')
             ->getQuery()
         ;

@@ -192,7 +192,15 @@ class ConnectedController extends Controller
      */
     public function favouritesAction()
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+
+        $publications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getFavoritesPublications($user->getId())
+        ;
+
+        return array('publications' => $publications);
     }
     
     /**
