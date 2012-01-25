@@ -1257,7 +1257,7 @@ p.text{
 
 margin: 10px;
 padding: 10px;
-
+font-size: 16px;
 width: 800px;
 
 text-align: justify;
@@ -2026,4 +2026,10 @@ cursor: pointer;
 #refresh_timeline a{
     color: #101212;
     text-decoration: underline;
+}
+
+.list{
+    font-size: 16px;
+    color: #808080;
+    line-height: 18px;
 }
