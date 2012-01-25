@@ -1,17 +1,13 @@
-{% extends "ECENetagoraBundle::menu_logged.html.twig" %}
+{% extends "ECENetagoraBundle::layout.html.twig" %}
 
 {% block content %}
-
    <div class="grey_bg">
-   
-   		<span class="subtitle">Your badges</span>
-   
-   		<div id="badges">
-   			{% for badges, badge in badges %}
-				<img src="{{badge|raw}}" />
-			{% endfor %}
-   		</div>
-   
+       <span class="subtitle"><center>Your badges!</center></span>
+       <br /><br />
+       <div id="badges">
+           {% for badges, badge in badges %}
+               <img src="{{badge|raw}}" />
+           {% endfor %}
+       </div>
    </div>
-           
 {% endblock %}

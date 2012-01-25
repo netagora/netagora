@@ -75,7 +75,7 @@ class ProjectController extends Controller
    //      if(i<num-1) $badges_list .= ",";
    // $badges = array($badges_list);
 
-   $badges = array("../bundles/ecenetagora/images/badges/pioneer.png","../bundles/ecenetagora/images/badges/pioneer.png");
+   $badges = array("../bundles/ecenetagora/images/badges/pioneer.png","../bundles/ecenetagora/images/badges/cobaye.png");
    return array('badges' => $badges);
     }
 }
