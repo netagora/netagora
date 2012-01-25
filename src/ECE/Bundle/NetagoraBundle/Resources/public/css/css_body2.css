@@ -1704,7 +1704,7 @@ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
 form#profile, form#subscribe, form#settings, form#password_retrieval{
 position: absolute;
 top: 40px;
-width: 600px;
+width: 800px;
 margin: auto 200px;
 background: #b7b2b1;
 -moz-border-radius: 5px;
@@ -1818,7 +1818,8 @@ border: none;
 border-radius: 3px;
 outline: none;
 padding: 5px;
-width: 200px;
+width: 500px;
+height: 200px;
 }
 form#profile input:not([type=submit]):focus,
 form#profile textarea:focus,
@@ -2032,4 +2033,44 @@ cursor: pointer;
     font-size: 16px;
     color: #808080;
     line-height: 18px;
+}
+
+.ideas{
+    margin: auto;
+    width: 799px;
+    background-color: #EAE5DF;
+}
+
+.ideas .one_feed {
+    border-bottom: 1px solid #EFEFEF;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25), 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
+    min-height: 100px;
+}
+
+.ideas .one_feed .content {
+    margin-top: 10px;
+}
+
+.ideas .pseudo {
+    font-size: 16px;
+    margin: 0 0 20px 25px;
+    text-decoration: underline;
+    float: left;
+}
+
+.ideas .text {
+    margin: 0 0 0 45px;
+    font-size: 18px;
+    float: left;
+}
+
+.ideas .submit_date {
+    float: left;
+    margin: 4px 0 0 15px;
+}
+
+.ideas #light{
+    margin: -25px 0 0 12px;
+    width: 28px;
+    position: absolue;
 }

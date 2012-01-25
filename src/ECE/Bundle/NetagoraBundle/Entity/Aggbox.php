@@ -3,6 +3,7 @@
 namespace ECE\Bundle\NetagoraBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Aggbox
 {
@@ -23,6 +24,7 @@ class Aggbox
 
     /**
      * @var string $content
+     * @Assert\NotBlank()
      */
     private $content;
     
@@ -30,6 +32,11 @@ class Aggbox
      * @var datetime $submitDate
      */
     private $submitDate;
+    
+    public function __construct()
+    {
+        $this->setSubmitDate(new \DateTime('now'));
+    }
     
     /**
      * Get id
@@ -121,6 +128,9 @@ class Aggbox
         return $this->submitDate;
     }
     
-    
+    public function getIdeas()
+    {
+        return $this->findAllIdeas();
+    }
     
 }

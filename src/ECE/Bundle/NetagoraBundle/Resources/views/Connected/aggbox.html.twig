@@ -1,0 +1,63 @@
+{% extends "ECENetagoraBundle::layout.html.twig" %}
+
+{% form_theme form _self %}
+
+{% block field_row %}
+{% spaceless %}
+    <li>
+        {{ form_label(form, label|default(null)) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </li>
+{% endspaceless %}
+{% endblock field_row %}
+
+{% block title -%}
+    {{ parent() }} - AggBox
+{%- endblock %}
+
+{% block content %}
+
+    <form id="subscribe" novalidate="novalidate" action="{{ path('aggbox') }}" method="post" {{ form_enctype(form) }}>
+        <fieldset>
+            <legend class="subtitle">All ideas submitted</legend>
+        </fieldset>
+        {% for idea in ideas %}
+            <div class="ideas">
+                <div class="one_feed">
+                    <div class="content">
+                        <div class="ids">
+                            <div class="pseudo">
+                                {{ idea.user.username }}
+                            </div>
+                            <div class="submit_date">
+                               {{ idea.submitDate|date("d/m/Y g:ia") }}
+                            </div>
+                        </div>
+                        <br />
+                        <img id="light" src="{{ asset('bundles/ecenetagora/images/Light.png') }}" />
+                        <div class="feed_content display">
+                            <div class="text">{{ idea.content }}</div>
+                             <br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <div class="division"></div>
+        
+        <fieldset>
+            <legend class="subtitle">Submit your ideas!</legend>
+                <ol>
+                {% for field in form %}
+                    {{ form_row(field) }}
+                {% endfor %}
+                </ol>
+             </fieldset>
+ 
+            <fieldset>
+                <button type=submit>Submit</button>
+          </fieldset>
+    </form>
+{% endblock %}

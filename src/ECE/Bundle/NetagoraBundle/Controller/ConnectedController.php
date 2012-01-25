@@ -12,6 +12,9 @@ use ECE\Bundle\NetagoraBundle\Entity\User;
 use ECE\Bundle\NetagoraBundle\Form\UserType;
 use ECE\Bundle\NetagoraBundle\Entity\Publication;
 use ECE\Bundle\NetagoraBundle\Social\Twitter\TwitterLoader;
+use ECE\Bundle\NetagoraBundle\Form\AggboxType;
+use ECE\Bundle\NetagoraBundle\Entity\Aggbox;
+use ECE\Bundle\NetagoraBundle\Entity\AggboxRepository;
 
 class ConnectedController extends Controller
 {
@@ -240,7 +243,27 @@ class ConnectedController extends Controller
      */
     public function aggboxAction(Request $request)
     {
-        return array();
+        $currentUser = $this->get('security.context')->getToken()->getUser();
+        
+        $em    = $this->getDoctrine()->getEntityManager();
+        $ideas = $em->getRepository('ECENetagoraBundle:Aggbox')->getIdeas();
+
+        $aggbox  = new Aggbox();
+        $form    = $this->createForm(new AggboxType(), $aggbox);
+        
+        if ('POST' === $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $aggbox->setUser($currentUser); 
+                
+                $em->persist($aggbox);
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('aggbox'));
+            }
+        }
+        
+        return array('form' => $form->createView(), 'ideas'=>$ideas);
     }
 }
 

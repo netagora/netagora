@@ -533,8 +533,6 @@ class User implements AdvancedUserInterface
     public function setTwitterID($twitterID)
     {
         $this->twitterID = $twitterID;
-        //$this->setTwitterUsername($twitterID);
-        //$this->salt = '';
     }
 
     /**
@@ -585,38 +583,5 @@ class User implements AdvancedUserInterface
     public function getTwitterOAuthSecret()
     {
         return $this->twitterOAuthSecret;
-    }
-
-    /*
-    static public function hydrateObject($userDB){
-        $user = new User();
-        $user->setUsername($userDB[0]['username']);
-        $user->setEmail($userDB[0]['email']);
-        $user->setPicture($userDB[0]['picture']);
-        $user->setLocation($userDB[0]['location']);
-        $user->setFirstName($userDB[0]['firstName']);
-        $user->setLastName($userDB[0]['lastName']);
-        $user->setBirthdate($userDB[0]['birthdate']);
-        $d = new \DateTime($userDB[0]['registeredAt'], new \DateTimeZone("Europe/Paris"));
-        $user->setRegisteredAt($d);
-        $user->setTwitterID($userDB[0]['twitterID']);
-        return $user;
-    }
-    */
-
-    public function getSocialButtons($network, $tweet_id)
-    {
-        if($network == "f"){
-            // for the social buttons at the bottom of the feed display
-            $social_buttons='<div class="fb-like" data-href="http://blop.ca" data-send="true" data-layout="button_count" data-width="200" data-show-faces="true"></div>';
-        }
-        else if($network == "t"){
-            $t_reply = '<a class="t_reply" href="https://twitter.com/intent/tweet?in_reply_to='.$tweet_id.'"> </a>';
-            $t_fav = '<a class="t_favorite" href="https://twitter.com/intent/retweet?tweet_id='.$tweet_id.'"> </a>';
-            $t_retweet = '<a class="t_retweet" href="https://twitter.com/intent/favorite?tweet_id='.$tweet_id.'"> </a>';
-            $social_buttons = $t_reply . ' ' . $t_fav . ' ' . $t_retweet;
-        }
-
-        return $social_buttons;
     }
 }
