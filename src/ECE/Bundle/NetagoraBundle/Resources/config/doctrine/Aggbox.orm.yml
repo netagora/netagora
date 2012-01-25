@@ -1,0 +1,18 @@
+ECE\Bundle\NetagoraBundle\Entity\Aggbox:
+  type: entity
+  repositoryClass: ECE\Bundle\NetagoraBundle\Entity\AggboxRepository
+  table: na_aggbox
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:         { strategy: AUTO }
+    type:                { type: string, length: 50 }
+    content:             { type: string, length: 1000 }
+    submitDate:          { type: datetime, column: submit_date }
+  lifecycleCallbacks:    {}
+  manyToOne:
+    user:
+      targetEntity: User
+      inversedBy:   aggbox
+      cascade:      ["persist", "delete", "merge"]

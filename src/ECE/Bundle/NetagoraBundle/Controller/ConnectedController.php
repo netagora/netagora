@@ -233,5 +233,14 @@ class ConnectedController extends Controller
 
         return new Response($publication->getId());
     }
+    
+    /**
+     * @Route("/Aggbox", name="aggbox")
+     * @Template()
+     */
+    public function aggboxAction(Request $request)
+    {
+        return array();
+    }
 }
 

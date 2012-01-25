@@ -58,6 +58,10 @@ ECE\Bundle\NetagoraBundle\Entity\User:
       targetEntity: Publication
       mappedBy: user
       cascade: ["persist", "delete", "merge"]
+    aggbox:
+      targetEntity: Aggbox
+      mappedBy: user
+      cascade: ["persist", "delete", "merge"]
   manyToMany:
     categories:
       targetEntity: Category

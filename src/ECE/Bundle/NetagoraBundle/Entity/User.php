@@ -132,6 +132,11 @@ class User implements AdvancedUserInterface
      * @var ArrayCollection
      */
     private $publications;
+    
+    /** 
+     * @var ArrayCollection
+     */
+    private $aggbox;
 
     /** 
      * @var ArrayCollection
