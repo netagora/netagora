@@ -1623,7 +1623,7 @@ cursor: pointer;
 /* ******* ******* START ***** DISPLAY OF SHARING IMGS FOR TWITTER ******* ******* */
 .feeds .one_feed .content .ids .share_feed{
 display: inline-block;
-width: 265px;
+width: 290px;
 vertical-align: middle;
 
 text-align: center;
@@ -1634,6 +1634,7 @@ opacity: 1;
 -ms-transition: opacity 1s ease-in-out; /* IE10? */
 -o-transition: opacity 1s ease-in-out; /* Opera 10.5+ */
 transition: opacity 1s ease-in-out;
+
 }
 .feeds .one_feed .content .ids .share_feed a{
 background-image:url('../images/twitter/twitter_sprite.png');
