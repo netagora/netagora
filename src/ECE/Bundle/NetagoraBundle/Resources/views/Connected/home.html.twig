@@ -15,18 +15,16 @@
                     Latest videos <span class="close">x</span>
                 </div>
                 <div class="cat_new_content">
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
+                    {% for moviePublication in moviePublications%}
+                        <div class="content">
+                            <div class="description">
+                                <a href="https://twitter.com/#!/{{ moviePublication.authorScreenName }}" target="_blank">{{ moviePublication.authorScreenName }}</a>
+                            </div>
+                            <div class="source">
+                                <a href="{{ moviePublication.linkUrl }}">{{ moviePublication.linkUrl }}</a>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- END CONTAINER VIDEOS -->
@@ -36,18 +34,16 @@
                     Latest music <span class="close">x</span>
                 </div>
                 <div class="cat_new_content">
+                    {% for musicPublication in musicPublications%}
                     <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
+                        <div class="description">
+                            <a href="https://twitter.com/#!/{{ musicPublication.authorScreenName }}" target="_blank">{{ musicPublication.authorScreenName }}</a>
+                        </div>
+                        <div class="source">
+                            <a href="{{ musicPublication.linkUrl }}">{{ musicPublication.linkUrl }}</a>
+                        </div>
                     </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- END CONTAINER MUSIC -->
@@ -57,18 +53,16 @@
                     Latest pictures <span class="close">x</span>
                 </div>
                 <div class="cat_new_content">
+                    {% for photoPublication in photoPublications%}
                     <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
+                        <div class="description">
+                            <a href="https://twitter.com/#!/{{ photoPublication.authorScreenName }}" target="_blank">{{ photoPublication.authorScreenName }}</a>
+                        </div>
+                        <div class="source">
+                            <a href="{{ photoPublication.linkUrl }}">{{ photoPublication.linkUrl }}</a>
+                        </div>
                     </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- END CONTAINER PICTURES -->
@@ -78,18 +72,16 @@
                     Latest locations <span class="close">x</span>
                 </div>
                 <div class="cat_new_content">
+                    {% for locationPublication in locationPublications%}
                     <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
+                        <div class="description">
+                            <a href="https://twitter.com/#!/{{ locationPublication.authorScreenName }}" target="_blank">{{ locationPublication.authorScreenName }}</a>
+                        </div>
+                        <div class="source">
+                            <a href="{{ locationPublication.linkUrl }}">{{ locationPublication.linkUrl }}</a>
+                        </div>
                     </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- END CONTAINER LOCATIONS -->
@@ -99,18 +91,16 @@
                     Latest other feeds <span class="close">x</span>
                 </div>
                 <div class="cat_new_content">
+                    {% for otherPublication in otherPublications%}
                     <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
+                        <div class="description">
+                            <a href="https://twitter.com/#!/{{ otherPublication.authorScreenName }}" target="_blank">{{ otherPublication.authorScreenName }}</a>
+                        </div>
+                        <div class="source">
+                            <a href="{{ otherPublication.linkUrl }}">{{ otherPublication.linkUrl }}</a>
+                        </div>
                     </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- END CONTAINER OTHER -->
@@ -120,31 +110,38 @@
                     Latest feeds <span class="close">x</span>
                 </div>
                 <div class="cat_new_content">
+                    {% for feedsPublication in feedsPublications %}
                     <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
+                        <div class="description">
+                            <a href="https://twitter.com/#!/{{ feedsPublication.authorScreenName }}" target="_blank">{{ feedsPublication.authorScreenName }}</a>
+                        </div>
+                        <div class="source">
+                            <a href="{{ feedsPublication.linkUrl }}">{{ feedsPublication.linkUrl }}</a>
+                        </div>
                     </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
-                    <div class="content">
-                        <div class="description">title</div>
-                        <div class="source"><a href="">(source)</a></div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <!-- END CONTAINER FEEDS -->
             <!-- START CONTAINER PROFIL -->
             <div class="categories" id="home_profil">
                   <div class="cat_title">
-                        PROFIL <span class="close">x</span>
+                      PROFILE <span class="close">x</span>
+                  </div>
+                    {% if app.user.picture %}
+                        {% set picture = '/avatars/' ~ app.user.picture %}
+                        <a href="{{ path('profile') }}">
+                            <center><img style="width: 100px; height: 100px;" src="{{  picture }}" /></center>
+                        </a>
+                    {% else %}
+                        <center><img src="{{ asset('bundles/ecenetagora/images/avatar.png') }}" /></center>
+                    {% endif %}
                   </div>
             </div>
             <!-- END CONTAINER PROFIL -->
         </div>
                       
-        <!-- <div id="cat_missing"></div> -->
+        <div id="cat_missing"></div>
     </div>
                                                                     
 </div>

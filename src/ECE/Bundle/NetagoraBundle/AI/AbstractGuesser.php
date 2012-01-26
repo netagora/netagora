@@ -34,7 +34,7 @@ abstract class AbstractGuesser implements GuesserStrategyInterface
         return $this->metadata;
     }
 
-    protected function analyzeUrl($pattern, $confidence = self::LOW_CONFIDENCE)
+    protected function analyzeUrl($pattern, $confidence = self::HIGH_CONFIDENCE)
     {
         if (preg_match_all($pattern, $this->url, $matches) > 0) {
             $this->score += ($confidence * count($matches[0]));

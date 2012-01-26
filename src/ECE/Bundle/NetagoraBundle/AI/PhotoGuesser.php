@@ -13,7 +13,7 @@ class PhotoGuesser extends AbstractGuesser
 
         // Check the response content type: medium confidence
         if (preg_match('#image/(jpe?g|png|gif)#i', $this->response->getHeader('Content-Type'))) {
-            $this->score += self::MEDIUM_CONFIDENCE;
+            $this->score += self::HIGH_CONFIDENCE;
         }
 
         // Check the image type: high confidence

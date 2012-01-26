@@ -27,12 +27,42 @@ class ConnectedController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $publications = $em
+        $moviePublications = $em
             ->getRepository('ECENetagoraBundle:Publication')
-            ->getOtherPublications($user->getId())
+            ->getLastVideoPublication($user->getId())
         ;
-
-        return array('publications' => $publications);
+        
+        $musicPublications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getLastMusicPublication($user->getId())
+        ;
+        
+        $photoPublications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getLastPhotoPublication($user->getId())
+        ;
+        
+        $locationPublications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getLastLocationsPublication($user->getId())
+        ;
+        
+        $otherPublications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getLastOthersPublication($user->getId())
+        ;
+        
+        $feedsPublications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getLastHomeFeeds($user->getId())
+        ;
+        
+        return array('moviePublications' => $moviePublications, 
+                     'musicPublications' => $musicPublications, 
+                     'photoPublications' => $photoPublications,
+                     'locationPublications' => $locationPublications,
+                     'otherPublications' => $otherPublications,
+                     'feedsPublications' => $feedsPublications);
     }
 
     /**

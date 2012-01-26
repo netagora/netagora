@@ -59,7 +59,7 @@ class PublicationRepository extends EntityRepository
 
                 // We found a corresponding KnownLink that we can affect to the publication
                 if ($knownLink) {
-                    $publication->setKnownLink();
+                    $publication->setKnownLink($knownLink);
                     $this->_em->persist($publication);
                     continue;
                 }
@@ -152,6 +152,27 @@ class PublicationRepository extends EntityRepository
         return $this->getByCategoryType('Photo', $user);
     }
     
+    /* Get Last publications */
+    public function getLastVideoPublication($user){
+        return $this->getByCategoryTypeLimited('Video', $user);
+    }
+    
+    public function getLastMusicPublication($user){
+        return $this->getByCategoryTypeLimited('Music', $user);
+    }
+    
+    public function getLastPhotoPublication($user){
+        return $this->getByCategoryTypeLimited('Photo', $user);
+    }
+    
+    public function getLastLocationsPublication($user){
+        return $this->getByCategoryTypeLimited('Location', $user);
+    }
+    
+    public function getLastOthersPublication($user){
+        return $this->getByCategoryTypeLimited('Other', $user);
+    }
+    
     /**
      * Returns the Location publications of a single user.
      *
@@ -183,6 +204,11 @@ class PublicationRepository extends EntityRepository
     public function getAllPublications($user)
     {
         return $this->getByUser($user);
+    }
+    
+    public function getLastHomeFeeds($user)
+    {
+        return $this->getThreeLastFeeds($user);
     }
     
     /**
@@ -289,6 +315,27 @@ class PublicationRepository extends EntityRepository
     }
     
     /**
+     * Returns the publications of a single user for a specific category.
+     *
+     * @param string  $type The publications category name
+     * @param integer $user The user identifier
+     * @return Publication[] A collection of publications
+     */
+    private function getByCategoryTypeLimited($type, $user)
+    {
+        $q = $this
+            ->getUserPublicationQueryBuilder($user)
+            ->andWhere('c.type = :type')
+            ->orderBy('p.publishedAt', 'desc')
+            ->setParameter('type', $type)
+            ->setMaxResults(3)
+            ->getQuery()
+        ;
+
+        return $q->getResult();
+    }
+    
+    /**
      * Returns the publications of a single user.
      *
      * @param integer $user The user identifier
@@ -299,6 +346,18 @@ class PublicationRepository extends EntityRepository
         $q = $this
             ->getUserPublicationQueryBuilder($user)
             ->orderBy('p.publishedAt', 'desc')
+            ->getQuery()
+        ;
+
+        return $q->getResult();
+    }
+    
+    private function getThreeLastFeeds($user)
+    {
+        $q = $this
+            ->getUserPublicationQueryBuilder($user)
+            ->orderBy('p.publishedAt', 'desc')
+            ->setMaxResults(3)
             ->getQuery()
         ;
 
