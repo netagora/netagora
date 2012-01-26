@@ -45,7 +45,6 @@ class AccountController extends Controller
                 $em = $this->getDoctrine()->getEntityManager();
                 $em->persist($user);
                 $em->flush();
-                $user->file = null;
 
                 // Send the confirmation email
                 $this->sendConfirmationEmail($user);
@@ -56,7 +55,6 @@ class AccountController extends Controller
                 return $this->redirect($this->generateUrl('home'));
             }
         }
-        $user->file = null;
 
         return array('form' => $form->createView());
     }

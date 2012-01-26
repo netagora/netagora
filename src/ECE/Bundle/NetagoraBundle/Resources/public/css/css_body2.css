@@ -1818,8 +1818,8 @@ border: none;
 border-radius: 3px;
 outline: none;
 padding: 5px;
-width: 500px;
-height: 200px;
+#width: 500px;
+#height: 200px;
 }
 form#profile input:not([type=submit]):focus,
 form#profile textarea:focus,

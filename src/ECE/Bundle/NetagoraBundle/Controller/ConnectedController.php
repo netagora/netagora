@@ -24,7 +24,15 @@ class ConnectedController extends Controller
      */
     public function homeAction(Request $request)
     {
-        return array();
+        $em = $this->getDoctrine()->getEntityManager();
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $publications = $em
+            ->getRepository('ECENetagoraBundle:Publication')
+            ->getOtherPublications($user->getId())
+        ;
+
+        return array('publications' => $publications);
     }
 
     /**
